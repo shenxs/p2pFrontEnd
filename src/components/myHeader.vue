@@ -1,4 +1,5 @@
 <template>
+
     <el-header style="text-align: right; font-size: 12px">
         <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -10,14 +11,20 @@
         </el-dropdown>
         <span>王小虎</span>
     </el-header>
+
 </template>
 
 <script>
     export default {
-        name: "header"
+        name: "myHeader"
     }
 </script>
 
 <style scoped>
+    el-header {
+        background-color: #B3C0D1;
+        color: #333;
+        line-height: 60px;
 
+    }
 </style>
