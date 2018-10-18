@@ -1,7 +1,7 @@
 <template>
     <div class="g-main">
-        <div class="g-inner g-carousel">
-            <el-carousel height="150px">
+        <div class="g-carousel">
+            <el-carousel height="410px">
                 <el-carousel-item v-for="item in 4" :key="item">
                     <p>{{ item }}</p>
                 </el-carousel-item>
@@ -26,17 +26,20 @@
     }
 
     .g-inner {
-        width: 100%;
         min-height: 100px;
+        padding: 20px 50px;
     }
 
     .g-carousel {
+        width: 100%;
+
         .el-carousel__item p {
             color: #475669;
-            font-size: 14px;
+            font-size: 18px;
             opacity: 0.75;
-            line-height: 150px;
+            line-height: 410px;
             margin: 0;
+            text-align: center;
         }
 
         .el-carousel__item:nth-child(2n) {
@@ -46,6 +49,14 @@
         .el-carousel__item:nth-child(2n+1) {
             background-color: #d3dce6;
         }
+    }
+
+    .g-news {
+
+    }
+
+    .g-loan {
+
     }
 
 </style>

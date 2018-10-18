@@ -45,5 +45,6 @@
         margin-bottom: auto;
         background: #efefef;
         min-height: 100vh;
+        padding: 60px 0 40px 0;
     }
 </style>
