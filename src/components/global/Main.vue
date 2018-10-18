@@ -1,15 +1,17 @@
 <template>
-    <div>
-        main
+    <div class="g-main">
+        <router-view />
     </div>
 </template>
 
 <script>
     export default {
-        name: "main"
+        name: "global-main"
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .g-main {
+        width: 100%;
+    }
 </style>
