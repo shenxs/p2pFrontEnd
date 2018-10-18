@@ -1,33 +1,15 @@
 <template>
     <div id="app">
 
-        <el-container style="margin-bottom: 10px; border: 1px solid #eee">
-            <side></side>
-            <el-container>
-                <my-header></my-header>
-
-                <el-header style="height: 0%;"/>
-
-                <el-main>
-                    <router-view></router-view>
-                </el-main>
-
-            </el-container>
-        </el-container>
-
     </div>
-
 </template>
 
 <script>
 
-    import myHeader from './components/myHeader'
-    import side from './components/side'
-    import myFooter from './components/myFooter'
-
     export default {
         name: 'app',
-        components: {myHeader, side, myFooter},
+        components: {
+        },
 
         props: {
             msg: 123
@@ -39,9 +21,8 @@
         },
         data() {
             return {
-                theMsg: "Hello"
-            }
 
+            }
         }
     }
 
@@ -49,6 +30,7 @@
 </script>
 
 <style>
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

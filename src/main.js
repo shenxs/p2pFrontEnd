@@ -1,26 +1,24 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import routes from './router'
+import routes from './router';
 
-import App from './App.vue'
+import App from './App.vue';
 import ElementUI from 'element-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
 
-import './assets/icon/iconfont.css'
+Vue.config.productionTip = false;
 
-Vue.config.productionTip = false
-
-Vue.use(ElementUI)
-Vue.use(Router)
+Vue.use(ElementUI);
+Vue.use(Router);
 
 const router = new Router({
-    routes
-})
+  routes
+});
 
 new Vue({
-    el: '#app',
-    router: router,
-    render: h => h(App)
-})
+  el: '#app',
+  router: router,
+  render: h => h(App)
+});

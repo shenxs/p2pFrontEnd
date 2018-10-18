@@ -1,6 +1,6 @@
 {
-  "name": "hello-world",
-  "version": "0.1.0",
+  "name": "P2PFrontend",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,6 +16,7 @@
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
+    "eslint-plugin-vue": "^4.7.1",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {

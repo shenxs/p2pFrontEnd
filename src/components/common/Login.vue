@@ -1,12 +1,12 @@
 <template>
-    <el-footer>
-
-    </el-footer>
+    <div>
+        login
+    </div>
 </template>
 
 <script>
     export default {
-        name: "myFooter"
+        name: "login"
     }
 </script>
 
