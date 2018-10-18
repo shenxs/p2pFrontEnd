@@ -1,22 +1,7 @@
 <template>
     <div id="app">
 
-
-        <!--<el-container style="height:650px; border: 1px solid #eee">-->
-        <!--<side></side>-->
-
-        <!--<el-container >-->
-        <!--<my-header></my-header>-->
-        <!--<el-main>-->
-        <!--<router-view> </router-view>-->
-        <!--<my-footer></my-footer>-->
-        <!--</el-main>-->
-
-        <!--</el-container>-->
-        <!--</el-container>-->
-
-
-        <el-container style="height: 500px; border: 1px solid #eee">
+        <el-container style="margin-bottom: 10px; border: 1px solid #eee">
             <side></side>
             <el-container>
                 <my-header></my-header>

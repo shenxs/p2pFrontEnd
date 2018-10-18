@@ -13,21 +13,20 @@
 
             <el-menu-item index="2">
                 <template slot="title">
-
-                    <router-link to="usercenter" replace> <i class="el-icon-menu"></i>个人中心</router-link>
+                    <router-link to="usercenter" replace><i class="icon-yonghu"></i>个人中心</router-link>
                 </template>
             </el-menu-item>
 
             <el-menu-item index="3">
                 <template slot="title">
-                    <router-link to="creditRating" replace> <i class="el-icon-menu"></i>信用评级</router-link>
+                    <router-link to="creditRating" replace><i class="el-icon-menu"></i>信用评级</router-link>
                 </template>
             </el-menu-item>
 
             <el-menu-item index="4">
                 <template slot="title">
 
-                    <router-link to="borrowLoanInfo" replace> <i class="el-icon-menu"></i>借贷信息</router-link>
+                    <router-link to="borrowLoanInfo" replace><i class="icon-gaoxiaofei"></i>借贷信息</router-link>
                 </template>
             </el-menu-item>
         </el-menu>
@@ -48,5 +47,6 @@
     li a {
         text-decoration: none;
         color: grey;
+        margin: 0 6px;
     }
 </style>
