@@ -18,7 +18,7 @@
                 <el-submenu index="4">
                     <template slot="title">用 户</template>
                     <el-menu-item index="4-1" @click="openUserLogin">登录</el-menu-item>
-                    <el-menu-item index="4-2" >注册</el-menu-item>
+                    <el-menu-item index="4-2" @click="goRegister">注册</el-menu-item>
                 </el-submenu>
             </el-menu>
         </div>
@@ -44,6 +44,9 @@
       },
       openUserLogin(){
         this.$router.push('/login')
+      },
+      goRegister(){
+        this.$router.push('/register')
       }
     }
   };

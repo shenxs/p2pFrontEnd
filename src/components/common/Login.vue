@@ -60,10 +60,7 @@
         // eslint-disable-next-line
         console.log('发送短信');
       },
-      handleLogin () {
-        // eslint-disable-next-line
-        console.log('Login');
-      },
+
       inputBlur: function (errorItem, inputContent) {
         inputContent = inputContent.trim();
         if (errorItem === 'account') {
