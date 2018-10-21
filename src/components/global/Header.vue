@@ -17,8 +17,8 @@
                 <el-menu-item index="3"><a href="javascript:;">申请贷款</a></el-menu-item>
                 <el-submenu index="4">
                     <template slot="title">用 户</template>
-                    <el-menu-item index="4-1">用户登录</el-menu-item>
-                    <el-menu-item index="4-2">管理员登录</el-menu-item>
+                    <el-menu-item index="4-1" @click="openUserLogin">登录</el-menu-item>
+                    <el-menu-item index="4-2" >注册</el-menu-item>
                 </el-submenu>
             </el-menu>
         </div>
@@ -27,6 +27,7 @@
 
 <script>
   export default {
+    /* eslint-disable */
     name: 'global-header',
     components: {},
     data () {
@@ -39,7 +40,10 @@
         this.$router.push(path);
       },
       handleSelect (key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
+      },
+      openUserLogin(){
+        this.$router.push('/login')
       }
     }
   };

@@ -28,14 +28,19 @@
                     </el-submenu>
                 </el-menu>
             </el-aside>
+
+
         </el-container>
     </div>
 </template>
 
 <script>
   /* eslint-disable */
+
+
   export default {
     name: 'main-admin',
+    components:{},
     methods: {
       handleOpen (key, keyPath) {
         console.log(key, keyPath);
@@ -49,6 +54,6 @@
 
 <style lang="scss" scoped>
     .m-sidebar {
-        width: 200px;
+
     }
 </style>

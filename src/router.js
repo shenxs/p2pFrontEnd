@@ -1,6 +1,7 @@
 import MainIndex from './components/pages/MainIndex';
 import MainUser from './components/pages/MainUser';
 import MainAdmin from './components/pages/MainAdmin';
+import Login from './components/common/Login'
 
 const routers = [
   {
@@ -21,7 +22,13 @@ const routers = [
     path: '/admin',
     name: 'main-admin',
     component: MainAdmin
+  },
+  {
+    path:'/login',
+    name:'login',
+    component:Login
   }
+
 ];
 
 export default routers;

@@ -40,6 +40,6 @@
 
 <style lang="scss" scoped>
     .m-sidebar {
-        width: 200px;
+
     }
 </style>
