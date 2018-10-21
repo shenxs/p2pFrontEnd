@@ -4,12 +4,13 @@
             <el-aside>
                 <el-menu class="m-sidebar"
                          @open="handleOpen"
-                         @close="handleClose">
+                         @close="handleClose"
+                         @select="handleSelect">
                     <el-menu-item index="1-1">
                         总览
                     </el-menu-item>
 
-                    <el-menu-item index="2">
+                    <el-menu-item index="2-1">
                         个人信息
                     </el-menu-item>
 
@@ -29,6 +30,15 @@
                 </el-menu>
             </el-aside>
 
+            <overview v-if="menuFlag === '1-1'"></overview>
+            <profile v-if="menuFlag === '2-1'"></profile>
+            <review-sell v-if="menuFlag === '3-1'"></review-sell>
+            <review-buy v-if="menuFlag === '3-2'"></review-buy>
+            <review-credit v-if="menuFlag==='3-3'"></review-credit>
+            <sell-record v-if="menuFlag==='4-1'"></sell-record>
+            <buy-record v-if="menuFlag==='4-2'"></buy-record>
+            <user-management v-if="menuFlag==='4-3'"></user-management>
+
 
         </el-container>
     </div>
@@ -36,17 +46,34 @@
 
 <script>
   /* eslint-disable */
+  import overview from '../common/admin-overview'
+  import profile from '../common/admin-profile'
 
+  import reviewBuy from '../common/admin-review-buy'
+  import reviewSell from '../common/admin-review-sell'
+  import reviewCredit from '../common/admin-review-credit'
+
+  import sellRecord from '../common/admin-sell-record'
+  import buyRecord from '../common/admin-buy-record'
+  import userManagement from '../common/admin-user-management'
 
   export default {
     name: 'main-admin',
-    components:{},
+    components: {overview,profile,reviewBuy,reviewSell,reviewCredit,sellRecord,buyRecord,userManagement},
     methods: {
       handleOpen (key, keyPath) {
         console.log(key, keyPath);
       },
       handleClose (key, keyPath) {
         console.log(key, keyPath);
+      },
+      handleSelect(index){
+        this.menuFlag=index
+      }
+    },
+    data(){
+      return {
+        menuFlag:"1-1"
       }
     }
   };

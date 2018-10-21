@@ -3,8 +3,7 @@
         <el-container>
             <el-aside>
                 <el-menu class="m-sidebar"
-                         @open="handleOpen"
-                         @close="handleClose">
+                         @select="handleSelect">
                     <el-menu-item index="1-1">
                         个人信息
                     </el-menu-item>
@@ -14,26 +13,44 @@
                         <el-menu-item index="2-2">待审核购买</el-menu-item>
                         <el-menu-item index="2-3">已完成交易</el-menu-item>
                     </el-submenu>
-                    <el-menu-item index="3">
+                    <el-menu-item index="3-1">
                         信用评级
                     </el-menu-item>
                 </el-menu>
             </el-aside>
+
+            <profile v-if="menuFlag === '1-1'"></profile>
+            <tosell v-if="menuFlag === '2-1'"></tosell>
+            <tobuy v-if="menuFlag === '2-2'"></tobuy>
+            <deals-done v-if="menuFlag === '2-3'"></deals-done>
+            <evaluate-credit v-if="menuFlag=== '3-1'"></evaluate-credit>
+
         </el-container>
     </div>
 </template>
 
 <script>
-  /* eslint-disable */
+  import dealsDone from '../common/user-center-deals-done';
+  import profile from '../common/user-center-profile';
+  import tobuy from '../common/user-center-tobuy';
+  import tosell from '../common/user-center-tosell';
+  import evaluateCredit from '../common/user-center-evaluate-credit';
+
   export default {
     name: 'main-user',
+    components: {dealsDone, profile, tobuy, tosell, evaluateCredit},
     methods: {
-      handleOpen (key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose (key, keyPath) {
-        console.log(key, keyPath);
+
+      handleSelect(index){
+        // eslint-disable-next-line
+        this.menuFlag=index;
       }
+    },
+    data () {
+      return {
+        menuFlag: '1-1'
+
+      };
     }
   };
 </script>

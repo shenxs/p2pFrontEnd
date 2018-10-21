@@ -30,8 +30,7 @@
                 <el-checkbox v-model="isadmin">管理员</el-checkbox>
             </div>
             <div class="u-form-btns">
-                <el-button class="u-login-btn" type="primary" @click="handleLogin" :disabled="isLoginBtnDisabled">登录
-                </el-button>
+                <el-button class="u-login-btn" type="primary" @click="handleLogin" :disabled="isLoginBtnDisabled">登录</el-button>
             </div>
 
         </el-form>
