@@ -46,16 +46,16 @@
 
 <script>
   /* eslint-disable */
-  import overview from '../common/admin-overview'
-  import profile from '../common/admin-profile'
+  import overview from '../common/AdminOverview'
+  import profile from '../common/AdminProfile'
 
-  import reviewBuy from '../common/admin-review-buy'
-  import reviewSell from '../common/admin-review-sell'
-  import reviewCredit from '../common/admin-review-credit'
+  import reviewBuy from '../common/AdminReviewBuy'
+  import reviewSell from '../common/AdminReviewSell'
+  import reviewCredit from '../common/AdminReviewCredit'
 
-  import sellRecord from '../common/admin-sell-record'
-  import buyRecord from '../common/admin-buy-record'
-  import userManagement from '../common/admin-user-management'
+  import sellRecord from '../common/AdminSellRecord'
+  import buyRecord from '../common/AdminBuyRecord'
+  import userManagement from '../common/AdminUserManagement'
 
   export default {
     name: 'main-admin',

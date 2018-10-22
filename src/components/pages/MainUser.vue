@@ -30,11 +30,11 @@
 </template>
 
 <script>
-  import dealsDone from '../common/user-center-deals-done';
-  import profile from '../common/user-center-profile';
-  import tobuy from '../common/user-center-tobuy';
-  import tosell from '../common/user-center-tosell';
-  import evaluateCredit from '../common/user-center-evaluate-credit';
+  import dealsDone from '../common/UserCenterDealsDone';
+  import profile from '../common/UserCenterProfile';
+  import tobuy from '../common/UserCenterTobuy';
+  import tosell from '../common/UserCenterTosell';
+  import evaluateCredit from '../common/UserCenterEvaluateCredit';
 
   export default {
     name: 'main-user',
