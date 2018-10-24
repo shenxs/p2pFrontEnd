@@ -1,6 +1,7 @@
 <template>
     <div class="g-register">
 
+        <h1 class="u-register-title">注册</h1>
         <el-form :labelPosition="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"
                  class="demo-ruleForm">
             <el-form-item label="账号" prop="account">
@@ -25,8 +26,9 @@
                         <el-button type="info" icon="el-icon-message" @click="sendSms">获取验证码</el-button>
                     </el-col>
                 </el-row>
-
             </el-form-item>
+
+                <el-checkbox v-model="isadmin">管理员</el-checkbox>
 
 
             <el-form-item>
@@ -111,7 +113,28 @@
 
 <style lang="scss" scoped>
     .g-register {
-        width: 600px;
-        margin: 30px auto auto;
+        background: white;
+        position: absolute;
+        width: 500px;
+        top: 50%;
+        left: 50%;
+        margin-top: -300px;
+        margin-left: -200px;
+
+        padding: 30px 20px 20px;
+        border-radius: 8px;
+        box-sizing: border-box;
+        padding-right: 60px;
+
+        .u-register-title{
+            text-align: center;
+            margin-left: 70px;
+            margin-bottom: 20px;
+        }
+
+
+        .el-checkbox{
+            margin-inline-start:0px;
+        }
     }
 </style>
