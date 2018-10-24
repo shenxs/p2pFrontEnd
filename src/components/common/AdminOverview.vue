@@ -6,7 +6,8 @@
 
 <script>
   export default {
-    name: 'admin-overview'
+    name: 'admin-overview',
+    props:['title']
   };
 </script>
 
