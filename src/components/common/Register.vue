@@ -3,7 +3,7 @@
 
         <h1 class="u-register-title">注册</h1>
         <el-form :labelPosition="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"
-                 class="demo-ruleForm">
+                 class="ruleForm">
             <el-form-item label="账号" prop="account">
                 <el-input v-model="ruleForm.account" placeholder="请设定您的账号"></el-input>
             </el-form-item>

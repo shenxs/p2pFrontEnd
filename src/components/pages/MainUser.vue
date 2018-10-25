@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-container>
-            <el-aside>
+            <el-aside style="width: 200px">
                 <el-menu class="m-sidebar"
                          @select="handleSelect">
                     <el-menu-item index="1-1">
@@ -41,22 +41,30 @@
     components: {dealsDone, profile, tobuy, tosell, evaluateCredit},
     methods: {
 
-      handleSelect(index){
+      handleSelect (index) {
         // eslint-disable-next-line
-        this.menuFlag=index;
+        this.menuFlag = index;
       }
     },
     data () {
       return {
         menuFlag: '1-1'
 
-      };
+      }
+
+
     }
   };
 </script>
 
 <style lang="scss" scoped>
-    .m-sidebar {
-
+    .el-aside {
+        height: available;
+        background-color: white;
+        .el-menu{
+            position: fixed;
+            width: inherit;
+            height: auto;
+        }
     }
 </style>
