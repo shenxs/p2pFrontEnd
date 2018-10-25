@@ -74,42 +74,38 @@
                               :label="'资产'+ (index+1)"
                               :key="asset.key"
                               prop="assets">
-                    <el-form-item label="签名" prop="signature">
-                        <el-input v-model="ruleForm.signature" placeholder="设定个性签名"></el-input>
-                    </el-form-item>
-                    <el-form-item label="描述" prop="description">
-                        <el-input v-model="ruleForm.description" placeholder="自我描述"></el-input>
-                    </el-form-item>
-                    <el-form-item label="性别" prop="sex">
-                        <el-radio v-model="ruleForm.sex" label="male">男</el-radio>
-                        <el-radio v-model="ruleForm.sex" label="female">女</el-radio>
-                    </el-form-item>
+                    <el-row>
+                        <el-col>
 
+                            <el-select style="width: 30%" v-model="asset.type" placeholder="请选择资产类型">
+                                <el-option label="房产" value="house"></el-option>
+                                <el-option label="车" value="car"></el-option>
+                                <el-option label="公司估值" value="company"></el-option>
+                                <el-option label="股票" value="stock"></el-option>
+                                <el-option label="期货" value="futures"></el-option>
+                                <el-option label="基金" value="funds"></el-option>
+                                <el-option label="证券" value="bond"></el-option>
+                                <el-option label="古玩字画" value="antique"></el-option>
+                                <el-option label="其他" value="other"></el-option>
+                            </el-select>
+                            <p style="display: inline;margin:0 20px">估值 :</p>
+                            <el-input-number style="width: 40%" v-model="asset.value" :min="0"></el-input-number>
+                            <p style="display: inline ;margin-left: 10px;font-size: 17px">万</p>
+                            <el-input type="textarea" style="margin-top:5px;" placeholder="资产估值证明"
+                                      autosize></el-input>
+                        </el-col>
+                        <el-col>
+                            <el-button class="u-asset-delete-btn" type="danger" style="margin-left: 50px"
+                                       icon="el-icon-delete" circle @click="deleteAsset(index)"></el-button>
 
-                    <el-col>
-                        <el-select v-model="asset.type" placeholder="请选择资产类型">
-                            <el-option label="房产" value="house"></el-option>
-                            <el-option label="车" value="car"></el-option>
-                            <el-option label="公司估值" value="company"></el-option>
-                            <el-option label="股票" value="stock"></el-option>
-                            <el-option label="期货" value="futures"></el-option>
-                            <el-option label="基金" value="funds"></el-option>
-                            <el-option label="证券" value="bond"></el-option>
-                            <el-option label="古玩字画" value="antique"></el-option>
-                            <el-option label="其他" value="other"></el-option>
-                        </el-select>
-                        <p style="display: inline;margin:0 20px">估值 :</p>
-                        <el-input-number v-model="asset.value" :min="0"></el-input-number>
-                        <p style="display: inline ;margin-left: 20px;font-size: 17px">万</p>
-                        <el-button type="danger" style="margin-left: 50px" icon="el-icon-delete" circle></el-button>
-                        <el-input style="margin-top:5px " placeholder="资产估值证明"></el-input>
-                    </el-col>
+                        </el-col>
 
-
+                    </el-row>
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="success">保存</el-button>
+                    <el-button type="primary">保存</el-button>
+                    <el-button type="success" @click="addAsset">新增资产</el-button>
                 </el-form-item>
 
             </el-form>
@@ -166,6 +162,13 @@
           idNum: '33042419960101189X',
           deposit: 1234,
           description: '诸葛亮字孔明，琅邪阳都人也。汉司隶校尉诸葛丰后也。父珪，字君贡，汉末为太山郡丞。亮早孤，从父玄为袁术所署豫章太守，玄将亮及亮弟均之官。会汉朝更选硃皓代玄。玄素与荆州牧刘表有旧，往依之。献帝春秋曰：初，豫章太守周术病卒，刘表上诸葛玄为豫章太守，治南昌。汉朝闻周术死，遣硃皓代玄。皓从扬州太守刘繇求兵击玄，玄退屯西城，皓入南昌。建安二年正月，西城民反，杀玄，送首诣繇。此书所云，与本传不同。玄卒，亮躬耕陇亩，好为梁父吟。汉晋春秋曰：亮家于南阳之邓县，在襄阳城西二十里，号曰隆中。身长八尺，每自比於管仲、乐毅，时人莫之许也'
+          , assets: [
+            {
+              value: '',
+              type: '',
+              description: ''
+            }
+          ]
         },
         transationNum: 123,
         delayTransation: 321,
@@ -191,6 +194,15 @@
         } else {
           this.passwordtype = 'password';
         }
+      },
+      addAsset:function ( ) {
+        this.ruleForm.assets.push({value:'',type:'',description:''});
+      },
+      deleteAsset:function (index) {
+        console.log(index);
+        this.ruleForm.assets.slice(index,1);
+        this.$delete(this.ruleForm.assets,index);
+        console.log(this.ruleForm.assets);
       }
     }
   };
@@ -206,6 +218,11 @@
             width: 50%;
             float: left;
             margin-right: 20px;
+            .u-asset-delete-btn {
+                position: absolute;
+                left: 100%;
+                top:30%;
+            }
         }
         .g-right {
             width: 40%;
@@ -228,7 +245,6 @@
 
                 }
             }
-
             .credit-card {
 
             }
@@ -246,10 +262,8 @@
                     float: left;
                     width: 43%;
                     margin: 10px;
-
                     &:hover {
                         margin: 7px;
-
                     }
                 }
                 .m-card-delay {
