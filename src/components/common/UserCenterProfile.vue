@@ -199,10 +199,8 @@
         this.ruleForm.assets.push({value:'',type:'',description:''});
       },
       deleteAsset:function (index) {
-        console.log(index);
         this.ruleForm.assets.slice(index,1);
         this.$delete(this.ruleForm.assets,index);
-        console.log(this.ruleForm.assets);
       }
     }
   };
