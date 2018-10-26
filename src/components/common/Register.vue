@@ -96,15 +96,27 @@
           if (valid) {
             if (this.ruleForm.password !== this.ruleForm.password2) {
               alert('密码不一致');
-            }
-            let role = ((is) => {if (is === true) return 'admin'; else return 'user';})(this.ruleForm.isadmin);
-            let data=this.ruleForm;
-            data.role=role;
-            api.register(data).then((re)=>{
-              // eslint-disable-next-line
+            } else {
+              let role = ((is) => {if (is === true) return 'admin'; else return 'user';})(this.ruleForm.isadmin);
+              let data = this.ruleForm;
+              data.role = role;
+              api.register(data).then((re) => {
+                // eslint-disable-next-line
                 console.log(re);
-              // eslint-disable-next-line
-            }).catch(reason => {console.log('error'+ reason)});
+                if (re.data.code === 0) {
+                  if(this.ruleForm.isadmin===true){
+                    this.$router.push('/admin')
+                  }else{
+                    this.$router.push(('/user'))
+                  }
+                }else{
+                  alert(re.data.message);
+                }
+                // eslint-disable-next-line
+              }).catch(reason => {
+                alert(reason)
+              });
+            }
           } else {
             // eslint-disable-next-line
             console.log('error submit!!');
@@ -120,7 +132,7 @@
         if (this.ruleForm.phoneNumber === '') {
           alert('手机号码不能为空');
         } else {
-          let result1 = api.sendsms({phoneNumber:this.ruleForm.phoneNumber});
+          let result1 = api.sendsms({phoneNumber: this.ruleForm.phoneNumber});
           console.log(this.ruleForm.phoneNumber);
           result1.then((re) => {
             console.log(re);
