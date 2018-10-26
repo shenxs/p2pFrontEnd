@@ -4,8 +4,8 @@
 
         <el-form label-width="100px">
             <el-form-item label="账号">
-                <el-input v-model="accountInfo.account" placeholder="请输入账号" type="text" id="account"
-                          @blur="inputBlur('account',accountInfo.account)"/>
+                <el-input v-model="accountInfo.username" placeholder="请输入账号" type="text" id="account"
+                          @blur="inputBlur('username',accountInfo.username)"/>
                 <p class="u-login-page">{{accountError}}</p>
             </el-form-item>
             <el-form-item label="密码">
@@ -43,7 +43,7 @@
     data () {
       return {
         accountInfo: {
-          account: '',
+          username: '',
           password: '',
           sms: ''
         },
@@ -62,10 +62,10 @@
 
       inputBlur: function (errorItem, inputContent) {
         inputContent = inputContent.trim();
-        if (errorItem === 'account') {
+        if (errorItem === 'username') {
           if (inputContent === '') {
             this.accountError = '账号不能为空';
-            this.accountInfo.account = '';
+            this.accountInfo.username = '';
           } else {
             this.accountError = '';
           }

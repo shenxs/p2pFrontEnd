@@ -5,7 +5,7 @@
         <el-form :labelPosition="labelPosition" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"
                  class="ruleForm">
             <el-form-item label="账号" prop="account">
-                <el-input v-model="ruleForm.account" placeholder="请设定您的账号"></el-input>
+                <el-input v-model="ruleForm.username" placeholder="请设定您的账号"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input v-model="ruleForm.password" placeholder="请设定您的密码" type="password"></el-input>
@@ -29,7 +29,6 @@
             </el-form-item>
 
             <el-checkbox v-model="ruleForm.isadmin">管理员</el-checkbox>
-
 
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
@@ -57,18 +56,18 @@
       };
       return {
         labelPosition: 'left',
-        smsBTn:'发送验证码',
-        smsBtnType:'info',
+        smsBTn: '发送验证码',
+        smsBtnType: 'info',
         ruleForm: {
-          account: '',
+          username: '',
           password: '',
           password2: '',
           phoneNumber: '',
           verificationCode: '',
-          isadmin:''
+          isadmin: false
         },
         rules: {
-          account: [
+          username: [
             {required: true, message: '请输入账号', trigger: 'blur'},
             {min: 3, max: 11, message: '长度在 3 到 11 个字符', trigger: 'blur'}
           ],
@@ -98,7 +97,14 @@
             if (this.ruleForm.password !== this.ruleForm.password2) {
               alert('密码不一致');
             }
-            alert('submit!');
+            let role = ((is) => {if (is === true) return 'admin'; else return 'user';})(this.ruleForm.isadmin);
+            let data=this.ruleForm;
+            data.role=role;
+            api.register(data).then((re)=>{
+              // eslint-disable-next-line
+                console.log(re);
+              // eslint-disable-next-line
+            }).catch(reason => {console.log('error'+ reason)});
           } else {
             // eslint-disable-next-line
             console.log('error submit!!');
@@ -114,17 +120,16 @@
         if (this.ruleForm.phoneNumber === '') {
           alert('手机号码不能为空');
         } else {
-          let result1 = api.sendsms(this.ruleForm.phoneNumber);
-
+          let result1 = api.sendsms({phoneNumber:this.ruleForm.phoneNumber});
           console.log(this.ruleForm.phoneNumber);
           result1.then((re) => {
             console.log(re);
-            if(re.data.message==='验证短信发送成功'){
-              this.smsBTn='发送成功';
-              this.smsBtnType='success';
-            }else{
-              this.smsBTn='发送失败';
-              this.smsBtnType='warning'
+            if (re.data.message === '验证短信发送成功') {
+              this.smsBTn = '发送成功';
+              this.smsBtnType = 'success';
+            } else {
+              this.smsBTn = '发送失败';
+              this.smsBtnType = 'warning';
             }
           });
         }
