@@ -20,7 +20,7 @@
                 <el-row type="flex" :gutter="10">
                     <el-col :span="40">
                         <el-input v-model="ruleForm.verificationCode" placeholder="请输入短信验证码" type="number" id="sms-code"
-                                  @blur="inputBlur('sms',ruleForm.verificationCode)"></el-input>
+                                  @blur="inputBlur('verificationCode',ruleForm.verificationCode)"></el-input>
                     </el-col>
                     <el-col :span="1">
                         <el-button :type="smsBtnType" icon="el-icon-message" @click="sendSms">{{smsBTn}}</el-button>
@@ -92,6 +92,7 @@
     },
     methods: {
       submitForm (formName) {
+        let _this=this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
             if (this.ruleForm.password !== this.ruleForm.password2) {
@@ -104,17 +105,14 @@
                 // eslint-disable-next-line
                 console.log(re);
                 if (re.data.code === 0) {
-                  if(this.ruleForm.isadmin===true){
-                    this.$router.push('/admin')
-                  }else{
-                    this.$router.push(('/user'))
-                  }
+                  alert("注册成功");
+                  _this.$router.push('/login');
                 }else{
                   alert(re.data.message);
                 }
                 // eslint-disable-next-line
               }).catch(reason => {
-                alert(reason)
+                alert(reason);
               });
             }
           } else {

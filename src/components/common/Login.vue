@@ -9,19 +9,23 @@
                 <p class="u-login-page">{{accountError}}</p>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="accountInfo.password" placeholder="请输入密码" type="password" id="password"
-                          @blur="inputBlur('password',accountInfo.password)"></el-input>
+                <el-input v-model="accountInfo.password" placeholder="请输入密码" :type="passwordType" id="password"
+                          @blur="inputBlur('password',accountInfo.password)">
+                    <i slot="suffix" title="显示密码" class="el-icon-view" style="cursor:pointer;"
+                       @click="togglePassword"></i>
+                </el-input>
                 <p class="u-login-page">{{passwordError}}</p>
             </el-form-item>
 
             <el-form-item label="验证码">
                 <el-row type="flex" :gutter="10">
                     <el-col :span="40">
-                        <el-input v-model="accountInfo.sms" placeholder="请输入短信验证码" type="number" id="sms-code"
-                                  @blur="inputBlur('sms',accountInfo.sms)"></el-input>
+                        <el-input v-model="accountInfo.verificationCode" placeholder="请输入短信验证码" type="number"
+                                  id="sms-code"
+                                  @blur="inputBlur('verificationCode',accountInfo.verificationCode)"></el-input>
                     </el-col>
                     <el-col :span="1">
-                        <el-button type="info" icon="el-icon-message" @click="sendSms">获取验证码</el-button>
+                        <el-button type="info" icon="el-icon-message" @click="getLoginMessage">获取验证码</el-button>
                     </el-col>
                 </el-row>
                 <p class="u-login-page">{{smsError}}</p>
@@ -30,7 +34,8 @@
                 <el-checkbox v-model="isadmin">管理员</el-checkbox>
             </div>
             <div class="u-form-btns">
-                <el-button class="u-login-btn" type="primary" @click="handleLogin" :disabled="isLoginBtnDisabled">登录</el-button>
+                <el-button class="u-login-btn" type="primary" @click="handleLogin" :disabled="isLoginBtnDisabled">登录
+                </el-button>
             </div>
 
         </el-form>
@@ -38,14 +43,18 @@
 </template>
 
 <script>
+  import api from '../../api/api';
+  import login from '../../api/login';
+
   export default {
     name: 'login',
     data () {
       return {
+        passwordType: 'password',
         accountInfo: {
           username: '',
           password: '',
-          sms: ''
+          verificationCode: ''
         },
         accountError: '',
         passwordError: '',
@@ -55,11 +64,13 @@
       };
     },
     methods: {
-      sendSms () {
-        // eslint-disable-next-line
-        console.log('发送短信');
+      togglePassword () {
+        if (this.passwordType === 'password') {
+          this.passwordType = 'text';
+        } else {
+          this.passwordType = 'password';
+        }
       },
-
       inputBlur: function (errorItem, inputContent) {
         inputContent = inputContent.trim();
         if (errorItem === 'username') {
@@ -76,7 +87,7 @@
           } else {
             this.passwordError = '';
           }
-        } else if (errorItem === 'sms') {
+        } else if (errorItem === 'verificationCode') {
           if (inputContent === '') {
             this.smsError = '请输入您收到的验证码';
           } else {
@@ -88,11 +99,35 @@
 
       },
       handleLogin () {
+        let data = this.accountInfo;
         if (this.isadmin) {
-          this.$router.push('/admin');
+          data['role'] = 'admin';
         } else {
-          this.$router.push('/user');
+          data['role'] = 'user';
         }
+        login(data).then((re) => {
+          // eslint-disable-next-line
+          if (re.data.code === 0) {
+            localStorage.setItem('user', JSON.stringify(re.data.data));
+            if (re.data.data.role === 'admin') {
+              this.$router.push('/admin');
+            } else {
+              this.$router.push('/user');
+            }
+          } else {
+            alert(re.data.message);
+          }
+        }).catch((e) => {
+          alert(e);
+        });
+
+      },
+      getLoginMessage () {
+        api.getLoginMessage({username: this.accountInfo.username}).then((re => {
+          alert(re.message);
+        })).catch((e) => {
+          alert(e);
+        });
       }
     }
   };

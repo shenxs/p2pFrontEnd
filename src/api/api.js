@@ -20,7 +20,7 @@ let apiDes = [
     }, {
       fun: 'logout',
       url: '/admin/logout',
-      method: 'get',
+      method: 'post',
       params: []
     }, {
       //登录时获取验证码

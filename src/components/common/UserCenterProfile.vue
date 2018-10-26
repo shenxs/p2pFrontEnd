@@ -15,7 +15,6 @@
                 <el-form-item label="邮箱" prop="email">
                     <el-input type="email" v-model="ruleForm.email"></el-input>
                 </el-form-item>
-
                 <el-form-item label="手机号码" prop="phoneNumber">
                     <el-input v-model="ruleForm.phoneNumber" placeholder="请输入手机号码" type="text"></el-input>
                 </el-form-item>
@@ -143,6 +142,10 @@
 </template>
 
 <script>
+  /* eslint-disable */
+
+  import api from '../../api/api';
+
   export default {
     name: 'user-center-profile',
     data () {
@@ -185,6 +188,16 @@
       };
 
     },
+    beforeMount: function () {
+      // `this` 指向 vm 实例
+      let user = localStorage.getItem('user');
+      console.log(JSON.parse(user));
+      api.logout().then((re)=>{
+        console.log(re);
+      }).catch((e)=>{
+        console.log(e);
+      })
+    },
     methods: {
       togglePassword: function () {
         // eslint-disable-next-line
@@ -195,12 +208,12 @@
           this.passwordtype = 'password';
         }
       },
-      addAsset:function ( ) {
-        this.ruleForm.assets.push({value:'',type:'',description:''});
+      addAsset: function () {
+        this.ruleForm.assets.push({value: '', type: '', description: ''});
       },
-      deleteAsset:function (index) {
-        this.ruleForm.assets.slice(index,1);
-        this.$delete(this.ruleForm.assets,index);
+      deleteAsset: function (index) {
+        this.ruleForm.assets.slice(index, 1);
+        this.$delete(this.ruleForm.assets, index);
       }
     }
   };
@@ -219,7 +232,7 @@
             .u-asset-delete-btn {
                 position: absolute;
                 left: 100%;
-                top:30%;
+                top: 30%;
             }
         }
         .g-right {
