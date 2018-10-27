@@ -46,13 +46,19 @@
         this.menuFlag = index;
       }
     },
+    beforeMount(){
+      if(this.$store.state.islogin){
+        const user=localStorage.getItem('user');
+        if(user.role==='user'){
+           return;
+        }
+      }
+      this.$router.push('/index');
+    },
     data () {
       return {
         menuFlag: '1-1'
-
-      }
-
-
+      };
     }
   };
 </script>
@@ -61,7 +67,7 @@
     .el-aside {
         height: available;
         background-color: white;
-        .el-menu{
+        .el-menu {
             position: fixed;
             width: inherit;
             height: auto;

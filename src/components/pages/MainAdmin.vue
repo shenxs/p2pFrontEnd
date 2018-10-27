@@ -46,20 +46,20 @@
 
 <script>
   /* eslint-disable */
-  import overview from '../common/AdminOverview'
-  import profile from '../common/AdminProfile'
+  import overview from '../common/AdminOverview';
+  import profile from '../common/AdminProfile';
 
-  import reviewBuy from '../common/AdminReviewBuy'
-  import reviewSell from '../common/AdminReviewSell'
-  import reviewCredit from '../common/AdminReviewCredit'
+  import reviewBuy from '../common/AdminReviewBuy';
+  import reviewSell from '../common/AdminReviewSell';
+  import reviewCredit from '../common/AdminReviewCredit';
 
-  import sellRecord from '../common/AdminSellRecord'
-  import buyRecord from '../common/AdminBuyRecord'
-  import userManagement from '../common/AdminUserManagement'
+  import sellRecord from '../common/AdminSellRecord';
+  import buyRecord from '../common/AdminBuyRecord';
+  import userManagement from '../common/AdminUserManagement';
 
   export default {
     name: 'main-admin',
-    components: {overview,profile,reviewBuy,reviewSell,reviewCredit,sellRecord,buyRecord,userManagement},
+    components: {overview, profile, reviewBuy, reviewSell, reviewCredit, sellRecord, buyRecord, userManagement},
     methods: {
       handleOpen (key, keyPath) {
         console.log(key, keyPath);
@@ -67,14 +67,26 @@
       handleClose (key, keyPath) {
         console.log(key, keyPath);
       },
-      handleSelect(index){
-        this.menuFlag=index
+      handleSelect (index) {
+        this.menuFlag = index;
       }
     },
-    data(){
-      return {
-        menuFlag:"1-1"
+    beforeMount: function () {
+      // `this` 指向 vm 实例
+      let user = localStorage.getItem('user');
+      if (typeof(user) === undefined ) {
+        this.$router.push('/login');
       }
+      console.log(JSON.parse(user));
+      if (user==null|| user.role !== 'admin') {
+        console.log('goback');
+        this.$router.push('/index');
+      }
+    },
+    data () {
+      return {
+        menuFlag: '1-1'
+      };
     }
   };
 </script>

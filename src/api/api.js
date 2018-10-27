@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+axios.defaults.withCredentials=true;
 const server = axios.create({
   baseURL: 'http://120.78.87.58:8083',
   timeout: 5000
@@ -135,6 +135,8 @@ function ApiGenerator (des) {
 
   //添加update函数
   api['update'] = function (data) {
+    // eslint-disable-next-line
+    console.log('update',data);
     return server({
       url: '/userInformation/update',
       method: 'post',

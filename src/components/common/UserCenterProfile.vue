@@ -20,8 +20,8 @@
                 </el-form-item>
 
                 <el-form-item label="性别">
-                    <el-radio v-model="ruleForm.gender" label="male">男</el-radio>
-                    <el-radio v-model="ruleForm.gender" label="female">女</el-radio>
+                    <el-radio v-model="ruleForm.gender" :label="1">男</el-radio>
+                    <el-radio v-model="ruleForm.gender" :label="0">女</el-radio>
                 </el-form-item>
                 <el-form-item label="出生日期" prop="birthday">
                     <el-col :span="11">
@@ -96,14 +96,13 @@
                         <el-col>
                             <el-button class="u-asset-delete-btn" type="danger" style="margin-left: 50px"
                                        icon="el-icon-delete" circle @click="deleteAsset(index)"></el-button>
-
                         </el-col>
 
                     </el-row>
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary">保存</el-button>
+                    <el-button type="primary" @click="updateProfile">保存</el-button>
                     <el-button type="success" @click="addAsset">新增资产</el-button>
                 </el-form-item>
 
@@ -134,7 +133,8 @@
                     逾期数目：{{delayTransation}}
                 </el-card>
             </div>
-            <el-input v-model="ruleForm.description" type="textarea" placeholder="自我描述" autosize></el-input>
+            <el-input v-model="ruleForm.description" type="textarea" placeholder="自我描述" autosize
+                      maxlength="255"></el-input>
 
 
         </div>
@@ -151,10 +151,10 @@
     data () {
       return {
         ruleForm: {
-          username: 'Mr.λ',
-          password: 'this is a secret',
+          username: 'sxs',
+          password: 'sxs',
           signature: '天之道，损有余而补不足',
-          gender: 'male',
+          gender: 1,
           email: '247820400@qq.com',
           card: '3304383838438',
           phoneNumber: '17816879774',
@@ -164,8 +164,8 @@
           idType: 'IDCARD',
           idNum: '33042419960101189X',
           deposit: 1234,
-          description: '诸葛亮字孔明，琅邪阳都人也。汉司隶校尉诸葛丰后也。父珪，字君贡，汉末为太山郡丞。亮早孤，从父玄为袁术所署豫章太守，玄将亮及亮弟均之官。会汉朝更选硃皓代玄。玄素与荆州牧刘表有旧，往依之。献帝春秋曰：初，豫章太守周术病卒，刘表上诸葛玄为豫章太守，治南昌。汉朝闻周术死，遣硃皓代玄。皓从扬州太守刘繇求兵击玄，玄退屯西城，皓入南昌。建安二年正月，西城民反，杀玄，送首诣繇。此书所云，与本传不同。玄卒，亮躬耕陇亩，好为梁父吟。汉晋春秋曰：亮家于南阳之邓县，在襄阳城西二十里，号曰隆中。身长八尺，每自比於管仲、乐毅，时人莫之许也'
-          , assets: [
+          description: '诸葛亮字孔明，琅邪阳都人也。汉司隶校尉诸葛丰后也。',
+          assets: [
             {
               value: '',
               type: '',
@@ -192,11 +192,7 @@
       // `this` 指向 vm 实例
       let user = localStorage.getItem('user');
       console.log(JSON.parse(user));
-      api.logout().then((re)=>{
-        console.log(re);
-      }).catch((e)=>{
-        console.log(e);
-      })
+
     },
     methods: {
       togglePassword: function () {
@@ -214,6 +210,31 @@
       deleteAsset: function (index) {
         this.ruleForm.assets.slice(index, 1);
         this.$delete(this.ruleForm.assets, index);
+      },
+      updateProfile () {
+
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        let data = {
+          userId: user.userId,
+          ... this.ruleForm
+        };
+        api.update(data).then((re) => {
+          console.log(re);
+          if(re.data.code===0){
+            const h = this.$createElement;
+            this.$notify({
+              title:'提示',
+              message: h('i', { style: 'color: teal'}, '保存成功')
+            })
+          }
+        }).catch((e) => {
+            const h=this.$createElement;
+          this.$notify({
+            title:'保存失败',
+            message: h('i', { style: 'color: teal'}, e)
+          })
+        });
       }
     }
   };
