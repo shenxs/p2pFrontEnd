@@ -8,7 +8,6 @@
                         :key="index" :prop="key" :label="index"/>
             </el-table>
         </div>
-
     </div>
 </template>
 

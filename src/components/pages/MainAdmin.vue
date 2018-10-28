@@ -23,9 +23,8 @@
 
                     <el-submenu index="4">
                         <template slot="title">所有记录</template>
-                        <el-menu-item index="4-1">出借记录</el-menu-item>
-                        <el-menu-item index="4-2">购买记录</el-menu-item>
-                        <el-menu-item index="4-3">用户管理</el-menu-item>
+                        <el-menu-item index="4-1">交易记录</el-menu-item>
+                        <el-menu-item index="4-2">用户管理</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>
@@ -35,9 +34,8 @@
             <review-sell v-if="menuFlag === '3-1'"></review-sell>
             <review-buy v-if="menuFlag === '3-2'"></review-buy>
             <review-credit v-if="menuFlag==='3-3'"></review-credit>
-            <sell-record v-if="menuFlag==='4-1'"></sell-record>
-            <buy-record v-if="menuFlag==='4-2'"></buy-record>
-            <user-management v-if="menuFlag==='4-3'"></user-management>
+            <transition v-if="menuFlag==='4-1'"></transition>
+            <user-management v-if="menuFlag==='4-2'"></user-management>
 
 
         </el-container>
@@ -53,13 +51,12 @@
   import reviewSell from '../common/AdminReviewSell';
   import reviewCredit from '../common/AdminReviewCredit';
 
-  import sellRecord from '../common/AdminSellRecord';
-  import buyRecord from '../common/AdminBuyRecord';
+  import transition from '../common/AdminTransition';
   import userManagement from '../common/AdminUserManagement';
 
   export default {
     name: 'main-admin',
-    components: {overview, profile, reviewBuy, reviewSell, reviewCredit, sellRecord, buyRecord, userManagement},
+    components: {overview, profile, reviewBuy, reviewSell, reviewCredit, transition, userManagement},
     methods: {
       handleOpen (key, keyPath) {
         console.log(key, keyPath);
@@ -73,15 +70,15 @@
     },
     beforeMount: function () {
       // `this` 指向 vm 实例
-      let user = localStorage.getItem('user');
-      if (typeof(user) === undefined ) {
-        this.$router.push('/login');
-      }
-      console.log(JSON.parse(user));
-      if (user==null|| user.role !== 'admin') {
-        console.log('goback');
-        this.$router.push('/index');
-      }
+      // let user = localStorage.getItem('user');
+      // if (typeof(user) === undefined ) {
+      //   this.$router.push('/login');
+      // }
+      // console.log(JSON.parse(user));
+      // if (user==null|| user.role !== 'admin') {
+      //   console.log('goback');
+      //   this.$router.push('/index');
+      // }
     },
     data () {
       return {
