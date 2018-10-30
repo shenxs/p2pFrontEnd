@@ -30,13 +30,15 @@
         </el-menu>
       </el-aside>
 
-      <overview v-if="menuFlag === '1-1'"/>
-      <profile v-if="menuFlag === '2-1'"/>
-      <review-sell v-if="menuFlag === '3-1'"/>
-      <review-buy v-if="menuFlag === '3-2'"/>
-      <review-credit v-if="menuFlag==='3-3'"/>
-      <transition v-if="menuFlag==='4-1'"/>
-      <user-management v-if="menuFlag==='4-2'"/>
+      <div class="g-operations">
+        <overview v-if="menuFlag === '1-1'"/>
+        <profile v-if="menuFlag === '2-1'"/>
+        <review-sell v-if="menuFlag === '3-1'"/>
+        <review-buy v-if="menuFlag === '3-2'"/>
+        <review-credit v-if="menuFlag==='3-3'"/>
+        <transition v-if="menuFlag==='4-1'"/>
+        <user-management v-if="menuFlag==='4-2'"/>
+      </div>
 
     </el-container>
   </div>
@@ -70,15 +72,14 @@
     },
     beforeMount: function () {
       // `this` 指向 vm 实例
-      // let user = localStorage.getItem('user');
-      // if (typeof(user) === undefined ) {
-      //   this.$router.push('/login');
-      // }
-      // console.log(JSON.parse(user));
-      // if (user==null|| user.role !== 'admin') {
-      //   console.log('goback');
-      //   this.$router.push('/index');
-      // }
+      if(this.$store.state.islogin===true){
+        let role=localStorage.getItem('user').role;
+        if(role==='user'){
+          this.$router.push('/user')
+        }
+      }else{
+        this.$router.push('/index');
+      }
     },
     data () {
       return {
@@ -91,5 +92,10 @@
 <style lang="scss" scoped>
     .m-sidebar {
 
+    }
+    .g-operations{
+        background-color: white;
+        width: 100%;
+        margin-left: 10px;
     }
 </style>

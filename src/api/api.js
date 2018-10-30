@@ -51,7 +51,7 @@ const apiDes = [
     fun: 'updateSell',
     url: '/deSell/update',
     method: 'post',
-    params: ['sellId', 'moneyNum', 'period', 'interest', 'credit']
+    params: ['deSellId', 'moneyNum', 'period', 'interest', 'credit']
   }, {
     fun: 'getSellBySellId',
     url: '/deSell/getBySellId',

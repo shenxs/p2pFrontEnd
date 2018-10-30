@@ -125,7 +125,7 @@
           // eslint-disable-next-line
           if (re.data.code === 0) {
             this.$store.commit('login');
-            console.log(re);
+            // console.log(re);
             localStorage.setItem('user', JSON.stringify(re.data.data));
             if (re.data.data.role === 'admin') {
               this.$router.push('/admin');
