@@ -100,7 +100,7 @@
 <style lang="scss" scoped>
     .g-profile {
         width: 100%;
-        margin-left: 10px;
+
         background: white;
         padding: 30px;
         .g-left {
