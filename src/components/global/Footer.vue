@@ -1,13 +1,13 @@
 <template>
-    <div class="g-footer">
-        <p class="m-copyright">Copyright © 2018, Zhejiang University, All rights reserved.</p>
-    </div>
+  <div class="g-footer">
+    <p class="m-copyright">Copyright © 2018, Zhejiang University, All rights reserved.</p>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "global-footer"
-    }
+export default {
+  name: 'GlobalFooter'
+}
 </script>
 
 <style lang="scss" scoped>

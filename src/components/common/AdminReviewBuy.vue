@@ -1,14 +1,13 @@
 <template>
-    <div class="admin-review-buy" style="width: 100%">
-        <h1>管理员审核购买</h1>
-        <basic-table :title="'购买列表'" :data="tableData" :labels="labels"></basic-table>
+  <div class="admin-review-buy" style="width: 100%">
+    <h1>管理员审核购买</h1>
+    <basic-table :title="'购买列表'" :data="tableData" :labels="labels"/>
 
-
-    </div>
+  </div>
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
 

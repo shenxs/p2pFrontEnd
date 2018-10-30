@@ -1,13 +1,13 @@
 <template>
-    <div class="admin-buy-record" style="width: 100%">
-        <h1>购买记录</h1>
-        <basic-table :title="title" :labels="label" :data="tableData"></basic-table>
+  <div class="admin-buy-record" style="width: 100%">
+    <h1>购买记录</h1>
+    <basic-table :title="title" :labels="label" :data="tableData"/>
 
-    </div>
+  </div>
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import api from '../../api/api';
   import basicTable from './BasicTableView';
 

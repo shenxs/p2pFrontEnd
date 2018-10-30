@@ -1,13 +1,13 @@
 <template>
-<div class="admin-review-credit" style="width: 100%">
+  <div class="admin-review-credit" style="width: 100%">
     <h1>审核信用评级</h1>
-</div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'admin-review-credit'
-  };
+export default {
+  name: 'AdminReviewCredit'
+}
 </script>
 
 <style lang="scss" scoped>

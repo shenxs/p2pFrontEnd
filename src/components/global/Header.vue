@@ -1,37 +1,37 @@
 <template>
-    <div class="g-header">
-        <div class="g-logo" @click="changeRoute('/index')">
-            <p style="line-height: 60px; text-align: center;">LOGO</p>
-        </div>
-        <div class="g-nav">
-            <el-menu
-                    :default-active="activeIndex"
-                    class="m-nav"
-                    mode="horizontal"
-                    @select="handleSelect"
-                    background-color="#545c64"
-                    text-color="#fff"
-                    active-text-color="#ffd04b">
-                <el-menu-item index="1"><a href="javascript:;">信 息</a></el-menu-item>
-                <el-menu-item index="2"><a href="javascript:;">出借贷款</a></el-menu-item>
-                <el-menu-item index="3"><a href="javascript:;">申请贷款</a></el-menu-item>
-
-                <el-menu-item v-if="isloginCom" index="4" @click="logout">登出</el-menu-item>
-                <el-submenu v-else index="4">
-                    <template slot="title">用 户</template>
-                    <el-menu-item index="4-1" @click="openUserLogin">登录</el-menu-item>
-                    <el-menu-item index="4-2" @click="goRegister">注册</el-menu-item>
-                </el-submenu>
-            </el-menu>
-        </div>
+  <div class="g-header">
+    <div class="g-logo" @click="changeRoute('/index')">
+      <p style="line-height: 60px; text-align: center;">LOGO</p>
     </div>
+    <div class="g-nav">
+      <el-menu
+        :default-active="activeIndex"
+        class="m-nav"
+        mode="horizontal"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        @select="handleSelect">
+        <el-menu-item index="1"><a href="javascript:;">信 息</a></el-menu-item>
+        <el-menu-item index="2"><a href="javascript:;">出借贷款</a></el-menu-item>
+        <el-menu-item index="3"><a href="javascript:;">申请贷款</a></el-menu-item>
+
+        <el-menu-item v-if="isloginCom" index="4" @click="logout">登出</el-menu-item>
+        <el-submenu v-else index="4">
+          <template slot="title">用 户</template>
+          <el-menu-item index="4-1" @click="openUserLogin">登录</el-menu-item>
+          <el-menu-item index="4-2" @click="goRegister">注册</el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </div>
+  </div>
 </template>
 
 <script>
-  import api from '../../api/api';
+import api from '../../api/api'
 
-  export default {
-    /* eslint-disable */
+export default {
+  /* eslint-disable */
     name: 'global-header',
     components: {},
     data () {

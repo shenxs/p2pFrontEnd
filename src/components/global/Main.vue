@@ -1,13 +1,13 @@
 <template>
-    <div class="g-main">
-        <router-view />
-    </div>
+  <div class="g-main">
+    <router-view />
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "global-main"
-    }
+export default {
+  name: 'GlobalMain'
+}
 </script>
 
 <style lang="scss" scoped>

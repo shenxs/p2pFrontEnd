@@ -1,22 +1,22 @@
 <template>
-    <div class="g-main">
-        <div class="g-carousel">
-            <el-carousel height="410px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <p>{{ item }}</p>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
-        <div class="g-inner g-news">news</div>
-        <div class="g-inner g-loan g-loan-sell">loan-sell</div>
-        <div class="g-inner g-loan g-loan-buy">loan-buy</div>
+  <div class="g-main">
+    <div class="g-carousel">
+      <el-carousel height="410px">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <p>{{ item }}</p>
+        </el-carousel-item>
+      </el-carousel>
     </div>
+    <div class="g-inner g-news">news</div>
+    <div class="g-inner g-loan g-loan-sell">loan-sell</div>
+    <div class="g-inner g-loan g-loan-buy">loan-buy</div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'main-index'
-  };
+export default {
+  name: 'MainIndex'
+}
 </script>
 
 <style lang="scss" scoped>

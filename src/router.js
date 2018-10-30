@@ -1,8 +1,8 @@
-import MainIndex from './components/pages/MainIndex';
-import MainUser from './components/pages/MainUser';
-import MainAdmin from './components/pages/MainAdmin';
-import Login from './components/common/Login';
-import Register from './components/common/Register';
+import MainIndex from './components/pages/MainIndex'
+import MainUser from './components/pages/MainUser'
+import MainAdmin from './components/pages/MainAdmin'
+import Login from './components/common/Login'
+import Register from './components/common/Register'
 
 const routers = [
   {
@@ -34,7 +34,7 @@ const routers = [
     component: Register
   }
 
-];
+]
 
-export default routers;
+export default routers
 

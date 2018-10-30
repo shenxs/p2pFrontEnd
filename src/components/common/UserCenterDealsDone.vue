@@ -1,13 +1,13 @@
 <template>
-    <div class="user-center-deals-done">
-        <h1>用户中心已完成交易</h1>
-    </div>
+  <div class="user-center-deals-done">
+    <h1>用户中心已完成交易</h1>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'user-center-deals-done'
-  };
+export default {
+  name: 'UserCenterDealsDone'
+}
 </script>
 
 <style lang="scss" scoped>
