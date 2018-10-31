@@ -98,7 +98,7 @@
     directives: {
       waves
     },
-    props: ['title', 'labels', 'tabledata', 'review', 'totalElements', 'sortLabels'],
+    props: ['title', 'labels', 'tabledata', 'review', 'totalElements'],
     data () {
       return {
         tData: this.tabledata,
