@@ -1,12 +1,15 @@
 <!--suppress ALL -->
 <template>
     <div class="admin-overview" style="width: 100%">
+
         <panel-group :count="count" @handleSetLineChartData="handleSetLineChartData"/>
         <line-chart :chart-data="chartData"/>
+
     </div>
 </template>
 
 <script>
+
   import PanelGroup from './PanelGroup';
   import LineChart from './LineChart';
 
@@ -50,6 +53,7 @@
         this.chartData = chartData[type];
       }
     }
+
   };
 </script>
 

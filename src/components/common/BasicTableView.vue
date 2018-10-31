@@ -1,86 +1,86 @@
 <template>
 
-  <div class="basicTable">
+    <div class="basicTable">
 
-    <div class="u-table-title">
-      <h1>{{ title }}</h1>
+        <div class="u-table-title">
+            <h1>{{ title }}</h1>
 
-      <div class="m-filter-container">
-        <el-input style="width: 200px" placeholder="请输入用户名"/>
-        <el-select :value="queryValue" class="f-filter-item">
-          <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item"/>
-        </el-select>
+            <div class="m-filter-container">
+                <el-input style="width: 200px" placeholder="请输入用户名"/>
+                <el-select :value="queryValue" class="f-filter-item">
+                    <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item"/>
+                </el-select>
 
-        <el-select
-          v-model="listQuery.type"
-          :value="queryValue"
-          clearable
-          class="f-filter-item"
-          style="width: 130px">
-          <el-option
-            v-for="item in calendarTypeOptions"
-            :key="item.key"
-            :label="item.display_name+'('+item.key+')'"
-            :value="item.key"/>
-        </el-select>
+                <el-select
+                        v-model="listQuery.type"
+                        :value="queryValue"
+                        clearable
+                        class="f-filter-item"
+                        style="width: 130px">
+                    <el-option
+                            v-for="item in calendarTypeOptions"
+                            :key="item.key"
+                            :label="item.display_name+'('+item.key+')'"
+                            :value="item.key"/>
+                </el-select>
 
-        <el-button v-waves class="f-filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-          筛选
-        </el-button>
+                <el-button v-waves class="f-filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+                    筛选
+                </el-button>
 
-      </div>
+            </div>
 
-      <el-table
-        :data="tData"
-        stripe
-        border
-        fit
-        highlight-current-row
-        style="width: 100%;">
-        <el-table-column
-          v-for="(index, key) in labels"
-          :key="index"
-          :prop="key"
-          :label="index"/>
-        <el-table-column
-          v-if="review"
-          fixed="right"
-          label="审核"
-          width="150"
-          align="center"
-          class-name="small-padding fixed-width">
-          <template slot-scope="scope">
+            <el-table
+                    :data="tabledata"
+                    stripe
+                    border
+                    fit
+                    highlight-current-row
+                    style="width: 100%;">
+                <el-table-column
+                        v-for="(index, key) in labels"
+                        :key="index"
+                        :prop="key"
+                        :label="index"/>
+                <el-table-column
+                        v-if="review"
+                        fixed="right"
+                        label="审核"
+                        width="150"
+                        align="center"
+                        class-name="small-padding fixed-width">
+                    <template slot-scope="scope">
 
-            <el-button type="success" size="mini" @click="makeReview(scope.row,'pass',scope)">
-              通过
-            </el-button>
-            <el-button size="mini" type="danger" @click="makeReview(scope.row,'reject',scope)">
-              拒绝
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+                        <el-button type="success" size="mini" @click="makeReview(scope.row,'pass',scope)">
+                            通过
+                        </el-button>
+                        <el-button size="mini" type="danger" @click="makeReview(scope.row,'reject',scope)">
+                            拒绝
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <div class="pagination-block">
+            <el-row :gutter="20">
+                <el-col :span="12" :offset="6">
+                    <el-pagination
+                            :total="totalElemets"
+                            background
+                            layout="prev, pager, next"
+                            @current-change="handelCurrentChange"/>
+                </el-col>
+            </el-row>
+        </div>
+
     </div>
-
-    <div class="pagination-block">
-      <el-row :gutter="20">
-        <el-col :span="12" :offset="6">
-          <el-pagination
-            :total="totalElemets"
-            background
-            layout="prev, pager, next"
-            @current-change="handelCurrentChange"/>
-        </el-col>
-      </el-row>
-    </div>
-
-  </div>
 
 </template>
 
 <script>
 
-/* eslint-disable */
+  /* eslint-disable */
   import ElSlPanel from 'element-ui/packages/color-picker/src/components/sv-panel';
   // eslint-disable-next-line
   import utils from '../../utils';
@@ -154,10 +154,10 @@
       };
     },
     watch: {
-      tabledata: function () {
-        this.tData = this.tabledata.slice();
-        this.tData =this.tData.map(this.parseData)
-      }
+      // tabledata: function () {
+      //   // this.tData = this.tabledata.slice();
+      //   // this.tData = this.tData.map(this.parseData);
+      // }
     },
     beforeMount () {
 
@@ -172,15 +172,10 @@
       handleFilter () {
 
       },
-      handelCurrentChange () {
-
-      },
-      parseData (aRecord) {
-        console.log(aRecord)
-        aRecord.sellTime = utils.unixTime2YYYYMMDD(aRecord.sellTime);
-        aRecord.interest = aRecord.interest + '%';
-        return aRecord;
+      handelCurrentChange (val) {
+        this.$emit('currentChange', val);
       }
+
     }
 
   };
