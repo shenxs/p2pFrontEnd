@@ -7,10 +7,12 @@
                 :labels="label"
                 :tabledata="tableData"
                 :totalElements="totalElements"
+                :sortLabels="sortlabels"
                 :review="true"
                 @checked="checked"
                 @currentChange="handelPageChange"
                 @refresh="loadData"
+                @filter="handelFilter"
         />
 
     </div>
@@ -44,6 +46,11 @@
           transactionTime: '交易时间',
           sellStatus: '借款审核'
         },
+        sortlabels:[ {key: 'interest', display_name: '利率'},
+          {key: 'moneyNum', display_name: '总额'},
+          {key: 'period', display_name: '周期'},
+          {key: 'transactionTime', display_name: '交易时间'}]
+        ,
         tableData: null, // 表格展示数据
         requestData: null// 请求所获的数据
       };
@@ -51,8 +58,11 @@
 
     methods: {
 
-      loadData () {
+      loadData (str) {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, sellStatus: 'N'};
+        if(str !==undefined){
+          data['sellName']=str.trim()
+        }
         api.getTansitionByPage(data).then(re => {
           console.log(re);
 
@@ -61,10 +71,10 @@
           this.totalElements = re.data.data.totalElements;
         });
       },
-      checked (comment, index) {
+      checked (comment, row) {
         // 审核完成
         // console.log(comment, index);
-        const data = this.requestData[index];
+        const data = this.requestData.filter(x=>x.transactionId===row.transactionId)[0];
         if (comment === 'pass')
           data.sellStatus = 'Y';
         else if (comment === 'reject')
@@ -77,9 +87,9 @@
               type: 'success'
             });
             if (comment === 'pass')
-              this.tableData[index].sellStatus = '通过';
+              row.sellStatus = '通过';
             else if (comment === 'reject')
-              this.tableData[index].sellStatus = '拒绝';
+             row.sellStatus = '拒绝';
           } else {
             this.$message({
               message: '操作失败',
@@ -100,6 +110,18 @@
       handelPageChange (val) {
         this.pageNow = val;
         this.loadData();
+      },
+      handelFilter(str){
+        console.log(str);
+        if(str.trim()===''){
+          this.$notify({
+            title:'error',
+            message:'请输入筛选关键字',
+            duration:1000,
+          })
+        }else{
+
+        }
       }
     }
   };

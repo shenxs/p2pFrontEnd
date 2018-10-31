@@ -1,28 +1,10 @@
 <template>
-
     <div class="basicTable">
-
         <div class="u-table-title">
             <h1>{{ title }}</h1>
 
             <div class="m-filter-container">
-                <el-input style="width: 200px" placeholder="请输入用户名"/>
-                <el-select :value="queryValue" class="f-filter-item">
-                    <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item"/>
-                </el-select>
-
-                <el-select
-                        v-model="listQuery.type"
-                        :value="queryValue"
-                        clearable
-                        class="f-filter-item"
-                        style="width: 130px">
-                    <el-option
-                            v-for="item in calendarTypeOptions"
-                            :key="item.key"
-                            :label="item.display_name+'('+item.key+')'"
-                            :value="item.key"/>
-                </el-select>
+                <el-input clearable="" v-model="filterStr" style="width: 200px" placeholder="输入搜索字段"/>
 
                 <el-button v-waves class="f-filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
                     筛选
@@ -36,9 +18,7 @@
                            @click="$emit('refresh')">
                     刷新
                 </el-button>
-
             </div>
-
             <el-table
                     :data="tabledata"
                     stripe
@@ -49,11 +29,13 @@
                 <el-table-column
                         align="center"
                         v-for="(index, key) in labels"
+                        sortable
                         :key="index"
                         :prop="key"
                         :label="index"/>
                 <el-table-column
                         v-if="review"
+                        sortable
                         fixed="right"
                         label="审核"
                         width="150"
@@ -98,10 +80,8 @@
   import waves from '../../directive/waves'; // 水波纹指令
 
   const calendarTypeOptions = [
-    {key: 'CN', display_name: 'China'},
-    {key: 'US', display_name: 'USA'},
-    {key: 'JP', display_name: 'Japan'},
-    {key: 'EU', display_name: 'Eurozone'}
+    {key: 'up', display_name: '生序'},
+    {key: 'down', display_name: '降序'}
   ];
 
   // arr to obj ,such as { CN : "China", US : "USA" }
@@ -116,13 +96,14 @@
     directives: {
       waves
     },
-    props: ['title', 'labels', 'tabledata', 'review','totalElements'],
+    props: ['title', 'labels', 'tabledata', 'review', 'totalElements', 'sortLabels'],
     data () {
       return {
         tData: this.tabledata,
         tableKey: 0,
         queryValue: '',
-
+        sortValue: '',
+        filterStr:'',
         total: null,
         listLoading: true,
         listQuery: {
@@ -174,13 +155,12 @@
     },
     methods: {
       //传入数据和意见
-      makeReview (row, comment, index) {
-        // console.log(row, comment, index);
-        // this.tData.splice(index.$index, 1);
-        this.$emit('checked', comment, index.$index);
+      makeReview (row, comment) {
+        console.log(row, comment);
+        this.$emit('checked', comment, row);
       },
       handleFilter () {
-
+        this.$emit('filter',this.filterStr);
       },
       handelCurrentChange (val) {
         this.$emit('currentChange', val);
@@ -200,14 +180,14 @@
             .f-filter-item {
                 margin-left: 10px;
             }
-            .f-refresh-item{
+            .f-refresh-item {
                 margin-left: 10px;
             }
         }
         .el-table {
             margin-bottom: 10px;
         }
-        .u-pagination-block{
+        .u-pagination-block {
             margin-bottom: 10px;
         }
 

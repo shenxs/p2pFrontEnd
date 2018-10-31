@@ -6,6 +6,7 @@
                 :title="title"
                 :labels="label"
                 :tabledata="tableData"
+                :totalElements="totalElements"
                 :review="true"
                 @checked="checked"
                 @currentChange="handelCurrentChange"
@@ -40,10 +41,11 @@
         },
         tableData: null,
         requestData: null,
+        totalElements:0,
         title: '审核购买',
         pageNow: 1,
         pageSize: 10,
-        totalElemets: 0
+
       };
     },
     methods: {
@@ -66,6 +68,7 @@
           this.requestData=JSON.parse(JSON.stringify(re.data.data.content));
           console.log(this.requestData);
           this.tableData=re.data.data.content.map(this.parseData);
+          this.totalElements=re.data.data.totalElements;
         }).catch(e=>{
           console.log(e);
         })
