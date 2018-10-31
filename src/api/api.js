@@ -113,6 +113,12 @@ const apiDes = [
     url: '/transection/getByPage.do',
     method: 'post',
     params: ['pageNow', 'pageSize']
+  }, {
+    //更新transition
+    fun: 'updateTransation',
+    url: '/transection/update.do',
+    method: 'post',
+    parmas: ['transactionId']
   }
 ];
 

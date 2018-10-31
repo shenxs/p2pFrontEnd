@@ -28,6 +28,15 @@
                     筛选
                 </el-button>
 
+                <el-button v-waves class="f-reset-item" type="primary" icon="" @click="$emit('reset')">
+                    重置
+                </el-button>
+
+                <el-button v-waves class="f-refresh-item" type="primary" icon="el-icon-refresh"
+                           @click="$emit('refresh')">
+                    刷新
+                </el-button>
+
             </div>
 
             <el-table
@@ -38,6 +47,7 @@
                     highlight-current-row
                     style="width: 100%;">
                 <el-table-column
+                        align="center"
                         v-for="(index, key) in labels"
                         :key="index"
                         :prop="key"
@@ -63,11 +73,11 @@
             </el-table>
         </div>
 
-        <div class="pagination-block">
+        <div class="u-pagination-block">
             <el-row :gutter="20">
-                <el-col :span="12" :offset="6">
+                <el-col :span="20" :offset="7">
                     <el-pagination
-                            :total="totalElemets"
+                            :total="totalElements"
                             background
                             layout="prev, pager, next"
                             @current-change="handelCurrentChange"/>
@@ -106,13 +116,12 @@
     directives: {
       waves
     },
-    props: ['title', 'labels', 'tabledata', 'review'],
+    props: ['title', 'labels', 'tabledata', 'review','totalElements'],
     data () {
       return {
         tData: this.tabledata,
         tableKey: 0,
         queryValue: '',
-        totalElemets: 1000,
 
         total: null,
         listLoading: true,
@@ -191,8 +200,14 @@
             .f-filter-item {
                 margin-left: 10px;
             }
+            .f-refresh-item{
+                margin-left: 10px;
+            }
         }
         .el-table {
+            margin-bottom: 10px;
+        }
+        .u-pagination-block{
             margin-bottom: 10px;
         }
 

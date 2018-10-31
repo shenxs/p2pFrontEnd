@@ -1,7 +1,7 @@
 <template>
 
     <div class="admin-review-buy" style="width: 100%">
-        <h1>管理员审核购买</h1>
+
         <basic-table
                 :title="title"
                 :labels="label"
@@ -30,13 +30,13 @@
     data () {
       return {
         label: {
-          userName: '用户名',
-          credit: '信用等级',
+          buyName: '贷款目的',
           interest: '利率',
           moneyNum: '总额(元)',
           period: '周期（天）',
-          sellTime: '交易时间',
-          status: '状态'
+          repaymentType:'还款方式',
+          transactionTime:'交易时间',
+          buyStatus: '贷款审核',
         },
         tableData: null,
         requestData: null,
@@ -48,26 +48,27 @@
     },
     methods: {
       parseData (aRecord) {
-        aRecord.sellTime = utils.unixTime2YYYYMMDD(aRecord.sellTime);
+        aRecord.transactionTime = utils.unixTime2YYYYMMDD(aRecord.transactionTime);
         aRecord.interest = aRecord.interest + '%';
+        if(aRecord.buyStatus==='N'){
+          aRecord.buyStatus='未审核';
+        }
         return aRecord;
       },
       loadData () {
         let data = {
           pageNow: this.pageNow,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          buyStatus:'N'
         };
-        api.getAllBuyPage(data).then(re => {
-          console.log(re);
+        api.getTansitionByPage(data).then(re=>{
+
           this.requestData=JSON.parse(JSON.stringify(re.data.data.content));
-          this.tableData = re.data.data.content.map(this.parseData);
-        }).catch(e => {
+          console.log(this.requestData);
+          this.tableData=re.data.data.content.map(this.parseData);
+        }).catch(e=>{
           console.log(e);
-          this.$notify({
-            title: 'error',
-            message: e
-          });
-        });
+        })
       },
       checked (comment, index) {
         console.log(comment,index);
