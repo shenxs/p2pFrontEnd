@@ -113,11 +113,12 @@ const apiDes = [
     url: '/transection/getByPage.do',
     method: 'post',
     params: ['pageNow', 'pageSize']
-  },{
-  fun:'getDaySell',
-    url:'/statistics/getDayMoney1',
-    method:'post',
-    params:[]
+  }, {
+    //更新transition
+    fun: 'updateTransation',
+    url: '/transection/update.do',
+    method: 'post',
+    parmas: ['transactionId']
   }
 ];
 

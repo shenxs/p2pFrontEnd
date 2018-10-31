@@ -17,8 +17,8 @@
 
                     <el-submenu index="3">
                         <template slot="title">待审核</template>
-                        <el-menu-item index="3-1">审核出借</el-menu-item>
-                        <el-menu-item index="3-2">审核购买</el-menu-item>
+                        <el-menu-item index="3-1">审核借款</el-menu-item>
+                        <el-menu-item index="3-2">审核贷款</el-menu-item>
                         <el-menu-item index="3-3">信用审核</el-menu-item>
                     </el-submenu>
 
