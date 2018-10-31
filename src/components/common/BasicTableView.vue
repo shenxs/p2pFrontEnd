@@ -154,10 +154,10 @@
       };
     },
     watch: {
-      tabledata: function () {
-        this.tData = this.tabledata.slice();
-        this.tData = this.tData.map(this.parseData);
-      }
+      // tabledata: function () {
+      //   // this.tData = this.tabledata.slice();
+      //   // this.tData = this.tData.map(this.parseData);
+      // }
     },
     beforeMount () {
 
