@@ -6,11 +6,11 @@
           <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">历史年化</div>
+          <div class="card-panel-text">历史年化11</div>
           <count-to
             :start-val="count.historyYear.startVal"
             :end-val="count.historyYear.endVal"
-            :duration="1000"
+            :duration="2800"
             :decimals="1"
             class="card-panel-num"/>
         </div>
@@ -26,7 +26,7 @@
           <count-to
             :start-val="count.period.startVal"
             :end-val="count.period.endVal"
-            :duration="1000"
+            :duration="2800"
             class="card-panel-num"/>
         </div>
       </div>
@@ -41,7 +41,7 @@
           <count-to
             :start-val="count.money.startVal"
             :end-val="count.money.endVal"
-            :duration="1000"
+            :duration="2800"
             class="card-panel-num"/>
         </div>
       </div>
@@ -56,22 +56,10 @@ export default {
   components: {
     CountTo
   },
+  props:['count'],
   data() {
     return {
-      count: {
-        historyYear: {
-          startVal: 0,
-          endVal: 8.4
-        },
-        period: {
-          startVal: 0,
-          endVal: 900000
-        },
-        money: {
-          startVal: 0,
-          endVal: 192000
-        }
-      }
+
     }
   },
   methods: {

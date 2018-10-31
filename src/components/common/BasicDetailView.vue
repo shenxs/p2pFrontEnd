@@ -7,14 +7,14 @@
           <div class="line_buttom"/>
         </el-row>
         <el-row>
-          <div class="topDetail">
-            <ul>
-              <li class="ul_left d_li">
-                <span class="li_top">历史年率</span>
-                <span class="li_buttom">{{ detailData.interest }}%</span>
-              </li>
+          <!--<div class="topDetail">-->
+            <!--<ul>-->
+              <!--<li class="ul_left d_li">-->
+                <!--<span class="li_top">历史年率</span>-->
+                <!--<span class="li_buttom">{{ detailData.interest }}%</span>-->
+              <!--</li>-->
               <li class="ul_center d_li">
-                <PanelGroup @handleSetLineChartData="handleSetLineChartData"/>
+                <PanelGroup :count="count"  @handleSetLineChartData="handleSetLineChartData"/>
                 <!--<span class="li_top">周期</span>-->
                 <!--<span class="li_buttom" style="color:black;">{{ detailData.period }}<i-->
                 <!--style="font-size:12px;">天</i>-->
@@ -24,14 +24,14 @@
               <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
                 <line-chart :chart-data="lineChartData"/>
               </el-row>
-              <li class="ul_right d_li">
+              <!--<li class="ul_right d_li">-->
 
-                <span class="li_top">金额</span>
-                <span class="li_buttom">{{ detailData.moneyNum }}</span>
-              </li>
-            </ul>
+                <!--<span class="li_top">金额</span>-->
+                <!--<span class="li_buttom">{{ detailData.moneyNum }}</span>-->
+              <!--</li>-->
+            <!--</ul>-->
 
-          </div>
+          <!--</div>-->
 
         </el-row>
         <el-row>
@@ -349,16 +349,30 @@ import PanelGroup from './PanelGroup'
 import LineChart from './LineChart'
 const lineChartData = {
   newVisitis: {
-    expectedData: [100, 120, 161, 134, 105, 160, 165],
-    actualData: [120, 82, 91, 154, 162, 140, 145]
+    expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
+    actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
   },
   messages: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140],
-    actualData: [180, 160, 151, 106, 145, 150, 130]
+    expectedData: [200, 192, 120, 144, 160, 130, 140, 120, 161, 134, 105, 160, 165],
+    actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
   },
   purchases: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100],
-    actualData: [120, 90, 100, 138, 142, 130, 130]
+    expectedData: [80, 100, 121, 104, 105, 90, 100, 120, 161, 134, 105, 160, 165],
+    actualData: [120, 90, 100, 138, 142, 130, 130, 120, 161, 134, 105, 160, 165]
+  }
+}
+const count = {
+  historyYear: {
+    startVal: 0,
+      endVal: 8.4
+  },
+  period: {
+    startVal: 0,
+      endVal: 900000
+  },
+  money: {
+    startVal: 0,
+      endVal: 192000
   }
 }
   export default {
