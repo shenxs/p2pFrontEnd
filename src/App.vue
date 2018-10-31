@@ -1,34 +1,33 @@
 <template>
-  <div id="app">
-    <global-header/>
-    <global-main/>
-    <global-footer/>
-  </div>
+    <div id="app">
+        <global-header/>
+        <global-main/>
+        <global-footer/>
+    </div>
 </template>
 
 <script>
-import Header from './components/global/Header'
-import Main from './components/global/Main'
-import Footer from './components/global/Footer'
+  import Header from './components/global/Header';
+  import Main from './components/global/Main';
+  import Footer from './components/global/Footer';
 
-export default {
-  name: 'App',
-  components: {
-    GlobalHeader: Header,
-    GlobalMain: Main,
-    GlobalFooter: Footer
-  },
-  props: {
-  },
-  data() {
-    return {}
-  },
-  methods: {
-    changeRoute(path) {
-      this.$router.push(path)
+  export default {
+    name: 'App',
+    components: {
+      GlobalHeader: Header,
+      GlobalMain: Main,
+      GlobalFooter: Footer
+    },
+    props: {},
+    data () {
+      return {};
+    },
+    methods: {
+      changeRoute (path) {
+        this.$router.push(path);
+      }
     }
-  }
-}
+  };
 
 </script>
 

@@ -1,10 +1,11 @@
-import axios from 'axios'
-axios.defaults.withCredentials = true
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 const server = axios.create({
   baseURL: 'http://120.78.87.58:8083',
   timeout: 5000
 
-})
+});
 
 const apiDes = [
   {
@@ -108,18 +109,18 @@ const apiDes = [
     method: 'post',
     params: ['pageNow', 'pageSize']
   }
-]
+];
 
 // 由接口描述生成接口调用函数
-function ApiGenerator(des) {
-  const api = {}
+function ApiGenerator (des) {
+  const api = {};
   for (const i in des) {
-    api[des[i].fun] = function(data) {
+    api[des[i].fun] = function (data) {
       for (const j in des[i].params) {
         if (!(({}).hasOwnProperty.call(data, des[i].params[j]))) {
           return (new Promise((resolve, reject) => {
-            reject(des[i].params[j] + ' not in params')
-          }))
+            reject(des[i].params[j] + ' not in params');
+          }));
         }
       }
       // eslint-disable-next-line
@@ -128,24 +129,23 @@ function ApiGenerator(des) {
         url: des[i].url,
         method: des[i].method,
         data
-      })
-    }
+      });
+    };
   }
 
   // 添加update函数
-  api['update'] = function(data) {
+  api['update'] = function (data) {
     // eslint-disable-next-line
-    console.log('update',data);
+    console.log('update', data);
     return server({
       url: '/userInformation/update',
       method: 'post',
       data
-    })
-  }
-  return api
+    });
+  };
+  return api;
 }
 
-const api = ApiGenerator(apiDes)
+const api = ApiGenerator(apiDes);
 
-export default api
-
+export default api;
