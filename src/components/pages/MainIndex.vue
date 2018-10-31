@@ -5,7 +5,9 @@
                 ss11
             </el-aside>
             <div class="g-main">
-                <div class="g-slogon"><marquee class="g-slogon-text"> 你不贷，我不贷，明天我们就狗带！</marquee> </div>
+                <div class="g-slogon">
+                    <marquee class="g-slogon-text"> 你不贷，我不贷，明天我们就狗带！</marquee>
+                </div>
                 <div clas="g-slogan"></div>
                 <div class="g-carousel">
                     <el-carousel height="360px">
@@ -14,10 +16,34 @@
                         </el-carousel-item>
                     </el-carousel>
                 </div>
+                <div class="g-loan">
+                    <div class=" g-inner g-sell ">
+                        <el-card class="box-card"  shadow="hover">
+                            <div slot="header" class="clearfix">
+                                <span>卡片名称</span>
+                                <el-button style="float: right; padding: 3px 0" type="text" @click="goto('/sell')">更多
+                                </el-button>
+                            </div>
+                            <el-table>
 
-                <div class="g-inner g-loan g-loan-sell">loan-sell</div>
-                <div class="g-inner g-loan g-loan-buy">loan-buy</div>
+                            </el-table>
 
+                        </el-card>
+                    </div>
+                    <div class="g-inner g-buy">
+                        <el-card class="box-card"  shadow="always">
+                            <div slot="header" class="clearfix">
+                                <span>卡片名称</span>
+                                <el-button style="float: right; padding: 3px 0"
+                                           type="text" @click="goto('/buy')">更多</el-button>
+                            </div>
+                            <el-table>
+
+                            </el-table>
+
+                        </el-card>
+                    </div>
+                </div>
             </div>
         </el-container>
 
@@ -26,7 +52,12 @@
 
 <script>
   export default {
-    name: 'MainIndex'
+    name: 'MainIndex',
+    methods:{
+      goto(url){
+        this.$router.push(url)
+      }
+    }
   }
 </script>
 
@@ -41,14 +72,13 @@
             text-align: center;
             line-height: 100px;
         }
-        .g-slogon{
+        .g-slogon {
             margin: 10px;
             background-color: aqua;
 
             height: 40px;
 
-
-            .g-slogon-text{
+            .g-slogon-text {
                 font-size: 20px;
                 line-height: 40px;
             }
@@ -56,8 +86,8 @@
     }
 
     .g-inner {
-        min-height: 100px;
-        padding: 20px 50px;
+        /*min-height: 100px;*/
+
     }
 
     .g-carousel {
@@ -80,17 +110,27 @@
         }
     }
 
-
-
     .g-loan {
-        width: 405px;
         margin: 10px;
-        line-height: 360px;
-        background-color: aquamarine;
-        display: inline-block;
-    }
-    .g-loan-sell{
+        height: 360px;
+        display: flex;
+        .g-inner{
+            width: 100%;
+            .box-card{
+                width: 100%;
+                height: 100%;
+
+            }
+        }
+        .g-sell{
+            margin-right: 5px;
+        }
+        .g-buy{
+            margin-left: 5px;
+        }
 
     }
+
+
 
 </style>
