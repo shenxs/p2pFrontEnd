@@ -57,6 +57,7 @@
                         <el-button size="mini" type="danger" @click="makeReview(scope.row,'reject',scope)">
                             拒绝
                         </el-button>
+
                     </template>
                 </el-table-column>
             </el-table>

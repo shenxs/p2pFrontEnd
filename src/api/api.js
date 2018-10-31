@@ -70,7 +70,7 @@ const apiDes = [
     params: []
   }, {
     fun: 'getAllSellPage',
-    url: '/deSell/getAll',
+    url: '/deSell/getByPage',
     method: 'post',
     params: ['pageNow', 'pageSize']
   }, {
@@ -83,7 +83,7 @@ const apiDes = [
     fun: 'updateBuy',
     url: '/deBuy/getByBuyId',
     method: 'post',
-    params: ['buyId', 'moneyNum', 'period', 'interest', 'credit']
+    params: ['deBuyId', 'moneyNum', 'period', 'interest', 'credit']
   }, {
     // 查看某一具体待借
     fun: 'getBuyByBuyId',
@@ -106,6 +106,11 @@ const apiDes = [
     // 查看所有待借(分页)
     fun: 'getAllBuyPage',
     url: '/deBuy/getAll',
+    method: 'post',
+    params: ['pageNow', 'pageSize']
+  }, {
+    fun: 'getTansitionByPage',
+    url: '/transection/getByPage.do',
     method: 'post',
     params: ['pageNow', 'pageSize']
   }

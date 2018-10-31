@@ -15,9 +15,11 @@
 </template>
 
 <script>
+
+  /* eslint-disable */
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
-
+  import utils from '../../utils'
   export default {
     name: 'AdminReviewSell',
     components: {basicTable},
@@ -46,34 +48,26 @@
     methods: {
 
       loadData () {
-        const data = {pageNow: this.pageNow, pageSize: this.pageSize};
-        api.getAllSellPage(data).then(re => {
-          // eslint-disable-next-line
-          // console.log(re);
-          this.tableData = re.data.data.content;
-          this.totalElemets = re.data.data.totalElements;
-        }).catch(e => {
-          this.$notify({
-            title: 'error',
-            message: e
-          });
-        });
+        const data = {pageNow: this.pageNow, pageSize: this.pageSize,sellStatus:'N'};
+        api.getTansitionByPage(data).then(re=>{
+          console.log(re);
+          this.requestData=JSON.parse(JSON.stringify(re.data.data.content))
+          this.tableData=re.data.data.content.map(this.parseData);
+        })
       },
       checked (comment, index) {
         // 审核完成
-
         // console.log(comment, index);
-        const data = this.tableData[index];
+        const data = this.requestData[index];
         data.status = comment;
-        api.updateSell(
-          data
-        ).then(re => {
+        api.updateSell(data).then(re => {
           if (re.data.code === 0) {
             this.$message({
               message: '操作成功',
               type: 'success'
             });
-            // _this.tableData[index].status = comment;
+            this.tableData[index].status=comment;
+
           } else {
             this.$message({
               message: '操作失败',
@@ -84,12 +78,7 @@
           alert(e);
         });
       },
-      handelCurrentChange (val) {
-        this.pageNow = val;
-        this.loadData();
-      },
       parseData (aRecord) {
-        console.log(aRecord);
         aRecord.sellTime = utils.unixTime2YYYYMMDD(aRecord.sellTime);
         aRecord.interest = aRecord.interest + '%';
         return aRecord;

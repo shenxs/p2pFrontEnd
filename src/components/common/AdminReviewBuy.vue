@@ -1,22 +1,24 @@
 <template>
 
-  <div class="admin-review-buy" style="width: 100%">
-    <h1>管理员审核购买</h1>
-    <basic-table
-      :title="title"
-      :labels="label"
-      :tabledata="tableData"
-      :review="true"
-      @checked="checked"/>
+    <div class="admin-review-buy" style="width: 100%">
+        <h1>管理员审核购买</h1>
+        <basic-table
+                :title="title"
+                :labels="label"
+                :tabledata="tableData"
+                :review="true"
+                @checked="checked"
+                @currentChange="handelCurrentChange"
+        />
 
-  </div>
+    </div>
 </template>
 
 <script>
-/* eslint-disable */
+  /* eslint-disable */
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
-  import utils from '../../utils'
+  import utils from '../../utils';
 
   export default {
     name: 'admin-review-buy',
@@ -37,7 +39,8 @@
           status: '状态'
         },
         tableData: null,
-        title:'审核购买',
+        requestData: null,
+        title: '审核购买',
         pageNow: 1,
         pageSize: 10,
         totalElemets: 0
@@ -54,25 +57,33 @@
           pageNow: this.pageNow,
           pageSize: this.pageSize
         };
-
         api.getAllBuyPage(data).then(re => {
           console.log(re);
-          this.tableData = re.data.data.content
-
+          this.requestData=JSON.parse(JSON.stringify(re.data.data.content));
+          this.tableData = re.data.data.content.map(this.parseData);
         }).catch(e => {
-          console.log(e)
+          console.log(e);
           this.$notify({
             title: 'error',
             message: e
           });
         });
       },
-      checked(comment,index){
-
+      checked (comment, index) {
+        console.log(comment,index);
+        let data=this.requestData[index];
+        data.status=comment;
+        api.updateBuy(data).then(re=>{
+            console.log(re)
+        }).catch(e=>{
+          console.log(e)
+        })
       },
-      handelCurrentChange(val){
-
+      handelCurrentChange (val) {
+        this.pageNow=val;
+        this.loadData();
       }
+
     }
   };
 </script>
