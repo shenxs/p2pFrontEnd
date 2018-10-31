@@ -37,10 +37,10 @@ const apiDes = [
     params: ['userId']
   }, {
     // 获取所有人的信息
-    fun: 'getAll',
+    fun: 'getAllUser',
     url: '/userInformation/getAll',
     method: 'post',
-    params: []
+    params: ['pageNow','pageSize']
   }, {
     // 新增贷款
     fun: 'addSell',

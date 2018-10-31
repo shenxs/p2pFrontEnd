@@ -1,64 +1,64 @@
 <template>
-  <div class="m-login">
-    <h1 class="u-login-title">登录</h1>
+    <div class="m-login">
+        <h1 class="u-login-title">登录</h1>
 
-    <el-form label-width="100px">
-      <el-form-item label="账号">
-        <el-input
-          id="account"
-          v-model="accountInfo.username"
-          placeholder="请输入账号"
-          type="text"
-          @blur="inputBlur('username',accountInfo.username)"/>
-        <p class="u-login-page">{{ accountError }}</p>
-      </el-form-item>
-      <el-form-item label="密码">
-        <el-input
-          id="password"
-          v-model="accountInfo.password"
-          :type="passwordType"
-          placeholder="请输入密码"
-          @blur="inputBlur('password',accountInfo.password)">
-          <i
-            slot="suffix"
-            title="显示密码"
-            class="el-icon-view"
-            style="cursor:pointer;"
-            @click="togglePassword"/>
-        </el-input>
-        <p class="u-login-page">{{ passwordError }}</p>
-      </el-form-item>
+        <el-form label-width="100px">
+            <el-form-item label="账号">
+                <el-input
+                        id="account"
+                        v-model="accountInfo.username"
+                        placeholder="请输入账号"
+                        type="text"
+                        @blur="inputBlur('username',accountInfo.username)"/>
+                <p class="u-login-page">{{ accountError }}</p>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input
+                        id="password"
+                        v-model="accountInfo.password"
+                        :type="passwordType"
+                        placeholder="请输入密码"
+                        @blur="inputBlur('password',accountInfo.password)">
+                    <i
+                            slot="suffix"
+                            title="显示密码"
+                            class="el-icon-view"
+                            style="cursor:pointer;"
+                            @click="togglePassword"/>
+                </el-input>
+                <p class="u-login-page">{{ passwordError }}</p>
+            </el-form-item>
 
-      <el-form-item label="验证码">
-        <el-row :gutter="10" type="flex">
-          <el-col :span="40">
-            <el-input
-              id="sms-code"
-              v-model="accountInfo.verificationCode"
-              placeholder="请输入短信验证码"
-              type="number"
-              @blur="inputBlur('verificationCode',accountInfo.verificationCode)"/>
-          </el-col>
-          <el-col :span="1">
-            <el-button type="info" icon="el-icon-message" @click="getLoginMessage">获取验证码</el-button>
-          </el-col>
-        </el-row>
-        <p class="u-login-page">{{ smsError }}</p>
-      </el-form-item>
-      <div class="u-checkbox">
-        <el-checkbox v-model="isadmin">管理员</el-checkbox>
-      </div>
-      <div class="u-form-btns">
-        <el-button :disabled="isLoginBtnDisabled" class="u-login-btn" type="primary" @click="handleLogin">登录
-        </el-button>
-      </div>
+            <el-form-item label="验证码">
+                <el-row :gutter="10" type="flex">
+                    <el-col :span="40">
+                        <el-input
+                                id="sms-code"
+                                v-model="accountInfo.verificationCode"
+                                placeholder="请输入短信验证码"
+                                type="number"
+                                @blur="inputBlur('verificationCode',accountInfo.verificationCode)"/>
+                    </el-col>
+                    <el-col :span="1">
+                        <el-button type="info" icon="el-icon-message" @click="getLoginMessage">获取验证码</el-button>
+                    </el-col>
+                </el-row>
+                <p class="u-login-page">{{ smsError }}</p>
+            </el-form-item>
+            <div class="u-checkbox">
+                <el-checkbox v-model="isadmin">管理员</el-checkbox>
+            </div>
+            <div class="u-form-btns">
+                <el-button :disabled="isLoginBtnDisabled" class="u-login-btn" type="primary" @click="handleLogin">登录
+                </el-button>
+            </div>
 
-    </el-form>
-  </div>
+        </el-form>
+    </div>
 </template>
 
 <script>
-/* eslint-disable */
+  /* eslint-disable */
   import api from '../../api/api';
   import login from '../../api/login';
 

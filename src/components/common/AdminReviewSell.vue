@@ -1,7 +1,6 @@
 <template>
 
     <div class="review-sell" style="width: 100%">
-
         <basic-table
                 :title="title"
                 :labels="label"
