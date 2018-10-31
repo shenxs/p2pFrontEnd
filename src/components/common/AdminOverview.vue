@@ -2,56 +2,74 @@
 <template>
     <div class="admin-overview" style="width: 100%">
 
-        <panel-group :count="count" @handleSetLineChartData="handleSetLineChartData"/>
-        <line-chart :chart-data="chartData"/>
-
+        <PanelGroup :count="count" @handleSetLineChartData="handleSetLineChartData"/>
+        <LineChart :chartData="returnChartData"/>
+        <TestVFor :items="items"/>
     </div>
 </template>
 
 <script>
 
+  /* eslint-disable */
   import PanelGroup from './PanelGroup';
   import LineChart from './LineChart';
-
-  const chartData = {
-    allBuy: {
-      expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
-      actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
-    },
-    allSell: {
-      expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
-      actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
-    }
-  };
-  const count={
-    historyYear: {
-      startVal: 0,
-      endVal: 8.4
-    },
-    period: {
-      startVal: 0,
-      endVal: 900000
-    },
-    money: {
-      startVal: 0,
-      endVal: 192000
-    }
-  };
+  import TestVFor from './TestVFor';
+  import api from '../../api/api'
 
   export default {
     name: 'AdminOverview',
-    components: {LineChart, PanelGroup},
+    components: {LineChart, PanelGroup, TestVFor},
     props: ['title'],
     data () {
       return {
-        chartData: chartData,
-        count:count
+        items: [
+          {message: 'a'},
+          {message: 'b'}
+        ],
+        chartData: [
+          {
+            expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
+            actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
+          },
+          {
+            expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
+            actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
+          },
+          {
+            expectedData: [100, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
+            actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
+          }
+        ],
+        count: [
+          {
+            name: "历史周期",
+            startVal: 0,
+            endVal: 8.4,
+            decimal: true
+          },
+          {
+            name: "周期",
+            startVal: 0,
+            endVal: 900000
+          },
+          {
+            name: "金额",
+            startVal: 0,
+            endVal: 192000
+          }
+        ],
+        returnChartData: {}
       };
     },
-    methods:{
-      handleSetLineChartData(type){
-        this.chartData = chartData[type];
+    methods: {
+      handleSetLineChartData (type) {
+        console.log("overview type is ", this.chartData[type])
+        this.returnChartData = this.chartData[type];
       }
+    },
+    mounted() {
+      this.returnChartData = this.chartData[0];
+
     }
 
   };

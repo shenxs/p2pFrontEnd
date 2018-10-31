@@ -1,57 +1,29 @@
 <template>
   <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
+
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(everycount,index) in count" :key="everycount.name">
+      <div class="card-panel" @click="handleSetLineChartData(index)">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">历史年化11</div>
+          <div class="card-panel-text">{{everycount.name}}</div>
           <count-to
-            :start-val="count.historyYear.startVal"
-            :end-val="count.historyYear.endVal"
+            :start-val="everycount.startVal"
+            :end-val="everycount.endVal"
             :duration="2800"
-            :decimals="1"
+            :decimals="everycount.decimal?1:0"
             class="card-panel-num"/>
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon"/>
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">周期</div>
-          <count-to
-            :start-val="count.period.startVal"
-            :end-val="count.period.endVal"
-            :duration="2800"
-            class="card-panel-num"/>
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon"/>
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">金额</div>
-          <count-to
-            :start-val="count.money.startVal"
-            :end-val="count.money.endVal"
-            :duration="2800"
-            class="card-panel-num"/>
-        </div>
-      </div>
-    </el-col>
+
   </el-row>
 </template>
 
 <script>
+  /* eslint-disable */
 import CountTo from 'vue-count-to'
-
 export default {
   components: {
     CountTo
@@ -60,6 +32,11 @@ export default {
   data() {
     return {
 
+      typeChartData : {
+        history:0,
+        period:1,
+        money:2
+      }
     }
   },
   methods: {

@@ -8,7 +8,7 @@
         :default-active="activeIndex"
         class="m-nav"
         mode="horizontal"
-        background-color="#545c64"
+        background-color="rgba(44, 52, 52, 1)"
         text-color="#fff"
         active-text-color="#ffd04b"
         @select="handleSelect">
