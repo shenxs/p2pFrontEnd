@@ -1,7 +1,9 @@
 <template>
     <div class="basicTable">
         <div class="u-table-title">
-            <h1>{{ title }}</h1>
+            <div class="m-table-title">
+                <h1>{{ title }}</h1>
+            </div>
 
             <div class="m-filter-container">
                 <el-input clearable="" v-model="filterStr" style="width: 200px" placeholder="输入搜索字段"/>
@@ -10,7 +12,7 @@
                     筛选
                 </el-button>
 
-                <el-button v-waves class="f-reset-item" type="primary" icon="" @click="$emit('reset')">
+                <el-button v-waves class="f-reset-item" type="primary" icon="" @click="handelReset">
                     重置
                 </el-button>
 
@@ -35,7 +37,6 @@
                         :label="index"/>
                 <el-table-column
                         v-if="review"
-                        sortable
                         fixed="right"
                         label="审核"
                         width="150"
@@ -61,6 +62,7 @@
                     <el-pagination
                             :total="totalElements"
                             background
+                            :current-page.sync="currentPage"
                             layout="prev, pager, next"
                             @current-change="handelCurrentChange"/>
                 </el-col>
@@ -103,8 +105,9 @@
         tableKey: 0,
         queryValue: '',
         sortValue: '',
-        filterStr:'',
+        filterStr: '',
         total: null,
+        currentPage: 1,
         listLoading: true,
         listQuery: {
           page: 1,
@@ -144,12 +147,7 @@
         downloadLoading: false
       };
     },
-    watch: {
-      // tabledata: function () {
-      //   // this.tData = this.tabledata.slice();
-      //   // this.tData = this.tData.map(this.parseData);
-      // }
-    },
+
     beforeMount () {
 
     },
@@ -160,12 +158,16 @@
         this.$emit('checked', comment, row);
       },
       handleFilter () {
-        this.$emit('filter',this.filterStr);
+        this.$emit('filter', this.filterStr);
       },
       handelCurrentChange (val) {
         this.$emit('currentChange', val);
+      },
+      handelReset () {
+        this.currentPage = 1;
+        this.filterStr = '';
+        this.$emit('reset');
       }
-
     }
 
   };
@@ -174,6 +176,10 @@
 <style lang="scss" scoped>
     .basicTable {
         margin: 0 30px;
+        .m-table-title{
+            text-align: center;
+            margin: 20px;
+        }
 
         .m-filter-container {
             margin-bottom: 10px;

@@ -13,6 +13,7 @@
                 @currentChange="handelPageChange"
                 @refresh="loadData"
                 @filter="handelFilter"
+                @reset="handelReset"
         />
 
     </div>
@@ -36,8 +37,9 @@
         pageNow: 1,
         pageSize: 10,
         totalElements: 1,
-        title: '待审核出借',
+        title: '待审核借款',
         label: {
+          transactionId:'交易id',
           buyName: '借款目的',
           interest: '利率',
           moneyNum: '总额(元)',
@@ -46,7 +48,8 @@
           transactionTime: '交易时间',
           sellStatus: '借款审核'
         },
-        sortlabels:[ {key: 'interest', display_name: '利率'},
+        sortlabels: [
+          {key: 'interest', display_name: '利率'},
           {key: 'moneyNum', display_name: '总额'},
           {key: 'period', display_name: '周期'},
           {key: 'transactionTime', display_name: '交易时间'}]
@@ -60,8 +63,8 @@
 
       loadData (str) {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, sellStatus: 'N'};
-        if(str !==undefined){
-          data['sellName']=str.trim()
+        if (str !== undefined) {
+          data['sellName'] = str.trim();
         }
         api.getTansitionByPage(data).then(re => {
           console.log(re);
@@ -74,12 +77,11 @@
       checked (comment, row) {
         // 审核完成
         // console.log(comment, index);
-        const data = this.requestData.filter(x=>x.transactionId===row.transactionId)[0];
+        const data = this.requestData.filter(x => x.transactionId === row.transactionId)[0];
         if (comment === 'pass')
           data.sellStatus = 'Y';
         else if (comment === 'reject')
           data.sellStatus = 'D';
-
         api.updateTransation(data).then(re => {
           if (re.data.code === 0) {
             this.$message({
@@ -89,7 +91,7 @@
             if (comment === 'pass')
               row.sellStatus = '通过';
             else if (comment === 'reject')
-             row.sellStatus = '拒绝';
+              row.sellStatus = '拒绝';
           } else {
             this.$message({
               message: '操作失败',
@@ -111,17 +113,21 @@
         this.pageNow = val;
         this.loadData();
       },
-      handelFilter(str){
+      handelFilter (str) {
         console.log(str);
-        if(str.trim()===''){
+        if (str.trim() === '') {
           this.$notify({
-            title:'error',
-            message:'请输入筛选关键字',
-            duration:1000,
-          })
-        }else{
-
+            title: 'error',
+            message: '请输入筛选关键字',
+            duration: 1000
+          });
+        } else {
+          this.loadData(str);
         }
+      },
+      handelReset(){
+        this.pageNow=1;
+        this.loadData();
       }
     }
   };
