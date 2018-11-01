@@ -1,23 +1,20 @@
 <template>
     <div class="g-index">
         <el-container style="border: 2px solid #eee">
-            <el-aside width="350px">
-                <div class="g-new-bar">
-                    <el-card v-for="(item,index) in news"  class="m-new-card">
-                        <div class="u-news-img">
-                            <!--<img :src="'../../assets/news' +(index+1)+'.png'"/>-->
-                            <img style="height: 100px;width: 100px" src="../../assets/news1.png"/>
-                        </div>
-                        <div class="u-news-text">
-                            <P>{{item.text}}</P>
-                        </div>
-                    </el-card>
-
-                </div>
+            <el-aside class="g-aside" width="350px">
+                <el-card v-for="(item, index) in news" :key="index" class="m-new-card">
+                    <div class="u-news-img">
+                        <!--<img :src="'../../assets/news' +(index+1)+'.png'"/>-->
+                        <img style="height: 100px;width: 100px" src="../../assets/news1.png"/>
+                    </div>
+                    <div class="u-news-text">
+                        <p>{{item.text}}</p>
+                    </div>
+                </el-card>
             </el-aside>
             <div class="g-main">
-                <div class="g-slogon">
-                    <marquee class="g-slogon-text"> 你不贷，我不贷，明天我们就狗带！</marquee>
+                <div class="g-slogan">
+                    <marquee class="g-slogan-text"> 你不贷，我不贷，明天我们就狗带！</marquee>
                 </div>
                 <div clas="g-slogan"></div>
                 <div class="g-carousel">
@@ -49,7 +46,6 @@
                                 </el-button>
                             </div>
                             <mini-table :tableData="buyTable.data" :labels="buyTable.labels"/>
-
                         </el-card>
                     </div>
 
@@ -77,7 +73,7 @@
             interest: '利率',
             period: '周期'
 
-          },
+          }
 
         },
         buyTable: {
@@ -89,31 +85,32 @@
             period: '周期'
           }
         },
-        news:[{
-          text:"五大官方信号看懂明年经济！县城房价降40%？养老金4000亿入市？",
-          path:"../../assets/news1.png",
-          utl:''
-        },{
-          text:'百亿央票出海在即：人民币跳涨 投机做空不容易',
-          path:"../../assets/news1.png",
-          url:'https://finance.sina.com.cn/money/forex/rmb/2018-11-01/doc-ihnfikve0782819.shtml'
-        },{
-          text:'天猫昨天发布双11价格保护机制 确保到手价为近3个月最低',
-          path:"../../assets/news1.png",
-          url:'http://www.xinhuanet.com//tech/2018-10/30/c_1123634879.htm'
-        },{
-          text:'世行营商环境报告 中国排名上升32位',
-          path:"../../assets/news1.png",
-          url:'https://finance.sina.com.cn/stock/usstock/c/2018-11-01/doc-ifxeuwwt0061154.shtml'
-        },{
-          text:'五险一金将建“黑名单”制度 这些行为会被惩戒',
-          path:"../../assets/news1.png",
-          url:'http://www.xinhuanet.com//yuqing/2018-10/31/c_129982022.htm'
-        },{
-          text:'全球股市以反弹结束6年来最糟糕月度行情',
-          path:"../../assets/news1.png",
-          url:'https://finance.sina.com.cn/stock/usstock/c/2018-11-01/doc-ifxeuwwt0062314.shtml'
-        }
+        news: [
+          {
+            text: '五大官方信号看懂明年经济！县城房价降40%？养老金4000亿入市？',
+            path: '../../assets/news1.png',
+            utl: ''
+          }, {
+            text: '百亿央票出海在即：人民币跳涨 投机做空不容易',
+            path: '../../assets/news1.png',
+            url: 'https://finance.sina.com.cn/money/forex/rmb/2018-11-01/doc-ihnfikve0782819.shtml'
+          }, {
+            text: '天猫昨天发布双11价格保护机制 确保到手价为近3个月最低',
+            path: '../../assets/news1.png',
+            url: 'http://www.xinhuanet.com//tech/2018-10/30/c_1123634879.htm'
+          }, {
+            text: '世行营商环境报告 中国排名上升32位',
+            path: '../../assets/news1.png',
+            url: 'https://finance.sina.com.cn/stock/usstock/c/2018-11-01/doc-ifxeuwwt0061154.shtml'
+          }, {
+            text: '五险一金将建“黑名单”制度 这些行为会被惩戒',
+            path: '../../assets/news1.png',
+            url: 'http://www.xinhuanet.com//yuqing/2018-10/31/c_129982022.htm'
+          }, {
+            text: '全球股市以反弹结束6年来最糟糕月度行情',
+            path: '../../assets/news1.png',
+            url: 'https://finance.sina.com.cn/stock/usstock/c/2018-11-01/doc-ifxeuwwt0062314.shtml'
+          }
         ]
 
       };
@@ -155,39 +152,37 @@
     .g-main {
         width: 90%;
         min-height: 500px;
-        .el-aside {
+        .g-aside {
             margin: 10px;
-            background-color: #D3DCE6;
-            color: #333;
-            text-align: center;
-            line-height: 100px;
-            .g-new-bar {
+            .m-new-card {
+                display: flex;
+                flex-direction: row;
 
+                & + .m-new-card {
+                    margin-top: 15px;
+                }
 
-                .m-new-card {
-                    margin: 20px 20px;
-                    min-height: 100px;
-                    max-height: 100px;
-                    position: relative;
-                    overflow: hidden;
+                .u-news-img, .u-news-text {
+                    display: inline-block;
+                    width: 100px;
+                    vertical-align: middle;
+                }
 
-                    .u-news-img{
-                        float: left;
-                        position: relative;
-                    }
-                    .u-news-text{
+                .u-news-img {
+                    font-size: 0;
+                }
 
-                        float: right;
-
-                    }
+                .u-news-text {
+                    width: 190px;
+                    margin-left: 15px;
                 }
             }
         }
-        .g-slogon {
+        .g-slogan {
             margin: 10px;
             background-color: aqua;
             height: 40px;
-            .g-slogon-text {
+            .g-slogan-text {
                 font-size: 20px;
                 line-height: 40px;
             }
