@@ -119,6 +119,18 @@ const apiDes = [
     url: '/transection/update.do',
     method: 'post',
     parmas: ['transactionId']
+  },{
+    //获得总购或总贷的金额
+    fun: 'getMoney',
+    url: '/statistics/getMoney',
+    method: 'post',
+    parmas: ['type','period']
+  },{
+    //获得一段时间的累计金额
+    fun:'getMoneyByTime',
+    url:"/statistics/getStatistic",
+    method:'post',
+    params:['type','period','startTime','endTime']
   }
 ];
 

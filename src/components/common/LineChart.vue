@@ -1,8 +1,9 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}"/>
+  <div :class="className" :style="{height:height,width:width}" style="padding-top: 20px"/>
 </template>
 
 <script>
+  /* eslint-disable */
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 // import { debounce } from '../../utilss'
@@ -36,11 +37,9 @@ export default {
     }
   },
   watch: {
-    chartData: {
-      deep: true,
-      handler(val) {
-        this.setOptions(val)
-      }
+    chartData: function (val) {
+      this.setOptions(val)
+      console.log("chartData has changed",val)
     }
   },
   mounted() {
@@ -74,14 +73,38 @@ export default {
     //     this.__resizeHandler()
     //   }
     // },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions({ xAxisName, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+          data: xAxisName,
           boundaryGap: false,
           axisTick: {
             show: false
           }
+        },
+        toolbox: {
+          show: true, //是否显示工具栏组件
+          orient: 'vertical', //工具栏icon的布局朝向
+          itemSize: 18, //工具栏icon的大小
+          itemGap: 20, //item之间的间距
+          right: -20, //toolbox的定位位置
+          feature: {
+            saveAsImage: {show: true}, //导出图片
+            dataView: {show: true}, //数据视图
+            magicType: { //动态类型切换
+              type: ['line', 'bar']
+            },
+            dataZoom: {show: true}, //数据区域缩放
+            restore: {show: true}, //重置
+          }
+        },
+
+        title: {
+          show: true, //显示折线图
+          text: xAxisName[0]+'-'+xAxisName[xAxisName.length-1]+"期间总金额变化图", //标题文字
+          // subtext: '熟悉title的配置项', //副标题
+          left: 400, //配置title的位置
+          // padding: [5,20,5,10] //title的padding值
         },
         grid: {
           left: 10,
@@ -102,25 +125,26 @@ export default {
             show: false
           }
         },
-        legend: {
-          data: ['expected', 'actual']
-        },
-        series: [{
-          name: 'expected', itemStyle: {
-            normal: {
-              color: '#FF005A',
-              lineStyle: {
-                color: '#FF005A',
-                width: 2
-              }
-            }
-          },
-          smooth: true,
-          type: 'line',
-          data: expectedData,
-          animationDuration: 2800,
-          animationEasing: 'cubicInOut'
-        },
+        // legend: {
+        //   data: ['expected', 'actual']
+        // },
+        series: [
+          // {
+        //   name: 'expected', itemStyle: {
+        //     normal: {
+        //       color: '#FF005A',
+        //       lineStyle: {
+        //         color: '#FF005A',
+        //         width: 2
+        //       }
+        //     }
+        //   },
+        //   smooth: true,
+        //   type: 'line',
+        //   data: expectedData,
+        //   animationDuration: 2800,
+        //   animationEasing: 'cubicInOut'
+        // },
         {
           name: 'actual',
           smooth: true,
@@ -145,6 +169,7 @@ export default {
     },
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
+      console.log("lineChart get Data: ",this.chartData)
       this.setOptions(this.chartData)
     }
   }

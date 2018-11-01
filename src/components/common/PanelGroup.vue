@@ -1,10 +1,11 @@
 <template>
-  <el-row :gutter="40" class="panel-group">
+  <el-row :gutter="80" class="panel-group">
 
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(everycount,index) in count" :key="everycount.name">
+    <el-col :xs="12" :sm="14" :lg="10" class="card-panel-col" v-for="(everycount,index) in count"
+            :key="everycount.name">
       <div class="card-panel" @click="handleSetLineChartData(index)">
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
+          <img src="../svg/money.svg" class="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">{{everycount.name}}</div>
@@ -63,6 +64,7 @@ export default {
             background: #fff;
             box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
             border-color: rgba(0, 0, 0, .05);
+
             &:hover {
                 .card-panel-icon-wrapper {
                     color: #fff;
@@ -101,7 +103,9 @@ export default {
             }
             .card-panel-icon {
                 float: left;
-                font-size: 48px;
+                font-size: 24px;
+              width: 55px;
+              height: 55px;
             }
             .card-panel-description {
                 float: right;
