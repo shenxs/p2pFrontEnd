@@ -40,8 +40,7 @@
                                 <div class="register" style="margin-top: 20px">
 
                                     <el-button type="primary" size="medium"
-                                               style="width: 80%; font-size:32px ;height: 60px;"
-                                    >注册
+                                               style="width: 80%; font-size:32px ;height: 60px;">注册
                                     </el-button>
                                 </div>
                                 <div class="login" style="font-size: 16px;line-height: 20px">
@@ -67,13 +66,8 @@
                                 </el-row>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
-
                 <div class="g-loan">
                     <div class="g-sell ">
                         <el-card class="box-card" shadow="hover">
@@ -115,9 +109,9 @@
       return {
         animate: false,
         items: [
-          {name: " 金额20万， 期限90天， 历史年化12.1%"},
-          {name: " 金额40万， 期限30天， 历史年化12.1%"},
-          {name: " 金额90万， 期限180天， 历史年化12.1%"}
+          {name: ' 金额20万， 期限90天， 历史年化12.1%'},
+          {name: ' 金额40万， 期限30天， 历史年化12.1%'},
+          {name: ' 金额90万， 期限180天， 历史年化12.1%'}
         ],
         sellTable: {
           data: undefined,
@@ -166,10 +160,10 @@
             url: 'https://finance.sina.com.cn/stock/usstock/c/2018-11-01/doc-ifxeuwwt0062314.shtml'
           }
         ]
-      }
+      };
     },
     created () {
-      setInterval(this.scroll, 1000)
+      setInterval(this.scroll, 1000);
     },
     components: {miniTable},
     methods: {
@@ -182,7 +176,7 @@
           this.items.push(this.items[0]);  // 将数组的第一个元素添加到数组的
           this.items.shift();               //删除数组的第一个元素
           this.animate = false;  // margin-top 为0 的时候取消过渡动画，实现无缝滚动
-        }, 500)
+        }, 500);
       },
       loadData () {
         const data = {pageNow: 1, pageSize: 6};
@@ -221,22 +215,17 @@
             margin: 10px;
             .m-new-card {
                 display: flex;
-                flex-direction: row;
-
                 & + .m-new-card {
                     margin-top: 15px;
                 }
-
                 .u-news-img, .u-news-text {
                     display: inline-block;
                     width: 100px;
                     vertical-align: middle;
                 }
-
                 .u-news-img {
                     font-size: 0;
                 }
-
                 .u-news-text {
                     width: 190px;
                     margin-left: 15px;
@@ -252,23 +241,18 @@
                 line-height: 40px;
             }
         }
-
         .g-middle {
             display: flex;
-            width: 100%;
+            margin: 10px;
+            width: auto;
             background-color: pink;
             .g-hot {
-
                 width: 340px;
                 height: 370px;
                 /*line-height: 370px;*/
-
                 margin: 10px;
-
                 z-index: 1;
-
                 .bg {
-
                     z-index: 1;
                     height: 100%;
                     background-color: rgba(96, 96, 96, 0.3);
@@ -322,26 +306,35 @@
                 }
             }
             .g-carousel {
-                margin: 10px;
-
+                width: 100%;
                 .el-carousel__item p {
                     color: #475669;
                     font-size: 18px;
                     opacity: 0.75;
                     line-height: 300px;
-                    margin: 0;
                     text-align: center;
                 }
-
                 .el-carousel__item:nth-child(2n) {
                     background-color: #99a9bf;
                 }
-
                 .el-carousel__item:nth-child(2n+1) {
                     background-color: #d3dce6;
                 }
             }
 
+        }
+
+        .g-loan {
+            margin: 10px;
+            display: flex;
+            .g-sell {
+                width: 50%;
+                margin-right: 5px;
+            }
+            .g-buy {
+                width: 50%;
+                margin-left: 5px;
+            }
         }
 
     }
