@@ -33,15 +33,15 @@
                         :prop="key"
                         :label="index"/>
                 <el-table-column
-                    v-if="buy"
-                    fixed="right"
-                    width="150"
-                    align="center">
+                        v-if="buy"
+                        fixed="right"
+                        width="150"
+                        align="center">
                     <template slot-scope="scope">
                         <el-button type="success" size="mini" @click="goDetail(scope.row,scope)">
                             详情
                         </el-button>
-                        <el-button type="danger" size="mini"  @click="handelBuy(scope.row,scope)">
+                        <el-button type="danger" size="mini" @click="handelBuy(scope.row,scope)">
                             购买
                         </el-button>
                     </template>
@@ -69,6 +69,7 @@
             <el-row :gutter="20">
                 <el-col :span="20" :offset="7">
                     <el-pagination
+                            :page-size="pageSize"
                             :total="totalElements"
                             background
                             :current-page.sync="currentPage"
@@ -106,7 +107,17 @@
     directives: {
       waves
     },
-    props: ['title', 'labels', 'tabledata',  'totalElements','review','buy'],
+    props: {
+      title:String,
+      labels:Object,
+      tabledata:Array,
+      totalElements:Number,
+      review:Boolean,
+      buy:Boolean,
+      pageSize:{
+        type:Number,
+        default:10
+      }},
     data () {
       return {
         tData: this.tabledata,
@@ -176,11 +187,12 @@
         this.filterStr = '';
         this.$emit('reset');
       },
-      goDetail(row,scope){
-        console.log(row,scope);
+      goDetail (row, scope) {
+        console.log('detail', row, scope);
+        this.$router.push({name: 'detail', params: {transactionId: row.transactionId}});
       },
-      handelBuy(row,scope){
-        console.log(row,scope);
+      handelBuy (row, scope) {
+        console.log(row, scope);
       }
     }
 
@@ -190,7 +202,7 @@
 <style lang="scss" scoped>
     .basicTable {
         margin: 0 30px;
-        .m-table-title{
+        .m-table-title {
             text-align: center;
             margin: 20px;
         }

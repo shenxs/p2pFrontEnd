@@ -486,6 +486,7 @@
         }
     }
 
+
     .el-dialog {
         display: flex !important;
         flex-direction: column !important;

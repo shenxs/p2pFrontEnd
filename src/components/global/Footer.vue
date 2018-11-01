@@ -14,6 +14,7 @@
     .g-footer {
         position: static;
         display: flow-root;
+
         width: 100%;
         bottom: 0;
         left: 0;

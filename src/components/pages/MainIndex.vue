@@ -61,15 +61,18 @@
         sellTable: {
           data: undefined,
           labels: {
-            buyName: '借款目的',
+            sellName: '借款目的',
+            moneyNum:'总额',
             interest: '利率',
             period: '周期'
+
           }
         },
         buyTable: {
           data: undefined,
           labels: {
-            buyName: '借款目的',
+            buyName: '贷款目的',
+            moneyNum:'总额',
             interest: '利率',
             period: '周期'
           }
@@ -81,13 +84,20 @@
         this.$router.push(url);
       },
       loadData () {
-        const data = {pageNow: 1, pageSize: 6, sellStatus: 'N'};
-        api.getTansitionByPage(data).then(re => {
+        const data = {pageNow: 1, pageSize: 6};
+        api.getSellByPage(data).then(re => {
           // eslint-disable-next-line
           console.log(re);
           this.sellTable.data = re.data.data.content;
-          this.buyTable.data = re.data.data.content;
+        }).catch(e => {
+          // eslint-disable-next-line
+          console.log(e);
+        });
 
+        api.getBuyByPage(data).then(re => {
+          // eslint-disable-next-line
+          console.log(re);
+          this.buyTable.data = re.data.data.content;
         }).catch(e => {
           // eslint-disable-next-line
           console.log(e);

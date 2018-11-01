@@ -119,6 +119,16 @@ const apiDes = [
     url: '/transection/update.do',
     method: 'post',
     parmas: ['transactionId']
+  },{
+    fun:'getSellByPage',
+    url:'/transection/getSellByPage.do',
+    method:'post',
+    parmas:['pageNow','pageSize']
+  },{
+    fun:'getBuyByPage',
+    url:'/transection/getBuyByPage.do',
+    method:'post',
+    parmas:['pageNow','pageSize']
   }
 ];
 
