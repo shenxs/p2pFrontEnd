@@ -16,33 +16,32 @@
                         </el-carousel-item>
                     </el-carousel>
                 </div>
+
                 <div class="g-loan">
-                    <div class=" g-inner g-sell ">
-                        <el-card class="box-card"  shadow="hover">
+                    <div class="g-sell ">
+                        <el-card class="box-card" shadow="hover">
                             <div slot="header" class="clearfix">
-                                <span>卡片名称</span>
-                                <el-button style="float: right; padding: 3px 0" type="text" @click="goto('/sell')">更多
+                                <span>贷款</span>
+                                <el-button style="float: right; padding: 3px 0" type="text" @click="goto('/sell')">
+                                    更多
                                 </el-button>
                             </div>
-                            <el-table>
-
-                            </el-table>
-
+                            <mini-table :tableData="sellTable.data" :labels="sellTable.labels"/>
                         </el-card>
                     </div>
-                    <div class="g-inner g-buy">
-                        <el-card class="box-card"  shadow="always">
+                    <div class="g-buy">
+                        <el-card class="box-card" shadow="always">
                             <div slot="header" class="clearfix">
-                                <span>卡片名称</span>
+                                <span>借款</span>
                                 <el-button style="float: right; padding: 3px 0"
-                                           type="text" @click="goto('/buy')">更多</el-button>
+                                           type="text" @click="goto('/buy')">更多
+                                </el-button>
                             </div>
-                            <el-table>
-
-                            </el-table>
+                            <mini-table :tableData="buyTable.data" :labels="buyTable.labels"/>
 
                         </el-card>
                     </div>
+
                 </div>
             </div>
         </el-container>
@@ -51,14 +50,55 @@
 </template>
 
 <script>
+  import miniTable from '../common/MiniTable';
+  import api from '../../api/api';
+
   export default {
     name: 'MainIndex',
-    methods:{
-      goto(url){
-        this.$router.push(url)
+    components: {miniTable},
+    data () {
+      return {
+        sellTable: {
+          data: undefined,
+          labels: {
+            buyName: '借款目的',
+            interest: '利率',
+            period: '周期'
+          }
+        },
+        buyTable: {
+          data: undefined,
+          labels: {
+            buyName: '借款目的',
+            interest: '利率',
+            period: '周期'
+          }
+        }
+      };
+    },
+    methods: {
+      goto (url) {
+        this.$router.push(url);
+      },
+      loadData () {
+        const data = {pageNow: 1, pageSize: 6, sellStatus: 'N'};
+        api.getTansitionByPage(data).then(re => {
+          // eslint-disable-next-line
+          console.log(re);
+          this.sellTable.data = re.data.data.content;
+          this.buyTable.data = re.data.data.content;
+
+        }).catch(e => {
+          // eslint-disable-next-line
+          console.log(e);
+        });
       }
+    },
+    beforeMount () {
+      this.loadData();
+
     }
-  }
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -112,25 +152,17 @@
 
     .g-loan {
         margin: 10px;
-        height: 360px;
         display: flex;
-        .g-inner{
+        .g-sell {
             width: 100%;
-            .box-card{
-                width: 100%;
-                height: 100%;
-
-            }
-        }
-        .g-sell{
             margin-right: 5px;
         }
-        .g-buy{
+        .g-buy {
+            width: 100%;
             margin-left: 5px;
         }
 
     }
-
 
 
 </style>
