@@ -38,8 +38,8 @@
                     <div class="line_middle"/>
                 </el-row>
 
-                <el-row>
-                    <el-row :gutter="20" type="flex" align="middle">
+                <el-row class="g-description">
+                    <el-row type="flex" align="middle">
                         <el-col :span="3" class="left">
                             完成时间:
                         </el-col>
@@ -47,7 +47,7 @@
                             <el-progress :percentage="100"/>
                         </el-col>
                     </el-row>
-                    <el-row :gutter="20" type="flex" justify="start">
+                    <el-row type="flex" justify="start">
 
                         <el-col :span="3">还款方式:</el-col>
                         <el-col :span="5">
@@ -76,7 +76,7 @@
                         </el-col>
 
                     </el-row>
-                    <el-row :gutter="20" type="flex" align="middle">
+                    <el-row type="flex" align="middle">
                         <el-col :span="3" class="left">还款日期:</el-col>
                         <el-col :span="10">
                             每出借<b style="color:orange">100</b>元，<b style="color:orange">每日</b>可获得利息收益<b
@@ -102,7 +102,7 @@
                         </el-col>
 
                     </el-row>
-                    <el-row :gutter="20" type="flex" align="middle">
+                    <el-row type="flex" align="middle">
                         <el-col :span="3" class="left"><b>温馨提示：</b></el-col>
                         <el-col :span="20" class="left"><b>市场有风险，出借需谨慎</b></el-col>
                     </el-row>
@@ -345,9 +345,8 @@
 
 <script>
   /* eslint-disable */
-  import PanelGroup from './PanelGroup'
-  import LineChart from './LineChart'
-
+  import PanelGroup from './PanelGroup';
+  import LineChart from './LineChart';
 
   export default {
     name: 'basic-detail-view',
@@ -359,41 +358,41 @@
     data () {
 
       return {
-        lineChartData : [
+        lineChartData: [
           {
-              expectedData: [101, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
-              actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
+            expectedData: [101, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
+            actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
           },
           {
-              expectedData: [200, 192, 120, 144, 160, 130, 140, 120, 161, 134, 105, 160, 165],
-              actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
+            expectedData: [200, 192, 120, 144, 160, 130, 140, 120, 161, 134, 105, 160, 165],
+            actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
           },
           {
-              expectedData: [80, 100, 121, 104, 105, 90, 100, 120, 161, 134, 105, 160, 165],
-              actualData: [120, 90, 100, 138, 142, 130, 130, 120, 161, 134, 105, 160, 165]
+            expectedData: [80, 100, 121, 104, 105, 90, 100, 120, 161, 134, 105, 160, 165],
+            actualData: [120, 90, 100, 138, 142, 130, 130, 120, 161, 134, 105, 160, 165]
           }
         ],
-        count : [
+        count: [
           {
-            name: "历史周期",
+            name: '历史周期',
             startVal: 0,
             endVal: 8.4,
             decimal: true
           },
           {
-            name: "周期",
+            name: '周期',
             startVal: 0,
             endVal: 900000
           },
           {
-            name: "金额",
+            name: '金额',
             startVal: 0,
             endVal: 192000
           }
         ],
         dialogVisible: false,
         activeName: 'first',
-        returnChartData:{}
+        returnChartData: {}
       };
     },
     methods: {
@@ -406,10 +405,10 @@
         console.log(tab, event);
       },
       handleSetLineChartData (type) {
-        this.returnChartData = this.lineChartData[type]
+        this.returnChartData = this.lineChartData[type];
       },
-      mounted(){
-        this.returnChartData = this.lineChartData[0]
+      mounted () {
+        this.returnChartData = this.lineChartData[0];
       }
     }
   };
@@ -417,14 +416,13 @@
 
 <style scoped lang="scss">
     .Detail {
-        margin-left: 10px;
+        margin: 0 50px;
     }
 
     .basicDetail {
         background-color: white;
 
         .wrapperDetail {
-            margin-left: 20px;
             padding-bottom: 12px;
             .line_buttom {
                 height: 14px;
@@ -440,24 +438,22 @@
     .basicDetailCard {
         background-color: white;
         width: 100%;
-        height: 100%;
-        margin-top: 10px;
+        margin: 20px 0;
         border: 1px solid #f8f8f8;
-        float: left;
         .project-title {
-
             font-size: 28px;
-
         }
         .box-icon {
             font-size: 18px;
             margin-right: 6px;
-
         }
         .project-content {
             margin-left: 25px;
         }
+    }
 
+    .g-description {
+        padding: 10px 50px;
     }
 
     .left {
@@ -465,10 +461,6 @@
     }
 
     .d_li {
-        /*float: left;*/
-        /*width: 238px;*/
-        /*height: 100px;*/
-        margin-top: 10px;
         border: 0;
         text-align: left;
         .li_top {

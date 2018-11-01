@@ -66,6 +66,7 @@
           data['sellName'] = str.trim();
         }
         api.getTansitionByPage(data).then(re => {
+
           console.log(re);
 
           this.requestData = JSON.parse(JSON.stringify(re.data.data.content));

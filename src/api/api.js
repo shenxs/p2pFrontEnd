@@ -125,12 +125,22 @@ const apiDes = [
     url: '/statistics/getMoney',
     method: 'post',
     parmas: ['type','period']
-  },{
+  }, {
     //获得一段时间的累计金额
-    fun:'getMoneyByTime',
-    url:"/statistics/getStatistic",
+    fun: 'getMoneyByTime',
+    url: "/statistics/getStatistic",
+    method: 'post',
+    params: ['type', 'period', 'startTime', 'endTime']
+  },{
+    fun:'getSellByPage',
+    url:'/transection/getSellByPage.do',
     method:'post',
-    params:['type','period','startTime','endTime']
+    parmas:['pageNow','pageSize']
+  },{
+    fun:'getBuyByPage',
+    url:'/transection/getBuyByPage.do',
+    method:'post',
+    parmas:['pageNow','pageSize']
   }
 ];
 

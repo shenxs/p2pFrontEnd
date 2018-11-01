@@ -7,15 +7,12 @@
 
             <div class="m-filter-container">
                 <el-input clearable="" v-model="filterStr" style="width: 200px" placeholder="输入搜索字段"/>
-
                 <el-button v-waves class="f-filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
                     筛选
                 </el-button>
-
                 <el-button v-waves class="f-reset-item" type="primary" icon="" @click="handelReset">
                     重置
                 </el-button>
-
                 <el-button v-waves class="f-refresh-item" type="primary" icon="el-icon-refresh"
                            @click="$emit('refresh')">
                     刷新
@@ -36,6 +33,21 @@
                         :prop="key"
                         :label="index"/>
                 <el-table-column
+                        v-if="buy"
+                        fixed="right"
+                        width="150"
+                        align="center">
+                    <template slot-scope="scope">
+                        <el-button type="success" size="mini" @click="goDetail(scope.row,scope)">
+                            详情
+                        </el-button>
+                        <el-button type="danger" size="mini" @click="handelBuy(scope.row,scope)">
+                            购买
+                        </el-button>
+                    </template>
+                </el-table-column>
+
+                <el-table-column
                         v-if="review"
                         fixed="right"
                         label="审核"
@@ -43,23 +55,21 @@
                         align="center"
                         class-name="small-padding fixed-width">
                     <template slot-scope="scope">
-
                         <el-button type="success" size="mini" @click="makeReview(scope.row,'pass',scope)">
                             通过
                         </el-button>
                         <el-button size="mini" type="danger" @click="makeReview(scope.row,'reject',scope)">
                             拒绝
                         </el-button>
-
                     </template>
                 </el-table-column>
             </el-table>
         </div>
-
         <div class="u-pagination-block">
             <el-row :gutter="20">
                 <el-col :span="20" :offset="7">
                     <el-pagination
+                            :page-size="pageSize"
                             :total="totalElements"
                             background
                             :current-page.sync="currentPage"
@@ -77,8 +87,7 @@
 
   /* eslint-disable */
   import ElSlPanel from 'element-ui/packages/color-picker/src/components/sv-panel';
-  // eslint-disable-next-line
-  import utils from '../../utils';
+
   import waves from '../../directive/waves'; // 水波纹指令
 
   const calendarTypeOptions = [
@@ -98,7 +107,17 @@
     directives: {
       waves
     },
-    props: ['title', 'labels', 'tabledata', 'review', 'totalElements'],
+    props: {
+      title:String,
+      labels:Object,
+      tabledata:Array,
+      totalElements:Number,
+      review:Boolean,
+      buy:Boolean,
+      pageSize:{
+        type:Number,
+        default:10
+      }},
     data () {
       return {
         tData: this.tabledata,
@@ -167,6 +186,13 @@
         this.currentPage = 1;
         this.filterStr = '';
         this.$emit('reset');
+      },
+      goDetail (row, scope) {
+        console.log('detail', row, scope);
+        this.$router.push({name: 'detail', params: {transactionId: row.transactionId}});
+      },
+      handelBuy (row, scope) {
+        console.log(row, scope);
       }
     }
 
@@ -176,7 +202,7 @@
 <style lang="scss" scoped>
     .basicTable {
         margin: 0 30px;
-        .m-table-title{
+        .m-table-title {
             text-align: center;
             margin: 20px;
         }

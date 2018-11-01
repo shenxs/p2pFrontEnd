@@ -93,6 +93,7 @@
 
 <style lang="scss" scoped>
     .m-sidebar {
+        min-height: 100vh;
 
     }
 
