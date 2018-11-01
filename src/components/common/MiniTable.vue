@@ -7,9 +7,7 @@
                 :prop="key"
                 :label="index"/>
         <el-table-column
-
                 fixed="right"
-                
                 width="100"
                 align="center"
                 class-name="small-padding fixed-width">
@@ -30,6 +28,7 @@
       goDetail(row){
         // eslint-disable-next-line
         console.log(row);
+        this.$router.push({name:'detail',params:{transactionId:row.transactionId}})
       }
     }
   };
