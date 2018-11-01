@@ -12,7 +12,7 @@
 
 <style lang="scss" scoped>
     .g-footer {
-        position: static;
+        position: absolute;
         display: flow-root;
 
         width: 100%;

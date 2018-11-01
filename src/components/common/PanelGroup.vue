@@ -1,57 +1,62 @@
 <template>
-  <el-row :gutter="40" class="panel-group">
+    <el-row class="panel-group">
+        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(everycount,index) in count"
+                :key="everycount.name">
+            <div class="card-panel" @click="handleSetLineChartData(index)">
+                <div class="card-panel-icon-wrapper icon-people">
+                    <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
+                </div>
+                <div class="card-panel-description">
+                    <div class="card-panel-text">{{everycount.name}}</div>
+                    <count-to
+                            :start-val="everycount.startVal"
+                            :end-val="everycount.endVal"
+                            :duration="2800"
+                            :decimals="everycount.decimal?1:0"
+                            class="card-panel-num"/>
+                </div>
+            </div>
+        </el-col>
 
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(everycount,index) in count" :key="everycount.name">
-      <div class="card-panel" @click="handleSetLineChartData(index)">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">{{everycount.name}}</div>
-          <count-to
-            :start-val="everycount.startVal"
-            :end-val="everycount.endVal"
-            :duration="2800"
-            :decimals="everycount.decimal?1:0"
-            class="card-panel-num"/>
-        </div>
-      </div>
-    </el-col>
-
-  </el-row>
+    </el-row>
 </template>
 
 <script>
   /* eslint-disable */
-import CountTo from 'vue-count-to'
-export default {
-  components: {
-    CountTo
-  },
-  props:['count'],
-  data() {
-    return {
+  import CountTo from 'vue-count-to';
 
-      typeChartData : {
-        history:0,
-        period:1,
-        money:2
+  export default {
+    components: {
+      CountTo
+    },
+    props: ['count'],
+    data () {
+      return {
+
+        typeChartData: {
+          history: 0,
+          period: 1,
+          money: 2
+        }
+      };
+    },
+    methods: {
+      handleSetLineChartData (type) {
+        this.$emit('handleSetLineChartData', type);
       }
     }
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
-  }
-}
+  };
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
     .panel-group {
-        margin-top: 18px;
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
         .card-panel-col {
-            margin-bottom: 32px;
+            & + .card-panel-col {
+                margin-left: 50px;
+            }
         }
         .card-panel {
             height: 108px;
@@ -61,8 +66,8 @@ export default {
             overflow: hidden;
             color: #666;
             background: #fff;
-            box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-            border-color: rgba(0, 0, 0, .05);
+            box-shadow: 0 0 20px #cccccc;
+            border-color: rgba(0, 0, 0, .5);
             &:hover {
                 .card-panel-icon-wrapper {
                     color: #fff;
@@ -106,8 +111,7 @@ export default {
             .card-panel-description {
                 float: right;
                 font-weight: bold;
-                margin: 26px;
-                margin-left: 0px;
+                margin: 26px 26px 26px 0;
                 .card-panel-text {
                     line-height: 18px;
                     color: rgba(0, 0, 0, 0.45);
