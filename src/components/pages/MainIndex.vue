@@ -263,14 +263,14 @@
                     height: 100%;
                     background-color: rgba(96, 96, 96, 0.3);
                     filter: alpha(opacity=60);
-                    opacity: 0.6;
+                    /*opacity: 0.6;*/
                     .notice {
                         display: inline-flex;
                         width: 340px;
                         height: 32px;
                         overflow: hidden;
                         margin-top: 40px;
-                        background-color: rgba(96, 96, 96, 0.8);
+                        background-color: rgba(96, 96, 96, 0.3);
                         .anim {
                             transition: all 0.5s;
                             margin-top: -30px;
