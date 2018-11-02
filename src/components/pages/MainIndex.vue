@@ -5,7 +5,8 @@
                 <el-card v-for="(item, index) in news" :key="index" class="m-new-card">
                     <div class="u-news-img">
                         <!--<img :src="'../../assets/news' +(index+1)+'.png'"/>-->
-                        <img style="height: 100px;width: 100px" :src="require(`@/assets/news${index+1}.png`)"/>
+                        <img @click="newsClick(item)" style="height: 100px;width: 100px"
+                             :src="require(`@/assets/news${index+1}.png`)"/>
                     </div>
                     <div class="u-news-text">
                         <p>{{item.text}}</p>
@@ -198,8 +199,11 @@
           console.log(e);
         });
       },
-      newsClick(item){
-        window.open(item.url);
+      newsClick (item) {
+        // eslint-disable-next-line
+        console.log('hhh');
+        if (item.url !== '')
+          window.open(item.url);
       }
     },
     beforeMount () {
