@@ -7,13 +7,14 @@ import routes from './router'
 import Utils from './utils'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
-
+import Icon from 'wc-svg-icon';
+import 'wc-svg-icon/style.css';
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 Vue.use(Router)
-
+Vue.use(Icon);
 const router = new Router({
   routes
 })
