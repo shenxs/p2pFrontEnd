@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="login" style="font-size: 16px;line-height: 20px">
                                     已有账号？
-                                    <a href="">立即登录</a>
+                                    <a href="#/login">立即登录</a>
                                 </div>
 
                             </div>
@@ -234,6 +234,7 @@
                 .u-news-text {
                     width: 190px;
                     margin-left: 15px;
+                    font-size: 17px;
                 }
             }
         }
