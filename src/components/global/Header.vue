@@ -12,7 +12,7 @@
                     text-color="#fff"
                     active-text-color="#ffd04b"
                     @select="handleSelect">
-                <el-menu-item index="1"><a href="#/index">信 息</a></el-menu-item>
+                <el-menu-item index="1"><a href="#/index">首 页</a></el-menu-item>
                 <el-menu-item index="2"><a href="#/buy">出借贷款</a></el-menu-item>
                 <el-menu-item index="3"><a href="#/sell">申请贷款</a></el-menu-item>
 
