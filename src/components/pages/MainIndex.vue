@@ -20,8 +20,8 @@
                 <div class="g-middle">
                     <div class="g-carousel">
                         <el-carousel height="370px">
-                            <el-carousel-item v-for="item in 4" :key="item">
-                                <p>{{ item }}</p>
+                            <el-carousel-item v-for="item in 3" :key="item">
+                                <img :src="require(`@/assets/${item}.jpg`)"/>
                             </el-carousel-item>
                         </el-carousel>
                     </div>
