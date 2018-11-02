@@ -250,7 +250,8 @@
                 width: 340px;
                 height: 370px;
                 /*line-height: 370px;*/
-                margin: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
                 z-index: 1;
                 .bg {
                     z-index: 1;
