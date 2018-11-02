@@ -1,11 +1,11 @@
 <template>
 
     <el-row class="panel-group">
-        <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(everycount,index) in count"
+        <el-col :xs="12" :sm="13" :lg="16" class="card-panel-col" v-for="(everycount,index) in count"
                 :key="everycount.name">
             <div class="card-panel" @click="handleSetLineChartData(index)">
                 <div class="card-panel-icon-wrapper icon-people">
-                    <svg-icon icon-class="peoples" class-name="card-panel-icon"/>
+                    <icon name="a" fill="#40c9c6" class="card-panel-icon"/>
                 </div>
                 <div class="card-panel-description">
                     <div class="card-panel-text">{{everycount.name}}</div>
@@ -33,7 +33,7 @@
     props: ['count'],
     data () {
       return {
-
+        fillColor: '#40c9c6',
         typeChartData: {
           history: 0,
           period: 1,
@@ -73,9 +73,11 @@
                 .card-panel-icon-wrapper {
                     color: #fff;
                 }
-                .icon-people {
+                .icon-people{
+                    filter:drop-shadow(0 0 0 black);
                     background: #40c9c6;
                 }
+
                 .icon-message {
                     background: #36a3f7;
                 }
@@ -108,8 +110,12 @@
             .card-panel-icon {
                 float: left;
                 font-size: 24px;
-              width: 55px;
-              height: 55px;
+                width: 55px;
+                height: 55px;
+                fill:red;
+            }
+            .icon{
+                fill:blue;
             }
             .card-panel-description {
                 float: right;
