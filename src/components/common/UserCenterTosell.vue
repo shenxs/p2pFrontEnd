@@ -1,17 +1,27 @@
 <template>
-  <div class="user-center-tosell">
-    <h1>用户 待审批 出借</h1>
-  </div>
+    <div class="user-center-tosell">
+        <basic-table
+                :title="title"
+        />
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'UserCenterTosell'
-}
+  import basicTable from '../common/BasicTableView';
+
+  export default {
+    name: 'UserCenterTosell',
+    components: {basicTable},
+    data () {
+      return {
+        title: '待审核出借'
+      };
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
-    .user-center-tosell{
+    .user-center-tosell {
         width: 100%;
     }
 </style>

@@ -4,7 +4,6 @@
             <el-aside class="g-aside" width="350px">
                 <el-card v-for="(item, index) in news" :key="index" class="m-new-card">
                     <div class="u-news-img">
-                        <!--<img :src="'../../assets/news' +(index+1)+'.png'"/>-->
                         <img @click="newsClick(item)" style="height: 100px;width: 100px"
                              :src="require(`@/assets/news${index+1}.png`)"/>
                     </div>

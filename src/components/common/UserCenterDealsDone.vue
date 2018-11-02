@@ -1,17 +1,28 @@
 <template>
-  <div class="user-center-deals-done">
-    <h1>用户中心已完成交易</h1>
-  </div>
+    <div class="user-center-deals-done">
+
+        <basic-table
+                :title="title"
+        />
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'UserCenterDealsDone'
-}
+  import basicTable from '../common/BasicTableView';
+
+  export default {
+    name: 'UserCenterDealsDone',
+    components: {basicTable},
+    data () {
+      return {
+        title: '已完成交易'
+      };
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
-    .user-center-deals-done{
+    .user-center-deals-done {
         width: 100%;
     }
 </style>

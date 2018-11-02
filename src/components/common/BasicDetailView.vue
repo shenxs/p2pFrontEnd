@@ -7,32 +7,12 @@
                     <div class="line_buttom"/>
                 </el-row>
                 <el-row>
-                    <!--<div class="topDetail">-->
-                    <!--<ul>-->
-                    <!--<li class="ul_left d_li">-->
-                    <!--<span class="li_top">历史年率</span>-->
-                    <!--<span class="li_buttom">{{ detailData.interest }}%</span>-->
-                    <!--</li>-->
                     <li class="ul_center d_li">
                         <PanelGroup :count="count" @handleSetLineChartData="handleSetLineChartData"/>
-                        <!--<span class="li_top">周期</span>-->
-                        <!--<span class="li_buttom" style="color:black;">{{ detailData.period }}<i-->
-                        <!--style="font-size:12px;">天</i>-->
-                        <!---->
-                        <!--</span>-->
                     </li>
                     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
                         <LineChart :chartData="returnChartData"/>
                     </el-row>
-                    <!--<li class="ul_right d_li">-->
-
-                    <!--<span class="li_top">金额</span>-->
-                    <!--<span class="li_buttom">{{ detailData.moneyNum }}</span>-->
-                    <!--</li>-->
-                    <!--</ul>-->
-
-                    <!--</div>-->
-
                 </el-row>
                 <el-row>
                     <div class="line_middle"/>
@@ -356,7 +336,6 @@
     },
     props: ['detailData'],
     data () {
-
       return {
         lineChartData: [
           {
@@ -392,7 +371,7 @@
         ],
         dialogVisible: false,
         activeName: 'first',
-        returnChartData: {}
+        returnChartData :{xAxisName: "表名", actualData: [1,2,3,0], type: Number}
       };
     },
     methods: {

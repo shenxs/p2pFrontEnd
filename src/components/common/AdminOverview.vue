@@ -25,8 +25,7 @@
                         :key="item.value"
                         :label="item.label"
                         :value="item.value"
-                        @change="changePeriod"
-                >
+                        @change="changePeriod">
                 </el-option>
             </el-select>
             <el-button type="primary" class="timeSelect-buttom" @click="initChartData">查询</el-button>

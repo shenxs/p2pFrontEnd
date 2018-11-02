@@ -105,7 +105,6 @@
               restore: {show: true}, //重置
             }
           },
-
           dataZoom: {
             show: true,
             realtime: true,
@@ -114,7 +113,6 @@
           },
           title: {
             show: true, //显示折线图
-
             text: xAxisName[0].replace('-','/') + '-' + xAxisName[xAxisName.length - 1].replace('-','/') + "期间[ "+ t +" ]金额变化图", //标题文字
             // subtext: '熟悉title的配置项', //副标题
             left: 50, //配置title的位置
