@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="register" style="margin-top: 20px">
 
-                                    <el-button type="primary" size="medium"
+                                    <el-button type="primary" size="medium" @click="goto('/register')"
                                                style="width: 80%; font-size:32px ;height: 60px;">注册
                                     </el-button>
                                 </div>
