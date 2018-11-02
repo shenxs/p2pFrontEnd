@@ -5,7 +5,8 @@
                 <el-card v-for="(item, index) in news" :key="index" class="m-new-card">
                     <div class="u-news-img">
                         <!--<img :src="'../../assets/news' +(index+1)+'.png'"/>-->
-                        <img style="height: 100px;width: 100px" src="../../assets/news1.png"/>
+                        <img @click="newsClick(item)" style="height: 100px;width: 100px"
+                             :src="require(`@/assets/news${index+1}.png`)"/>
                     </div>
                     <div class="u-news-text">
                         <p>{{item.text}}</p>
@@ -19,8 +20,8 @@
                 <div class="g-middle">
                     <div class="g-carousel">
                         <el-carousel height="370px">
-                            <el-carousel-item v-for="item in 4" :key="item">
-                                <p>{{ item }}</p>
+                            <el-carousel-item v-for="item in 3" :key="item">
+                                <img :src="require(`@/assets/${item}.jpg`)"/>
                             </el-carousel-item>
                         </el-carousel>
                     </div>
@@ -39,13 +40,13 @@
                                 </div>
                                 <div class="register" style="margin-top: 20px">
 
-                                    <el-button type="primary" size="medium"
+                                    <el-button type="primary" size="medium" @click="goto('/register')"
                                                style="width: 80%; font-size:32px ;height: 60px;">注册
                                     </el-button>
                                 </div>
                                 <div class="login" style="font-size: 16px;line-height: 20px">
                                     已有账号？
-                                    <a href="">立即登录</a>
+                                    <a href="#/login">立即登录</a>
                                 </div>
 
                             </div>
@@ -95,7 +96,6 @@
                 </div>
             </div>
         </el-container>
-
     </div>
 </template>
 
@@ -197,11 +197,16 @@
           // eslint-disable-next-line
           console.log(e);
         });
+      },
+      newsClick (item) {
+        // eslint-disable-next-line
+        console.log('hhh');
+        if (item.url !== '')
+          window.open(item.url);
       }
     },
     beforeMount () {
       this.loadData();
-
     }
   };
 </script>
@@ -229,6 +234,7 @@
                 .u-news-text {
                     width: 190px;
                     margin-left: 15px;
+                    font-size: 17px;
                 }
             }
         }
@@ -250,21 +256,22 @@
                 width: 340px;
                 height: 370px;
                 /*line-height: 370px;*/
-                margin: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
                 z-index: 1;
                 .bg {
                     z-index: 1;
                     height: 100%;
                     background-color: rgba(96, 96, 96, 0.3);
                     filter: alpha(opacity=60);
-                    opacity: 0.6;
+                    /*opacity: 0.6;*/
                     .notice {
                         display: inline-flex;
                         width: 340px;
                         height: 32px;
                         overflow: hidden;
                         margin-top: 40px;
-                        background-color: rgba(96, 96, 96, 0.8);
+                        background-color: rgba(96, 96, 96, 0.3);
                         .anim {
                             transition: all 0.5s;
                             margin-top: -30px;
@@ -321,9 +328,7 @@
                     background-color: #d3dce6;
                 }
             }
-
         }
-
         .g-loan {
             margin: 10px;
             display: flex;
