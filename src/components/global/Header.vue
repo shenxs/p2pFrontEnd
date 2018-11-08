@@ -105,7 +105,6 @@
         box-shadow: 0 1px 5px #999999;
 
         .g-logo {
-            background: #999999;
             width: 150px;
             height: 100%;
             display: inline-block;
