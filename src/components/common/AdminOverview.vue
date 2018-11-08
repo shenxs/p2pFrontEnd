@@ -93,7 +93,7 @@
             endVal: 0
           }
         ],
-        returnChartData:{xAxisName: "表名", actualData: [1,2,3], type: Number} ,
+        returnChartData:{xAxisName: "表名", actualData: [1,2,3], type: 0} ,
         pickerOptions2: {
           shortcuts: [
             {

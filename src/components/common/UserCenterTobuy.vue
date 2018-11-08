@@ -13,7 +13,7 @@
 <script>
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
-
+  /* eslint-disable */
   export default {
     name: 'UserCenterTobuy',
     components: {basicTable},
@@ -40,7 +40,7 @@
       loadData(){
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, buyId: this.userId,buyStatus:'N'};
         if (this.filterStr !== undefined) {
-          data['sellName'] = str.trim();
+          data['sellName'] =this.filterStr;
         }
         api.getTansitionByPage(data).then(re => {
           console.log(re);
