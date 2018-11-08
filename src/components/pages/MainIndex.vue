@@ -78,7 +78,7 @@
                     <div class="g-sell ">
                         <el-card class="box-card" shadow="hover">
                             <div slot="header" class="clearfix">
-                                <span>贷款</span>
+                                <span style="font-size: 20px">贷款</span>
                                 <el-button style="float: right; padding: 3px 0" type="text" @click="goto('/sell')">
                                     更多
                                 </el-button>
@@ -89,7 +89,7 @@
                     <div class="g-buy">
                         <el-card class="box-card" shadow="always">
                             <div slot="header" class="clearfix">
-                                <span>借款</span>
+                                <span style="font-size: 20px">借款</span>
                                 <el-button style="float: right; padding: 3px 0"
                                            type="text" @click="goto('/buy')">更多
                                 </el-button>
@@ -245,7 +245,10 @@
         }
         .g-slogan {
             margin: 10px;
-            background-color: rgba(255,255,255,.1);
+
+            /*background-color: rgba(255,255,255,.1);*/
+            background-color: lightskyblue;
+            color: white;
             height: 40px;
             .g-slogan-text {
                 font-size: 20px;
@@ -267,6 +270,7 @@
                 .bg {
                     z-index: 1;
                     height: 100%;
+
                     background-color: rgba(224,224,224, 0.3);
                     filter: alpha(opacity=60);
                     /*opacity: 0.6;*/

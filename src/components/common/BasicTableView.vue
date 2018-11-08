@@ -54,7 +54,7 @@
                         v-if="buy"
                         fixed="right"
                         width="150"
-                        label="action"
+                        label="操作"
                         align="center">
                     <template slot-scope="scope">
                         <el-button type="success" size="mini" @click="goDetail(scope.row,scope)">
@@ -88,6 +88,9 @@
             <el-form label-width="80px">
                 <el-form-item label="购买原因">
                     <el-input v-model="reason" placeholder="输入您的交易理由"></el-input>
+                </el-form-item>
+                <el-form-item label="扫码付款">
+                    <img style="margin-left: 200px" :src="require('@/assets/QR.png')"/>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleConfirmBuy">确定</el-button>

@@ -143,8 +143,10 @@
       },
       getLoginMessage () {
         api.getLoginMessage({username: this.accountInfo.username}).then((re => {
-          alert(re.message);
+          console.log(re);
+          alert(re.data.message);
         })).catch((e) => {
+          console.log(e)
           alert(e);
         });
       }
