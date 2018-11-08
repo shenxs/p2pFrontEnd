@@ -14,7 +14,13 @@
             </el-aside>
             <div class="g-main">
                 <div class="g-slogan">
-                    <marquee class="g-slogan-text"> 你不贷，我不贷，明天我们就狗带！</marquee>
+                    <marquee   amount=10 class="g-slogan-text">
+                        <ul>
+                            <li>
+                                天弘聚利灵活配置混合(001647)，今日单位净值1.3722，近一周上涨29.37%
+                            </li>
+                        </ul>
+                    </marquee>
                 </div>
                 <div class="g-middle">
                     <div class="g-carousel">
@@ -239,7 +245,8 @@
         }
         .g-slogan {
             margin: 10px;
-            background-color: orange;
+
+            background-color: rgba(255,255,255,.1);
             height: 40px;
             .g-slogan-text {
                 font-size: 20px;
@@ -250,7 +257,7 @@
             display: flex;
             margin: 10px;
             width: auto;
-            background-color: rgba(299,116,112,1);
+            background-color: #e0e0e0;
             .g-hot {
                 width: 340px;
                 height: 370px;
@@ -261,7 +268,8 @@
                 .bg {
                     z-index: 1;
                     height: 100%;
-                    background-color: rgba(0, 0, 0, 0);
+
+                    background-color: rgba(224,224,224, 0.3);
                     filter: alpha(opacity=60);
                     /*opacity: 0.6;*/
                     .notice {
