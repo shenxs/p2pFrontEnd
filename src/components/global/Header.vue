@@ -1,7 +1,9 @@
 <template>
     <div class="g-header">
         <div class="g-logo" @click="changeRoute('/index')">
-            <p style="line-height: 60px; text-align: center;">LOGO</p>
+            <img :src="require('@/assets/logo.png')" width="80px" style="text-align: center;
+            margin-left: 30px;margin-top: 10px"/>
+            <!--<p style="line-height: 60px; text-align: center;">LOGO</p>-->
         </div>
         <div class="g-nav">
             <el-menu

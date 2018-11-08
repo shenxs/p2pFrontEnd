@@ -239,7 +239,7 @@
         }
         .g-slogan {
             margin: 10px;
-            background-color: aqua;
+            background-color: orange;
             height: 40px;
             .g-slogan-text {
                 font-size: 20px;
@@ -250,7 +250,7 @@
             display: flex;
             margin: 10px;
             width: auto;
-            background-color: pink;
+            background-color: rgba(299,116,112,1);
             .g-hot {
                 width: 340px;
                 height: 370px;
@@ -261,7 +261,7 @@
                 .bg {
                     z-index: 1;
                     height: 100%;
-                    background-color: rgba(96, 96, 96, 0.3);
+                    background-color: rgba(0, 0, 0, 0);
                     filter: alpha(opacity=60);
                     /*opacity: 0.6;*/
                     .notice {
