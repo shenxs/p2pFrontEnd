@@ -6,8 +6,6 @@ import Register from './components/common/Register';
 import MainBuy from './components/pages/MainBuy';
 import MainSell from './components/pages/MainSell';
 import Detail from './components/common/BasicDetailView';
-import NewBuy from './components/pages/MainNewBuy';
-import NewSell from './components/pages/MainNewSell';
 
 const routers = [
   {
@@ -49,14 +47,6 @@ const routers = [
     path: '/detail/:id',
     name: 'detail',
     component: Detail
-  }, {
-    path: '/newBuy',
-    name: 'newBuy',
-    component: NewBuy
-  }, {
-    path: '/newSell',
-    name: 'newSell',
-    component: NewSell
   }
 
 ];

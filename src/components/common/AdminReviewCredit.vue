@@ -1,15 +1,25 @@
 <template>
 
     <div class="admin-review-credit" style="width: 100%">
-        <h1>审核信用评级</h1>
+        <basic-table
+                :title="title"
+        />
     </div>
 </template>
 
 <script>
+  import basicTable from '../common/BasicTableView';
 
   export default {
-    name: 'AdminReviewCredit'
-  
+    name: 'AdminReviewCredit',
+    components: {basicTable},
+
+    data () {
+
+      return {
+        title: '审核信用评级'
+      };
+    }
   };
 </script>
 

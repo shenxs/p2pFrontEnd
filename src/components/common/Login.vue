@@ -122,10 +122,11 @@
           data['role'] = 'user';
         }
         login(data).then((re) => {
-          // eslint-disable-next-line
+          //eslint-disable-next-line
+          console.log(re);
           if (re.data.code === 0) {
             this.$store.commit('login');
-            // console.log(re);
+
             localStorage.setItem('user', JSON.stringify(re.data.data));
             if (re.data.data.role === 'admin') {
               this.$router.push('/admin');

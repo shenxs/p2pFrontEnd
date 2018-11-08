@@ -32,20 +32,6 @@
                         :key="index"
                         :prop="key"
                         :label="index"/>
-                <el-table-column
-                        v-if="buy"
-                        fixed="right"
-                        width="150"
-                        align="center">
-                    <template slot-scope="scope">
-                        <el-button type="success" size="mini" @click="goDetail(scope.row,scope)">
-                            详情
-                        </el-button>
-                        <el-button type="danger" size="mini" @click="handelBuy(scope.row,scope)">
-                            购买
-                        </el-button>
-                    </template>
-                </el-table-column>
 
                 <el-table-column
                         v-if="review"
@@ -63,6 +49,24 @@
                         </el-button>
                     </template>
                 </el-table-column>
+
+                <el-table-column
+                        v-if="buy"
+                        fixed="right"
+                        width="150"
+                        label="action"
+                        align="center">
+                    <template slot-scope="scope">
+                        <el-button type="success" size="mini" @click="goDetail(scope.row,scope)">
+                            详情
+                        </el-button>
+                        <el-button type="danger" size="mini" @click="handelBuy(scope.row,scope)">
+                            购买
+                        </el-button>
+                    </template>
+                </el-table-column>
+
+
             </el-table>
         </div>
         <div class="u-pagination-block">
@@ -79,6 +83,20 @@
             </el-row>
         </div>
 
+
+        <el-dialog :title="'购买'" :visible.sync="dialogBuyFormVisible">
+            <el-form label-width="80px">
+                <el-form-item label="购买原因">
+                    <el-input v-model="reason" placeholder="输入您的交易理由"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="handleConfirmBuy">确定</el-button>
+                    <el-button @click="dialogBuyFormVisible=false">取消</el-button>
+                </el-form-item>
+            </el-form>
+
+        </el-dialog>
+
     </div>
 
 </template>
@@ -90,17 +108,6 @@
 
   import waves from '../../directive/waves'; // 水波纹指令
 
-  const calendarTypeOptions = [
-    {key: 'up', display_name: '生序'},
-    {key: 'down', display_name: '降序'}
-  ];
-
-  // arr to obj ,such as { CN : "China", US : "USA" }
-  const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-    acc[cur.key] = cur.display_name;
-    return acc;
-  }, {});
-
   export default {
     name: 'basic-table-view',
     components: {ElSlPanel},
@@ -108,16 +115,17 @@
       waves
     },
     props: {
-      title:String,
-      labels:Object,
-      tabledata:Array,
-      totalElements:Number,
-      review:Boolean,
-      buy:Boolean,
-      pageSize:{
-        type:Number,
-        default:10
-      }},
+      title: String,
+      labels: Object,
+      tabledata: Array,
+      totalElements: Number,
+      review: Boolean,
+      buy: Boolean,
+      pageSize: {
+        type: Number,
+        default: 10
+      }
+    },
     data () {
       return {
         tData: this.tabledata,
@@ -127,37 +135,9 @@
         filterStr: '',
         total: null,
         currentPage: 1,
-        listLoading: true,
-        listQuery: {
-          page: 1,
-          limit: 20,
-          importance: undefined,
-          title: undefined,
-          type: undefined,
-          sort: '+id'
-        },
-        importanceOptions: [1, 2, 3],
-        calendarTypeOptions,
-        sortOptions: [{label: 'ID Ascending', key: '+id'}, {label: 'ID Descending', key: '-id'}],
-        statusOptions: ['published', 'draft', 'deleted'],
-        showReviewer: false,
-        temp: {
-          id: undefined,
-          importance: 1,
-          remark: '',
-          timestamp: new Date(),
-          title: '',
-          type: '',
-          status: 'published'
-        },
-        dialogFormVisible: false,
-        dialogStatus: '',
-        textMap: {
-          update: 'Edit',
-          create: 'Create'
-        },
-        dialogPvVisible: false,
-        pvData: [],
+        dialogBuyFormVisible: false,
+        tryToBuyOrSell: null,
+        reason: '',
         rules: {
           type: [{required: true, message: 'type is required', trigger: 'change'}],
           timestamp: [{type: 'date', required: true, message: 'timestamp is required', trigger: 'change'}],
@@ -167,9 +147,6 @@
       };
     },
 
-    beforeMount () {
-
-    },
     methods: {
       //传入数据和意见
       makeReview (row, comment) {
@@ -192,7 +169,16 @@
         this.$router.push({name: 'detail', params: {transactionId: row.transactionId}});
       },
       handelBuy (row, scope) {
-        console.log(row, scope);
+        // console.log(row, scope);
+        this.tryToBuyOrSell = row;
+
+        this.dialogBuyFormVisible = true;
+      },
+      handleConfirmBuy () {
+        // console.log('hello');
+        this.dialogBuyFormVisible = false;
+        this.$emit('deal', this.tryToBuyOrSell, this.reason);
+
       }
     }
 

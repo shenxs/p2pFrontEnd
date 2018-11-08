@@ -25,8 +25,7 @@
                         :key="item.value"
                         :label="item.label"
                         :value="item.value"
-                        @change="changePeriod"
-                >
+                        @change="changePeriod">
                 </el-option>
             </el-select>
             <el-button type="primary" class="timeSelect-buttom" @click="initChartData">查询</el-button>
@@ -94,7 +93,7 @@
             endVal: 0
           }
         ],
-        returnChartData: {},
+        returnChartData:{xAxisName: "表名", actualData: [1,2,3], type: Number} ,
         pickerOptions2: {
           shortcuts: [
             {
@@ -140,7 +139,6 @@
         this.initChartData()
       },
       initGetMoney () {
-
         api.getMoney(this.getYearBuy).then(res => {
           console.log(res)
           this.count[0].endVal = parseInt(res.data.data.totalMoney)
@@ -148,7 +146,6 @@
         api.getMoney(this.getYearSell).then(res => {
           this.count[1].endVal = parseInt(res.data.data.totalMoney)
         });
-
       },
       initChartData () {
         this.getMoneyByTime.startTime = this.chooseTime[0]
@@ -161,8 +158,7 @@
             xAxisName.push(k)
             actualData.push(v)
           }
-
-          this.returnChartData = {"xAxisName": xAxisName, "actualData": actualData, "type": this.getMoneyByTime.type}
+          this.returnChartData = {xAxisName: xAxisName, actualData: actualData, type: this.getMoneyByTime.type}
           console.log("return chartData is ", this.returnChartData, this.getMoneyByTime)
           this.chartData[this.getMoneyByTime.type] = this.returnChartData
         })
@@ -181,6 +177,7 @@
       },
 
     },
+
     beforeMount () {
       this.initGetMoney();
       this.initChartData();
