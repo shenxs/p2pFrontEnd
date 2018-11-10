@@ -122,11 +122,9 @@
           data['role'] = 'user';
         }
         login(data).then((re) => {
-          //eslint-disable-next-line
-          console.log(re);
           if (re.data.code === 0) {
+            console.log(re.data.data);
             this.$store.commit('login');
-
             localStorage.setItem('user', JSON.stringify(re.data.data));
             if (re.data.data.role === 'admin') {
               this.$router.push('/admin');
@@ -146,7 +144,7 @@
           console.log(re);
           alert(re.data.message);
         })).catch((e) => {
-          console.log(e)
+          console.log(e);
           alert(e);
         });
       }

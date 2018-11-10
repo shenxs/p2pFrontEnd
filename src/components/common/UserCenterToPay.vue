@@ -1,25 +1,29 @@
 <template>
-    <div class="user-center-tosell">
+    <div class="user-center-topay">
 
-        <basic-table
-                :title="title"
-                :tabledata="tData"
-                :labels="labels"
-                :totalElements="totalElements"
-        />
+        <div class="user-center-tosell">
+            <basic-table
+                    :title="title"
+                    :tabledata="tData"
+                    :labels="labels"
+                    :total-elements="totalElements"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
 
   export default {
-    name: 'UserCenterTobuy',
+    name: 'UserToPay',
     components: {basicTable},
     data () {
       return {
-        title: '未完成出借借款',
+        title: '待还款',
+        requestData: null,
         tData: null,
         labels: {
           transactionId: '交易id',
@@ -42,25 +46,22 @@
         if (this.filterStr !== undefined) {
           data['sellName'] = this.filterStr.trim();
         }
-        api.selectThree(data).then(re => {
-          // /* eslint-disable */
-          // console.log(re);
+        api.selectTwo(data).then(re => {
           this.requestData = JSON.parse(JSON.stringify(re.data.data));
           this.tData = re.data.data.map(this.$utils.parseData);
           this.totalElements = re.data.data.length;
         });
+
       }
+
     },
     beforeMount () {
-      let user = JSON.parse(localStorage.getItem('user'));
-      this.userId = user.userId;
-      this.loadData();
     }
   };
 </script>
 
 <style lang="scss" scoped>
-    .user-center-tosell {
+    .user-center-topay{
         width: 100%;
     }
 </style>

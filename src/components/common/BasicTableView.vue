@@ -17,7 +17,16 @@
                            @click="$emit('refresh')">
                     刷新
                 </el-button>
+
+                <el-button v-if="sellOrBuy==='sell'" type="success" style="float: right"
+                           @click="showAuthDialog"
+                >授权出借</el-button>
+                <el-button v-if="sellOrBuy==='buy'" type="success" style="float: right"
+                           @click="showBorrowDialog"
+                >借款申请</el-button>
             </div>
+
+
             <el-table
                     :data="tabledata"
                     stripe
@@ -97,8 +106,70 @@
                     <el-button @click="dialogBuyFormVisible=false">取消</el-button>
                 </el-form-item>
             </el-form>
-
         </el-dialog>
+
+
+        <el-dialog :title="'授权出借'" :visible.sync="dialogAuthVisible">
+            <el-form label-width="80px">
+                <el-form-item label="金额">
+                    <el-input v-model="reason" placeholder="输入您的交易理由"></el-input>
+                </el-form-item>
+                <el-form-item label="利率">
+                    <el-input></el-input>
+                </el-form-item>
+                <el-form-item label="周期">
+                    <el-input></el-input>
+                </el-form-item>
+                <el-form-item label="还款方式">
+                    <el-select v-model="payBackForm.payBackOption">
+                        <el-option
+                                v-for="item in payBackOptions"
+                                :key="item.value"
+                                :value="item.value"
+                                :label="item.value">
+
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="handleConfirmAuth">确定</el-button>
+                    <el-button @click="dialogAuthVisible=false">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
+
+
+        <el-dialog :title="'申请借款'" :visible.sync="dialogBorrowVisible">
+            <el-form label-width="100px">
+                <el-form-item label="金额（元）">
+                    <el-input v-model="reason" placeholder="输入金额"></el-input>
+                </el-form-item>
+                <el-form-item label="利率">
+                    <el-input></el-input>
+                </el-form-item>
+                <el-form-item label="周期">
+                    <el-input></el-input>
+                </el-form-item>
+
+
+                <el-form-item label="还款方式">
+                    <el-select v-model="payBackForm.payBackOption">
+                        <el-option
+                                v-for="item in payBackOptions"
+                                :key="item.value"
+                                :value="item.value"
+                                :label="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="handleConfirmBorrow">确定</el-button>
+                    <el-button @click="dialogBorrowVisible=false">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
 
     </div>
 
@@ -127,7 +198,8 @@
       pageSize: {
         type: Number,
         default: 10
-      }
+      },
+      sellOrBuy:String
     },
     data () {
       return {
@@ -139,7 +211,19 @@
         total: null,
         currentPage: 1,
         dialogBuyFormVisible: false,
+        dialogAuthVisible:false,
+        dialogBorrowVisible:false,
         tryToBuyOrSell: null,
+        payBackOptions:[
+          {value:'先息后本'},
+          {value:'等额本金'},
+          {value:'先本后金'},
+          {value:'等额本息'}
+        ],
+        payBackForm:{
+          payBackOption:''
+        },
+
         reason: '',
         rules: {
           type: [{required: true, message: 'type is required', trigger: 'change'}],
@@ -181,7 +265,24 @@
         // console.log('hello');
         this.dialogBuyFormVisible = false;
         this.$emit('deal', this.tryToBuyOrSell, this.reason);
-
+      },
+      showAuthDialog(){
+        this.dialogAuthVisible=true;
+      },
+      showBorrowDialog(){
+        this.dialogBorrowVisible=true;
+      },
+      handleConfirmAuth(){
+        this.$message({
+          message:'todo'
+        });
+        this.dialogAuthVisible=false
+      },
+      handleConfirmBorrow(){
+        this.$message({
+          message:'todo'
+        });
+        this.dialogBorrowVisible=false
       }
     }
 

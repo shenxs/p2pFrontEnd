@@ -15,14 +15,16 @@
                     active-text-color="#ffd04b"
                     @select="handleSelect">
                 <el-menu-item index="1"><a href="#/index">首 页</a></el-menu-item>
-                <el-menu-item index="2"><a href="#/buy">出借贷款</a></el-menu-item>
-                <el-menu-item index="3"><a href="#/sell">申请贷款</a></el-menu-item>
+                <el-menu-item index="2"><a href="#/buy">我要借款</a></el-menu-item>
+                <el-menu-item index="3"><a href="#/sell">我要出借</a></el-menu-item>
 
-                <el-menu-item v-if="isloginCom" index="4" @click="logout">登出</el-menu-item>
-                <el-submenu v-else index="4">
+
+                <el-submenu index="4">
                     <template slot="title">用 户</template>
-                    <el-menu-item index="4-1" @click="changeRoute('/login')">登录</el-menu-item>
-                    <el-menu-item index="4-2" @click="changeRoute('/register')">注册</el-menu-item>
+                    <el-menu-item v-if="isloginCom" index="4-1" @click="goCenter">个人中心</el-menu-item>
+                    <el-menu-item v-if="isloginCom" index="4-2" @click="logout">登出</el-menu-item>
+                    <el-menu-item v-if="!isloginCom" index="4-1" @click="changeRoute('/login')">登录</el-menu-item>
+                    <el-menu-item v-if="!isloginCom" index="4-2" @click="changeRoute('/register')">注册</el-menu-item>
                 </el-submenu>
             </el-menu>
         </div>
@@ -55,6 +57,16 @@
       },
       handleSelect (key, keyPath) {
         // console.log(key, keyPath);
+      },
+      goCenter () {
+        let user =JSON.parse( localStorage.getItem('user'));
+        if (user.role === 'admin') {
+          this.$router.push('/admin');
+        } else if (user.role === 'user') {
+          this.$router.push('/user');
+        }else{
+          alert('error'+user);
+        }
       },
       isLogedin () {
         const user = localStorage.getItem('user');

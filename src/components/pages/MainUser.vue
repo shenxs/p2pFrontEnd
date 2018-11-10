@@ -10,9 +10,13 @@
                     </el-menu-item>
                     <el-submenu index="2">
                         <template slot="title">个人交易信息</template>
-                        <el-menu-item index="2-1">待审核出借</el-menu-item>
-                        <el-menu-item index="2-2">待审核购买</el-menu-item>
-                        <el-menu-item index="2-3">已完成交易</el-menu-item>
+
+
+                        <el-menu-item index="2-1">已完成</el-menu-item>
+                        <el-menu-item index="2-2">待还款</el-menu-item>
+                        <el-menu-item index="2-3">未完成出借借款</el-menu-item>
+                        <el-menu-item index="2-4">未完成申请借款</el-menu-item>
+
                     </el-submenu>
                     <el-menu-item index="3-1">
                         信用评级
@@ -21,9 +25,12 @@
             </el-aside>
 
             <profile v-if="menuFlag === '1-1'"/>
-            <tosell v-if="menuFlag === '2-1'"/>
-            <tobuy v-if="menuFlag === '2-2'"/>
-            <deals-done v-if="menuFlag === '2-3'"/>
+
+            <deals-done v-if="menuFlag === '2-1'"/>
+            <topay v-if="menuFlag==='2-2'"/>
+            <tobuy v-if="menuFlag==='2-3'"/>
+            <tosell v-if="menuFlag==='2-4'"/>
+
             <evaluate-credit v-if="menuFlag=== '3-1'"/>
 
         </el-container>
@@ -36,10 +43,11 @@
   import tobuy from '../common/UserCenterTobuy';
   import tosell from '../common/UserCenterTosell';
   import evaluateCredit from '../common/UserCenterEvaluateCredit';
+  import topay from '../common/UserCenterToPay';
 
   export default {
     name: 'MainUser',
-    components: {dealsDone, profile, tobuy, tosell, evaluateCredit},
+    components: {dealsDone, profile, tobuy, tosell, evaluateCredit,topay},
     data () {
       return {
         menuFlag: '1-1'
@@ -57,7 +65,6 @@
     methods: {
 
       handleSelect (index) {
-        // eslint-disable-next-line
         this.menuFlag = index;
       }
     }

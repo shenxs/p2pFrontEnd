@@ -47,24 +47,13 @@
         const data = {
           pageNow: this.pageNow,
           pageSize: this.pageSize,
-          buyStatus: 'Y',
-          sellStatus: 'Y',
-          sellId: this.userId
+          userId: this.userId
         };
         if (this.filterStr !== undefined) {
-          data['sellName'] = str.trim();
+          data['sellName'] = this.filterStr.trim();
         }
-        api.getTansitionByPage(data).then(re => {
-          console.log(re);
-          this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
-          this.tData.push(...re.data.data.content.map(this.$utils.parseData));
-          this.totalElements = re.data.data.totalElements;
-        });
-        const data2 = {
-          pageNow: this.pageNow, pageSize: this.pageSize, buyStatus: 'Y', sellStatus: 'Y'
-          , buyId: this.userId
-        };
-        api.getTansitionByPage(data).then(re => {
+        api.selectOne(data).then(re => {
+          /* eslint-disable */
           console.log(re);
           this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
           this.tData.push(...re.data.data.content.map(this.$utils.parseData));

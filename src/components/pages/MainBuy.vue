@@ -6,6 +6,7 @@
                 :labels="labels"
                 :totalElements="totalElements"
                 :pageSize="pageSize"
+                :sellOrBuy="'buy'"
                 @currentChange="handelCurrentChange"
                 @refresh="loadData"
                 @reset="handelRest"
