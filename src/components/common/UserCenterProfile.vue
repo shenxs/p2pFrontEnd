@@ -229,11 +229,11 @@
         }
       },
       addAsset: function () {
-        this.ruleForm.assets.push({value: '', type: '', description: ''});
+        this.assets.push({value: '', type: '', description: ''});
       },
       deleteAsset: function (index) {
-        this.ruleForm.assets.slice(index, 1);
-        this.$delete(this.ruleForm.assets, index);
+        this.assets.slice(index, 1);
+        this.$delete(this.assets, index);
       },
       updateProfile () {
         const user = JSON.parse(localStorage.getItem('user'));

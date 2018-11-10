@@ -19,11 +19,14 @@
                 </el-button>
 
                 <el-button v-if="sellOrBuy==='sell'" type="success" style="float: right"
-                           @click="showAuthDialog"
-                >授权出借</el-button>
+                           @click="showAuthDialog">
+                    授权出借
+                </el-button>
+
                 <el-button v-if="sellOrBuy==='buy'" type="success" style="float: right"
-                           @click="showBorrowDialog"
-                >借款申请</el-button>
+                           @click="showBorrowDialog">
+                    借款申请
+                </el-button>
             </div>
 
 
@@ -139,7 +142,6 @@
         </el-dialog>
 
 
-
         <el-dialog :title="'申请借款'" :visible.sync="dialogBorrowVisible">
             <el-form label-width="100px">
                 <el-form-item label="金额（元）">
@@ -199,7 +201,7 @@
         type: Number,
         default: 10
       },
-      sellOrBuy:String
+      sellOrBuy: String
     },
     data () {
       return {
@@ -211,17 +213,17 @@
         total: null,
         currentPage: 1,
         dialogBuyFormVisible: false,
-        dialogAuthVisible:false,
-        dialogBorrowVisible:false,
+        dialogAuthVisible: false,
+        dialogBorrowVisible: false,
         tryToBuyOrSell: null,
-        payBackOptions:[
-          {value:'先息后本'},
-          {value:'等额本金'},
-          {value:'先本后金'},
-          {value:'等额本息'}
+        payBackOptions: [
+          {value: '先息后本'},
+          {value: '等额本金'},
+          {value: '先本后金'},
+          {value: '等额本息'}
         ],
-        payBackForm:{
-          payBackOption:''
+        payBackForm: {
+          payBackOption: ''
         },
 
         reason: '',
@@ -266,23 +268,23 @@
         this.dialogBuyFormVisible = false;
         this.$emit('deal', this.tryToBuyOrSell, this.reason);
       },
-      showAuthDialog(){
-        this.dialogAuthVisible=true;
+      showAuthDialog () {
+        this.dialogAuthVisible = true;
       },
-      showBorrowDialog(){
-        this.dialogBorrowVisible=true;
+      showBorrowDialog () {
+        this.dialogBorrowVisible = true;
       },
-      handleConfirmAuth(){
+      handleConfirmAuth () {
         this.$message({
-          message:'todo'
+          message: 'todo'
         });
-        this.dialogAuthVisible=false
+        this.dialogAuthVisible = false;
       },
-      handleConfirmBorrow(){
+      handleConfirmBorrow () {
         this.$message({
-          message:'todo'
+          message: 'todo'
         });
-        this.dialogBorrowVisible=false
+        this.dialogBorrowVisible = false;
       }
     }
 
