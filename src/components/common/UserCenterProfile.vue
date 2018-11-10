@@ -56,15 +56,31 @@
                 <el-form-item label="证件号" prop="id_num">
                     <el-input v-model="ruleForm.idNum" type="text" placeholder="请输入证件号"/>
                 </el-form-item>
-
-                <el-form-item label="卡号" prop="card">
-                    <el-input v-model="ruleForm.card" type="text" placeholder="请输入卡号"/>
-                </el-form-item>
-
                 <el-form-item label="存款" prop="deposit">
                     <el-input-number v-model="ruleForm.deposit" :min="0" type="number"/>
                     <p style="display: inline ;margin-left: 20px;font-size: 17px">万</p>
                 </el-form-item>
+
+                <el-form-item v-for="(card,index) in cards"
+                              :label="'卡号'+(index+1)"
+                              :key="index"
+                              prop="card">
+                    <el-row>
+                        <el-col>
+                            <el-input disabled v-model="card.cardNum" type="text" placeholder="请输入卡号"/>
+                        </el-col>
+                        <el-col>
+                            <el-button
+                                    class="u-asset-delete-btn"
+                                    type="danger"
+                                    style="margin-left: 50px ;margin-top: -10px"
+                                    icon="el-icon-delete"
+                                    circle
+                                    @click="deleteCard(index,card)"/>
+                        </el-col>
+                    </el-row>
+                </el-form-item>
+
 
                 <el-form-item
                         v-for="(asset,index) in assets"
@@ -105,13 +121,15 @@
                         </el-col>
                     </el-row>
                 </el-form-item>
+
                 <el-form-item>
                     <el-button type="primary" @click="updateProfile">保存</el-button>
                     <el-button type="success" @click="dialogAddAssetVisible=true">新增资产</el-button>
+                    <el-button type="success" @click="dialogAddCardVisible=true">新增银行卡</el-button>
+
                 </el-form-item>
             </el-form>
         </div>
-
 
         <div class="g-right">
             <div class="m-Thumb-card">
@@ -145,7 +163,6 @@
 
         </div>
 
-
         <el-dialog :title="'新增资产'" :visible.sync="dialogAddAssetVisible">
             <el-form label-width="100px">
                 <el-form-item label="资产类型">
@@ -175,6 +192,18 @@
 
         </el-dialog>
 
+        <el-dialog :title="'添加银行卡'" :visible.sync="dialogAddCardVisible">
+            <el-form label-width="100px">
+
+                <el-form-item label="银行卡号">
+                    <el-input v-model="newCard"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="addCard(newCard)">添加</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
 
     </div>
 </template>
@@ -194,7 +223,6 @@
           signature: '天之道，损有余而补不足',
           gender: null,
           email: '247820400@qq.com',
-          card: '3304383838438',
           phoneNumber: '17816879774',
           birthDate: null,
           job: '厨子',
@@ -208,9 +236,11 @@
           credit: 1
         },
         newAsset: {assetType: '', assessmenValue: 0, assessCertification: ''},
+        newCard: 0,
         assets: [],
+        cards: [],
         dialogAddAssetVisible: false,
-
+        dialogAddCardVisible: false,
         rules: {
           phoneNumber: [
             {required: true, message: '手机号码错误', trigger: 'blur'},
@@ -225,10 +255,10 @@
     beforeMount () {
       // `this` 指向 vm 实例
       let user = JSON.parse(localStorage.getItem('user'));
-      console.log(user);
+      // console.log(user);
       this.userId = user.userId;
       api.getById({userId: user.userId}).then(re => {
-        console.log(re);
+        // console.log(re);
         this.ruleForm.username = re.data.data.username;
         this.ruleForm.signature = re.data.data.signature;
         this.ruleForm.gender = re.data.data.gender;
@@ -249,11 +279,23 @@
         console.log(e);
       });
 
+      api.getAssets({userId: this.userId}).then(re => {
+        this.assets = re.data.data;
+      }).catch(e => {
+        this.$alert(e);
+      });
+
+      api.getCards({userId: this.userId}).then(re => {
+        this.cards = re.data.data;
+      }).catch(e => {
+        this.$alert(e);
+      });
+
     },
     methods: {
       togglePassword: function () {
         // eslint-disable-next-line
-        console.log(this.passwordtype);
+        // console.log(this.passwordtype);
         if (this.passwordtype === 'password') {
           this.passwordtype = 'text';
         } else {
@@ -266,11 +308,11 @@
         data['userId'] = this.userId;
 
         api.insertAsset(data).then(re => {
-          console.log(re);
+          // console.log(re);
           if (re.data.code === 0) {
             data['assetId'] = re.data.data.AssetId;
             this.assets.push(data);
-            console.log(this.assets);
+            // console.log(this.assets);
             this.$message({
               message: '添加成功',
               type: 'success'
@@ -337,6 +379,46 @@
             message: h('i', {style: 'color: teal'}, e)
           });
         });
+      },
+
+      addCard (number) {
+        api.insertCard({userId: this.userId, cardNum: number}).then(re => {
+          if (re.data.code === 0) {
+            this.cards.push({
+              userId: this.userId,
+              cardNum: number,
+              cardId: re.data.data.cardId
+            });
+            this.$message({
+              message: '成功添加',
+              type: 'success'
+            });
+          } else {
+            this.$alert(re);
+          }
+        }).catch(e => {
+          this.$alert(e);
+        });
+        this.dialogAddCardVisible = false;
+      },
+      deleteCard(index,card){
+        api.deleteCard({cardId:card.cardId}).then(re=>{
+          if(re.data.code===0){
+            this.$message({
+              message:'已删除',
+              type:'success'
+            });
+            this.cards.slice(index, 1);
+            this.$delete(this.cards, index);
+          }else{
+            this.$message({
+              message:re.data.message,
+              type:'fail'
+            })
+          }
+        }).catch(e=>{
+          this.$alert(e);
+        })
       }
     }
   };
