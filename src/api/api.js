@@ -145,25 +145,70 @@ const apiDes = [
     fun: 'selectOne',
     url: '/transection/selectOne.do',
     method: 'post',
-    parmas: ['pageNow', 'pageSize','userId']
+    parmas: ['pageNow', 'pageSize', 'userId']
   },
   {
     fun: 'selectTwo',
     url: '/transection/selectTwo.do',
     method: 'post',
-    parmas: ['pageNow', 'pageSize','userId']
+    parmas: ['pageNow', 'pageSize', 'userId']
   },
   {
     fun: 'selectThree',
     url: '/transection/selectThree.do',
     method: 'post',
-    parmas: ['pageNow', 'pageSize','userId']
+    parmas: ['pageNow', 'pageSize', 'userId']
   }
-  ,{
+  , {
     fun: 'selectFour',
     url: '/transection/selectFour.do',
     method: 'post',
-    parmas: ['pageNow', 'pageSize','userId']
+    parmas: ['pageNow', 'pageSize', 'userId']
+  }, {
+    fun: 'getAssets',
+    url: '/asset/getByUserId',
+    method: 'post',
+    params: ['userId']
+  }, {
+    fun: 'insertAsset',
+    url: '/asset/insert',
+    method: 'post',
+    parmas: ['userId', 'assessCertification', 'assessmenValue', 'assetType']
+  }, {
+    fun: 'deleteAsset',
+    url: '/asset/delete',
+    method: 'post',
+    params: ['assetId']
+  }, {
+    fun: 'updateAsset',
+    url: '/asset/update',
+    method: 'post',
+    params: ['assetId']
+  }, {
+    fun: 'getCards',
+    url: '/card/getByUserId',
+    method: 'post',
+    params: ['userId']
+  },{
+    fun:'insertCard',
+    url:'/card/insert',
+    method:'post',
+    params:['userId','cardNum']
+  },{
+    fun:'deleteCard',
+    url:'/card/delete',
+    method:'post',
+    params:['cardId']
+  },{
+    fun:'getPersonCredit',
+    url:'/userInformation/getPersonCredit',
+    method:'post',
+    params:['userId']
+  },{
+    fun:'changeOO',
+    url:'/status/changeOO',
+    method:'post',
+    params:['transactionId']
   }
 ];
 
