@@ -69,25 +69,25 @@
             background: #fff;
             box-shadow: 0 0 20px #cccccc;
             border-color: rgba(0, 0, 0, .5);
-            &:hover {
-                .card-panel-icon-wrapper {
-                    color: #fff;
-                }
-                .icon-people{
-                    filter:drop-shadow(0 0 0 black);
-                    background: #40c9c6;
-                }
+            /*&:hover {*/
+                /*.card-panel-icon-wrapper {*/
+                    /*color: #fff;*/
+                /*}*/
+                /*.icon-people{*/
+                    /*filter:drop-shadow(0 0 0 black);*/
+                    /*background: #40c9c6;*/
+                /*}*/
 
-                .icon-message {
-                    background: #36a3f7;
-                }
-                .icon-money {
-                    background: #f4516c;
-                }
-                .icon-shopping {
-                    background: #34bfa3
-                }
-            }
+                /*.icon-message {*/
+                    /*background: #36a3f7;*/
+                /*}*/
+                /*.icon-money {*/
+                    /*background: #f4516c;*/
+                /*}*/
+                /*.icon-shopping {*/
+                    /*background: #34bfa3*/
+                /*}*/
+            /*}*/
             .icon-people {
                 color: #40c9c6;
             }

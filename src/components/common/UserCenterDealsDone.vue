@@ -14,7 +14,7 @@
 <script>
   import basicTable from '../common/BasicTableView';
   import api from '../../api/api';
-
+  /* eslint-disable */
   export default {
     name: 'UserCenterDealsDone',
     components: {basicTable},

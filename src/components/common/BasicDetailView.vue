@@ -571,16 +571,14 @@
       return {
         lineChartData: [
           {
-            expectedData: [101, 120, 161, 134, 105, 160, 165, 120, 161, 134, 105, 160, 165],
-            actualData: [120, 82, 91, 154, 162, 140, 145, 120, 161, 134, 105, 160, 165]
+            xAxisName: ["2014", "2015", "2016", "2017"],
+            actualData: [120, 82, 91, 154],
+            type: "0"
           },
           {
-            expectedData: [200, 192, 120, 144, 160, 130, 140, 120, 161, 134, 105, 160, 165],
-            actualData: [180, 160, 151, 106, 145, 150, 130, 120, 161, 134, 105, 160, 165]
-          },
-          {
-            expectedData: [80, 100, 121, 104, 105, 90, 100, 120, 161, 134, 105, 160, 165],
-            actualData: [120, 90, 100, 138, 142, 130, 130, 120, 161, 134, 105, 160, 165]
+            xAxisName: ["2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08"],
+            actualData: [180, 160, 151, 106, 145, 150],
+            type: "1"
           }
         ],
         count: [
@@ -588,7 +586,6 @@
             name: '历史周期',
             startVal: 0,
             endVal: 8.4,
-            decimal: true
           },
           {
             name: '周期',
@@ -603,6 +600,7 @@
         ],
         dialogVisible: false,
         activeName: 'first',
+
         returnChartData: {xAxisName: '表名', actualData: [1, 2, 3, 0], type: Number}
       };
     },
@@ -618,9 +616,22 @@
       handleSetLineChartData (type) {
         this.returnChartData = this.lineChartData[type];
       },
-      mounted () {
-        this.returnChartData = this.lineChartData[0];
+      makeData(){
+        let a=[]
+        let num = []
+        var oriDate = new Date("2014-01-01");
+        for(let i=1;i<100;++i) {
+          var date = new Date("2014-01-01");
+          date.setDate(oriDate.getDate()+i);
+          a.push(date.toISOString().split('T')[0])
+          num.push(i)
+        }
+        this.returnChartData = {xAxisName: a, actualData:num.map(x=>Math.log(x)) , type: 0}
       }
+    },
+    mounted () {
+      this.makeData()
+      console.log(this.returnChartData)
     }
   };
 </script>
