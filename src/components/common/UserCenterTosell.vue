@@ -40,11 +40,7 @@
       loadData () {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize,  userId: this.userId};
         if (this.filterStr !== undefined) {
-<<<<<<< HEAD
           data['sellName'] = this.filterStr.trim();
-=======
-          data['sellName'] = this.filterStr;
->>>>>>> 1f8171f1f52082a1e7a08d16ab77c02f187135ba
         }
         api.selectFour(data).then(re => {
 
