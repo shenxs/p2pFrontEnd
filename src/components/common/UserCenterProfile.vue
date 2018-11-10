@@ -73,7 +73,7 @@
                         prop="assets">
                     <el-row>
                         <el-col>
-                            <el-select v-model="asset.type" style="width: 30%" placeholder="请选择资产类型">
+                            <el-select disabled v-model="asset.assetType" style="width: 30%" placeholder="请选择资产类型">
                                 <el-option label="房产" value="house"/>
                                 <el-option label="车" value="car"/>
                                 <el-option label="公司估值" value="company"/>
@@ -85,13 +85,14 @@
                                 <el-option label="其他" value="other"/>
                             </el-select>
                             <p style="display: inline;margin:0 20px">估值 :</p>
-                            <el-input-number v-model="asset.value" :min="0" style="width: 40%"/>
+                            <el-input-number disabled v-model="asset.assessmenValue" :min="0" style="width: 40%"/>
                             <p style="display: inline ;margin-left: 10px;font-size: 17px">万</p>
-                            <el-input
-                                    type="textarea"
-                                    style="margin-top:5px;"
-                                    placeholder="资产估值证明"
-                                    autosize/>
+                            <el-input disabled
+                                      v-model="asset.assessCertification"
+                                      type="textarea"
+                                      style="margin-top:5px;"
+                                      placeholder="资产估值证明"
+                                      autosize/>
                         </el-col>
                         <el-col>
                             <el-button
@@ -100,16 +101,18 @@
                                     style="margin-left: 50px"
                                     icon="el-icon-delete"
                                     circle
-                                    @click="deleteAsset(index)"/>
+                                    @click="deleteAsset(index,asset.assetId)"/>
                         </el-col>
                     </el-row>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="updateProfile">保存</el-button>
-                    <el-button type="success" @click="addAsset">新增资产</el-button>
+                    <el-button type="success" @click="dialogAddAssetVisible=true">新增资产</el-button>
                 </el-form-item>
             </el-form>
         </div>
+
+
         <div class="g-right">
             <div class="m-Thumb-card">
                 <el-card class="u-card-thumb">
@@ -141,6 +144,38 @@
                     maxlength="255"/>
 
         </div>
+
+
+        <el-dialog :title="'新增资产'" :visible.sync="dialogAddAssetVisible">
+            <el-form label-width="100px">
+                <el-form-item label="资产类型">
+                    <el-select v-model="newAsset.assetType" style="width: 30%" placeholder="请选择资产类型">
+                        <el-option label="房产" value="house"/>
+                        <el-option label="车" value="car"/>
+                        <el-option label="公司估值" value="company"/>
+                        <el-option label="股票" value="stock"/>
+                        <el-option label="期货" value="futures"/>
+                        <el-option label="基金" value="funds"/>
+                        <el-option label="证券" value="bond"/>
+                        <el-option label="古玩字画" value="antique"/>
+                        <el-option label="其他" value="other"/>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="资产估值（元）">
+                    <el-input v-model="newAsset.assessmenValue" type="number"></el-input>
+                </el-form-item>
+                <el-form-item label="资产证明">
+                    <el-input v-model="newAsset.assessCertification" type="textarea"></el-input>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="addAsset">添加</el-button>
+                </el-form-item>
+            </el-form>
+
+        </el-dialog>
+
+
     </div>
 </template>
 
@@ -172,20 +207,17 @@
           delayTransation: 321,
           credit: 1
         },
-        assets: [
-          {
-            value: '',
-            type: '',
-            description: ''
-          }
-        ],
+        newAsset: {assetType: '', assessmenValue: 0, assessCertification: ''},
+        assets: [],
+        dialogAddAssetVisible: false,
 
         rules: {
           phoneNumber: [
             {required: true, message: '手机号码错误', trigger: 'blur'},
             {pattern: /^1[34578]\d{9}$/, message: '目前只支持中国大陆的手机号码'}
           ]
-        }
+        },
+        userId: 0
 
       };
 
@@ -194,6 +226,7 @@
       // `this` 指向 vm 实例
       let user = JSON.parse(localStorage.getItem('user'));
       console.log(user);
+      this.userId = user.userId;
       api.getById({userId: user.userId}).then(re => {
         console.log(re);
         this.ruleForm.username = re.data.data.username;
@@ -212,7 +245,6 @@
         this.ruleForm.transationNum = re.data.data.transationNum;
         this.ruleForm.delayTransation = re.data.data.delayTransation;
         this.ruleForm.credit = re.data.data.credit;
-
       }).catch(e => {
         console.log(e);
       });
@@ -229,11 +261,57 @@
         }
       },
       addAsset: function () {
-        this.assets.push({value: '', type: '', description: ''});
+
+        var data = JSON.parse(JSON.stringify(this.newAsset));
+        data['userId'] = this.userId;
+
+        api.insertAsset(data).then(re => {
+          console.log(re);
+          if (re.data.code === 0) {
+            data['assetId'] = re.data.data.AssetId;
+            this.assets.push(data);
+            console.log(this.assets);
+            this.$message({
+              message: '添加成功',
+              type: 'success'
+            });
+            this.newAsset.assessCertification = '';
+            this.newAsset.assessmenValue = 0;
+            this.newAsset.assetType = '';
+            this.dialogAddAssetVisible = false;
+          } else {
+            this.$message({
+              title: 'error',
+              message: re.data.message
+            });
+          }
+        }).catch(e => {
+          this.$notify({
+            title: 'error',
+            message: e
+          });
+        });
+
       },
-      deleteAsset: function (index) {
-        this.assets.slice(index, 1);
-        this.$delete(this.assets, index);
+      deleteAsset: function (index, assetId) {
+        api.deleteAsset({assetId: assetId}).then(re => {
+          if (re.data.code === 0) {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            this.assets.slice(index, 1);
+            this.$delete(this.assets, index);
+          } else {
+            this.$message({
+              message: '删除失败',
+              type: 'fail'
+            });
+          }
+        }).catch(e => {
+          this.$alert(e);
+        });
+
       },
       updateProfile () {
         const user = JSON.parse(localStorage.getItem('user'));
