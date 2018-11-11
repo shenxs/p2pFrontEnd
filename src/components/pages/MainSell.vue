@@ -48,7 +48,7 @@
       loadData () {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize};
         if (this.filterStr !== undefined) {
-          data['sellName'] = this.filterStr;
+          data['transectionId'] = this.filterStr;
         }
         api.getSellByPage(data).then(re => {
           // eslint-disable-next-line

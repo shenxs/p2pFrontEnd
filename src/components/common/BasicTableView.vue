@@ -123,6 +123,9 @@
                 <el-form-item v-model="authDialog.period" label="周期">
                     <el-input type="number"></el-input>
                 </el-form-item>
+                <el-form-item label="出借原因">
+                    <el-input v-model="authDialog.buyName"></el-input>
+                </el-form-item>
                 <el-form-item label="还款方式">
                     <el-select v-model="authDialog.repaymentType">
                         <el-option
@@ -236,7 +239,8 @@
           moneyNum: 0,
           interest: 0,
           period: 0,
-          repaymentType: ''
+          repaymentType: '',
+          buyName:''
         },
         borrowDialog: {
           moneyNum: 0,
