@@ -209,6 +209,11 @@ const apiDes = [
     url:'/status/changeOO',
     method:'post',
     params:['transactionId']
+  },{
+    fun:'addTransaction',
+    url:'/transection/insert.do',
+    method:'post',
+    params:['period','interest','repaymentType']
   }
 ];
 

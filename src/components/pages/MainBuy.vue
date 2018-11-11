@@ -12,7 +12,8 @@
                 @reset="handelRest"
                 @deal="handelBuy"
                 @filter="handelFilter"
-                @auth="handelAuth"
+                @Borrow="handelBorrow"
+
         ></basic-table>
     </div>
 </template>
@@ -102,8 +103,26 @@
         this.filterStr = filterStr;
         this.loadData();
       },
-      handelAuth (dialog) {
-        this.$alert(dialog);
+      handelBorrow (dialog) {
+        let user = JSON.parse(localStorage.getItem('user'));
+        api.addTransaction({
+          sellId: user.userId,
+          ...dialog
+        }).then(re => {
+          if (re.data.code === 0) {
+            this.$message({
+              message: '已申请',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: '申请失败',
+              type: 'fail'
+            });
+          }
+        }).catch(e => {
+          this.$alert(e);
+        });
       }
     }
   };

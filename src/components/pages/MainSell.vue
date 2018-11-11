@@ -12,6 +12,7 @@
                 @refresh="handelRefresh"
                 @deal="handelSell"
                 @filter="handelFilter"
+                @Auth="handelAuth"
         ></basic-table>
     </div>
 </template>
@@ -65,7 +66,7 @@
       },
       handleRest () {
         this.pageNow = 1;
-        this.filterStr=undefined;
+        this.filterStr = undefined;
         this.loadData();
       },
       handelRefresh () {
@@ -101,8 +102,29 @@
         });
       },
       handelFilter (str) {
-        this.filterStr=str;
+        this.filterStr = str;
         this.loadData();
+      },
+      handelAuth (AuthDialog) {
+        let user = JSON.parse(localStorage.getItem('user'));
+        api.addTransaction({
+          buyId: user.userId,
+          ...AuthDialog
+        }).then(re => {
+          if (re.data.code === 0) {
+            this.$message({
+              message: '授权成功',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: '授权失败',
+              type: 'fail'
+            });
+          }
+        }).catch(e => {
+          this.$alert(e);
+        });
       }
     }
   };

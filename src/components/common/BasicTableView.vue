@@ -287,7 +287,7 @@
         this.dialogBorrowVisible = true;
       },
       handleConfirmAuth () {
-        this.$emit('auth', this.authDialog);
+        this.$emit('Auth', this.authDialog);
         this.dialogAuthVisible = false;
       },
       handleConfirmBorrow () {
