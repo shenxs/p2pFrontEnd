@@ -109,7 +109,8 @@
         let user = JSON.parse(localStorage.getItem('user'));
         api.addTransaction({
           buyId: user.userId,
-          ...AuthDialog
+          ...AuthDialog,
+          buyStatus:'N',
         }).then(re => {
           if (re.data.code === 0) {
             this.$message({
