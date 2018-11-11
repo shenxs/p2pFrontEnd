@@ -6,6 +6,11 @@
                 :tabledata="tData"
                 :labels="labels"
                 :totalElements="totalElements"
+                @currentChange="handelCurrentChange"
+                @refresh="loadData"
+                @reset="handelRest"
+                @filter="handelFilter"
+
         />
     </div>
 </template>
@@ -23,7 +28,8 @@
         tData: null,
         labels: {
           transactionId: '交易id',
-          buyName: '贷款目的',
+          buyName: '借款目的',
+          sellName: '出借目的',
           interest: '利率',
           moneyNum: '总额(元)',
           period: '周期（天）',
@@ -40,15 +46,30 @@
       loadData () {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, userId: this.userId};
         if (this.filterStr !== undefined) {
-          data['sellName'] = this.filterStr.trim();
+          data['transactionId'] = this.filterStr.trim();
         }
         api.selectFour(data).then(re => {
           // /* eslint-disable */
           // console.log(re);
-          this.requestData = JSON.parse(JSON.stringify(re.data.data));
-          this.tData = re.data.data.map(this.$utils.parseData);
-          this.totalElements = re.data.data.length;
+          this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
+          this.tData = re.data.data.content.map(this.$utils.parseData);
+          this.totalElements = re.data.data.totalElements;
         });
+      },
+      handelCurrentChange (val) {
+        this.pageNow = val;
+        this.loadData();
+      },
+      handelRest () {
+        this.pageNow = 1;
+        this.filterStr = undefined;
+        this.loadData();
+      },
+      handelFilter (filterStr) {
+        // eslint-disable-next-line
+        // console.log(filterStr);
+        this.filterStr = filterStr;
+        this.loadData();
       }
     },
     beforeMount () {

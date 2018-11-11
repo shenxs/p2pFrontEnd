@@ -110,7 +110,7 @@
         api.addTransaction({
           buyId: user.userId,
           ...AuthDialog,
-          buyStatus:'N',
+          buyStatus: 'N'
         }).then(re => {
           if (re.data.code === 0) {
             this.$message({

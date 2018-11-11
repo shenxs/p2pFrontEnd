@@ -12,7 +12,11 @@ const utils = {
   parseData (aRecord) {
     aRecord.transactionTime = utils.unixTime2YYYYMMDD(aRecord.transactionTime);
     aRecord.interest = aRecord.interest + '%';
-    const means = [{k: 'N', v: '未审核'}, {k: 'Y', v: '已通过'}, {k: 'D', v: '已拒绝'}];
+    const means = [
+      {k: 'N', v: '未审核'},
+      {k: 'Y', v: '已通过'},
+      {k: 'D', v: '已拒绝'},
+      {k: 'O', v: '已完成'}];
     for (let i = 0; i < means.length; i++) {
       if (aRecord.buyStatus === means[i].k) {
         aRecord.buyStatus = means[i].v;
@@ -23,7 +27,6 @@ const utils = {
         aRecord.sellStatus = means[i].v;
       }
     }
-
     return aRecord;
   },
   dateFormatter (str) {//默认返回yyyy-MM-dd HH-mm-ss

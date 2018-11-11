@@ -7,6 +7,13 @@
                     :tabledata="tData"
                     :labels="labels"
                     :total-elements="totalElements"
+                    :payBackBtn="true"
+                    @payBack="handelPayBack"
+                    @currentChange="handelCurrentChange"
+                    @refresh="loadData"
+                    @reset="handelRest"
+                    @filter="handelFilter"
+
             />
         </div>
     </div>
@@ -44,24 +51,60 @@
       loadData () {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, userId: this.userId};
         if (this.filterStr !== undefined) {
-          data['sellName'] = this.filterStr.trim();
+          data['transactionId'] = this.filterStr.trim();
         }
         api.selectTwo(data).then(re => {
-          this.requestData = JSON.parse(JSON.stringify(re.data.data));
-          this.tData = re.data.data.map(this.$utils.parseData);
-          this.totalElements = re.data.data.length;
+          this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
+          this.tData = re.data.data.content.map(this.$utils.parseData);
+          this.totalElements = re.data.data.totalElements;
+        }).catch(e => {
+          this.$alert(e);
         });
-
+      },
+      handelCurrentChange (val) {
+        this.pageNow = val;
+        this.loadData();
+      },
+      handelPayBack (row) {
+        api.changeOO({transactionId: row.transactionId}).then(re => {
+          if (re.data.code === 0) {
+            this.$message({
+              message: '还款成功',
+              type: 'success'
+            });
+            this.loadData();
+          } else {
+            this.$message({
+              message: '还款失败',
+              type: 'fail'
+            });
+          }
+        }).catch(e => {
+          this.$alert(e);
+        });
+      },
+      handelRest () {
+        this.pageNow = 1;
+        this.filterStr = undefined;
+        this.loadData();
+      },
+      handelFilter (filterStr) {
+        // eslint-disable-next-line
+        // console.log(filterStr);
+        this.filterStr = filterStr;
+        this.loadData();
       }
-
     },
     beforeMount () {
+      let user = JSON.parse(localStorage.getItem('user'));
+      this.userId = user.userId;
+      this.loadData();
     }
   };
 </script>
 
 <style lang="scss" scoped>
-    .user-center-topay{
+    .user-center-topay {
         width: 100%;
     }
 </style>

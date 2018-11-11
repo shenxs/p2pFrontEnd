@@ -99,7 +99,7 @@
       },
       handelFilter (filterStr) {
         // eslint-disable-next-line
-        console.log(filterStr);
+        // console.log(filterStr);
         this.filterStr = filterStr;
         this.loadData();
       },
@@ -108,7 +108,7 @@
         api.addTransaction({
           sellId: user.userId,
           ...dialog,
-          sellStatus:'N',
+          sellStatus: 'N'
         }).then(re => {
           if (re.data.code === 0) {
             this.$message({

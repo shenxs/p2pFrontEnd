@@ -10,6 +10,10 @@
                 :review="true"
                 @checked="checked"
                 @currentChange="handelCurrentChange"
+                @refresh="loadData"
+                @reset="handelRest"
+                @filter="handelFilter"
+
         />
 
     </div>
@@ -31,7 +35,7 @@
     data () {
       return {
         label: {
-          transactionId:'交易id',
+          transactionId: '交易id',
           buyName: '贷款目的',
           interest: '利率',
           moneyNum: '总额(元)',
@@ -45,8 +49,8 @@
         totalElements: 0,
         title: '待审核贷款',
         pageNow: 1,
-        pageSize: 10
-
+        pageSize: 10,
+        filterStr: undefined
       };
     },
     methods: {
@@ -58,18 +62,17 @@
         }
         return aRecord;
       },
-      loadData (str) {
+      loadData () {
         let data = {
           pageNow: this.pageNow,
           pageSize: this.pageSize,
           buyStatus: 'N'
         };
 
-        if (str !== undefined) {
-          data['buyName'] = str.trim();
+        if (this.filterStr !== undefined) {
+          data['transactionId'] = this.filterStr.trim();
         }
         api.getTansitionByPage(data).then(re => {
-
           this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
           console.log(this.requestData);
           this.tableData = re.data.data.content.map(this.parseData);
@@ -81,27 +84,27 @@
       checked (comment, row) {
         console.log(comment, row);
         let data = this.requestData.filter(x => x.transactionId === row.transactionId)[0];
-        if(comment==='pass'){
-          data['']
+        if (comment === 'pass') {
+          data[''];
         }
         data.status = comment;
         api.updateTransation(data).then(re => {
           console.log(re);
-          if(re.data.code===0){
+          if (re.data.code === 0) {
             this.$message({
-              message:'操作成功',
-              type:'success'
-            })
-            if(comment==='pass'){
-              row.buyStatus='通过';
-            }else{
-              row.buyStatus='拒绝';
+              message: '操作成功',
+              type: 'success'
+            });
+            if (comment === 'pass') {
+              row.buyStatus = '通过';
+            } else {
+              row.buyStatus = '拒绝';
             }
-          }else{
+          } else {
             this.message({
-              message:'操作失败',
-              type:'fail',
-            })
+              message: '操作失败',
+              type: 'fail'
+            });
           }
         }).catch(e => {
           console.log(e);
@@ -109,6 +112,17 @@
       },
       handelCurrentChange (val) {
         this.pageNow = val;
+        this.loadData();
+      },
+      handelRest () {
+        this.pageNow = 1;
+        this.filterStr = undefined;
+        this.loadData();
+      },
+      handelFilter (filterStr) {
+        // eslint-disable-next-line
+        // console.log(filterStr);
+        this.filterStr = filterStr;
         this.loadData();
       }
 

@@ -54,21 +54,20 @@
           {key: 'transactionTime', display_name: '交易时间'}]
         ,
         tableData: null, // 表格展示数据
-        requestData: null// 请求所获的数据
+        requestData: null,// 请求所获的数据
+        filterStr: undefined
       };
     },
 
     methods: {
 
-      loadData (str) {
+      loadData () {
         const data = {pageNow: this.pageNow, pageSize: this.pageSize, sellStatus: 'N'};
-        if (str !== undefined) {
-          data['sellName'] = str.trim();
+        if (this.filterStr !== undefined) {
+          data['transactionId'] = this.filterStr.trim();
         }
         api.getTansitionByPage(data).then(re => {
-
-          console.log(re);
-
+          // console.log(re);
           this.requestData = JSON.parse(JSON.stringify(re.data.data.content));
           this.tableData = re.data.data.content.map(this.parseData);
           this.totalElements = re.data.data.totalElements;
@@ -114,19 +113,12 @@
         this.loadData();
       },
       handelFilter (str) {
-        console.log(str);
-        if (str.trim() === '') {
-          this.$notify({
-            title: 'error',
-            message: '请输入筛选关键字',
-            duration: 1000
-          });
-        } else {
-          this.loadData(str);
-        }
+        this.filterStr = str;
+        this.loadData();
       },
       handelReset () {
         this.pageNow = 1;
+        this.filterStr = undefined;
         this.loadData();
       }
     }
