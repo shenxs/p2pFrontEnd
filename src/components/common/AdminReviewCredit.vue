@@ -36,7 +36,6 @@
         totalElements: null,
         pageNow: 1,
         pageSize: 1000,
-        filterStr: undefined,
       };
     },
     methods: {

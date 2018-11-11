@@ -92,6 +92,40 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="信用等级介绍" >
+                <div class="collaspe-wapper">
+                <el-collapse v-model="activeName" accordion>
+                    <el-collapse-item title="贷款额度:" name="1">
+                        <div class="introduce">
+                        <div>A: 总资产的150%</div>
+                        <div>B: 总资产的100%</div>
+                        <div>C: 总资产的50%</div>
+                        <div>D: 10000</div>
+                        <div>E: 1000</div>
+                        </div>
+                    </el-collapse-item>
+                    <el-collapse-item title="分数评级：" name="2">
+                        <div class="introduce">
+                        <div>A: >799</div>
+                        <div>B: 740-799</div>
+                        <div>C: 670-739</div>
+                        <div>D: 580-669</div>
+                        <div>E: &lt;579</div>
+                        </div>
+                    </el-collapse-item>
+                    <el-collapse-item title="分数计算占比：" name="3">
+                        <div class="introduce">
+                        <div>付款记录：35%</div>
+                        <div>债务金额：30%</div>
+                        <div>信用记录的长度：15%</div>
+                        <div>新信贷额度：10%</div>
+                        <div>信贷总额度：10%</div>
+                        </div>
+                    </el-collapse-item>
+
+                </el-collapse>
+                </div>
+            </el-form-item>
 
             <el-form-item>
                 <el-button type="success"
@@ -117,6 +151,7 @@
     data () {
 
       return {
+        activeName: '1',
         userCreditInfo: {},
         options: [{
           value: 1,
@@ -160,6 +195,15 @@
             text-align: center;
             margin-top: 30px;
         }
+        .collaspe-wapper{
+            padding: 10px;
+            background-color: white;
+            .introduce{
+                margin-left: 20px;
+                /*background-color: #efefef;*/
+            }
+        }
+
         .el-card {
             text-align: center;
         }

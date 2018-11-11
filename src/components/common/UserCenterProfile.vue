@@ -275,7 +275,7 @@
         this.ruleForm.description = re.data.data.description;
         this.ruleForm.transationNum = re.data.data.transationNum;
         this.ruleForm.delayTransation = re.data.data.delayTransation;
-        this.ruleForm.credit = String.fromCharCode(re.data.data.credit+"A".charCodeAt()-1);
+        this.ruleForm.credit = String.fromCharCode(re.data.data.credit+"A".charCodeAt());
       }).catch(e => {
         console.log(e);
       });
