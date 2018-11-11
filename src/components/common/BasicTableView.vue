@@ -257,6 +257,7 @@
           repaymentType: '',
           sellName: ''
         },
+
         borrowDialog: {
           moneyNum: 0,
           interest: 0,
