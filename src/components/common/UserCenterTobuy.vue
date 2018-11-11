@@ -42,7 +42,7 @@
         if (this.filterStr !== undefined) {
           data['sellName'] = this.filterStr.trim();
         }
-        api.selectThree(data).then(re => {
+        api.selectFour(data).then(re => {
           // /* eslint-disable */
           // console.log(re);
           this.requestData = JSON.parse(JSON.stringify(re.data.data));

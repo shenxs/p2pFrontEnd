@@ -42,7 +42,7 @@
         if (this.filterStr !== undefined) {
           data['sellName'] = this.filterStr.trim();
         }
-        api.selectFour(data).then(re => {
+        api.selectThree(data).then(re => {
 
           this.requestData = JSON.parse(JSON.stringify(re.data.data));
           this.tData = re.data.data.map(this.$utils.parseData);
