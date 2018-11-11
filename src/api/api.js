@@ -110,13 +110,13 @@ const apiDes = [
     params: ['pageNow', 'pageSize']
   }, {
     fun: 'getTansitionByPage',
-    url: '/transection/getByPage.do',
+    url: '/transaction/getByPage.do',
     method: 'post',
     params: ['pageNow', 'pageSize']
   }, {
     //更新transition
     fun: 'updateTransation',
-    url: '/transection/update.do',
+    url: '/transaction/update.do',
     method: 'post',
     parmas: ['transactionId']
   }, {
@@ -133,35 +133,35 @@ const apiDes = [
     params: ['type', 'period', 'startTime', 'endTime']
   }, {
     fun: 'getSellByPage',
-    url: '/transection/getSellByPage.do',
+    url: '/transaction/getSellByPage.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize']
   }, {
     fun: 'getBuyByPage',
-    url: '/transection/getBuyByPage.do',
+    url: '/transaction/getBuyByPage.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize']
   }, {
     fun: 'selectOne',
-    url: '/transection/selectOne.do',
+    url: '/transaction/selectOne.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize', 'userId']
   },
   {
     fun: 'selectTwo',
-    url: '/transection/selectTwo.do',
+    url: '/transaction/selectTwo.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize', 'userId']
   },
   {
     fun: 'selectThree',
-    url: '/transection/selectThree.do',
+    url: '/transaction/selectThree.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize', 'userId']
   }
   , {
     fun: 'selectFour',
-    url: '/transection/selectFour.do',
+    url: '/transaction/selectFour.do',
     method: 'post',
     parmas: ['pageNow', 'pageSize', 'userId']
   }, {
@@ -211,7 +211,7 @@ const apiDes = [
     params:['transactionId']
   },{
     fun:'addTransaction',
-    url:'/transection/insert.do',
+    url:'/transaction/insert.do',
     method:'post',
     params:['period','interest','repaymentType']
   }

@@ -38,7 +38,7 @@
         totalElements: 1,
         title: '待审核借款',
         label: {
-          transactionId:'交易id',
+          transactionId: '交易id',
           buyName: '借款目的',
           interest: '利率',
           moneyNum: '总额(元)',
@@ -125,8 +125,8 @@
           this.loadData(str);
         }
       },
-      handelReset(){
-        this.pageNow=1;
+      handelReset () {
+        this.pageNow = 1;
         this.loadData();
       }
     }
