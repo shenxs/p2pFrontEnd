@@ -112,25 +112,24 @@
         </el-dialog>
 
 
-        <el-dialog :title="'授权出借'" :visible.sync="dialogAuthVisible">
+        <el-dialog v-model="authDialog" :title="'授权出借'" :visible.sync="dialogAuthVisible">
             <el-form label-width="80px">
                 <el-form-item label="金额">
-                    <el-input v-model="reason" placeholder="输入您的交易理由"></el-input>
+                    <el-input type="number" v-model="authDialog.moneyNum" placeholder="请输入授权出借金额"></el-input>
                 </el-form-item>
                 <el-form-item label="利率">
-                    <el-input></el-input>
+                    <el-input type="number" v-model="authDialog.interest"></el-input>
                 </el-form-item>
-                <el-form-item label="周期">
-                    <el-input></el-input>
+                <el-form-item v-model="authDialog.period" label="周期">
+                    <el-input type="number"></el-input>
                 </el-form-item>
                 <el-form-item label="还款方式">
-                    <el-select v-model="payBackForm.payBackOption">
+                    <el-select v-model="authDialog.repaymentType">
                         <el-option
                                 v-for="item in payBackOptions"
                                 :key="item.value"
                                 :value="item.value"
                                 :label="item.value">
-
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -142,20 +141,22 @@
         </el-dialog>
 
 
-        <el-dialog :title="'申请借款'" :visible.sync="dialogBorrowVisible">
+        <el-dialog v-model="borrowDialog" :title="'申请借款'" :visible.sync="dialogBorrowVisible">
             <el-form label-width="100px">
                 <el-form-item label="金额（元）">
-                    <el-input v-model="reason" placeholder="输入金额"></el-input>
+                    <el-input v-model="borrowDialog.moneyNum" placeholder="输入金额"></el-input>
                 </el-form-item>
                 <el-form-item label="利率">
-                    <el-input></el-input>
+                    <el-input type="number" v-model="borrowDialog.interest"></el-input>
                 </el-form-item>
                 <el-form-item label="周期">
-                    <el-input></el-input>
+                    <el-input v-model="borrowDialog.period"></el-input>
                 </el-form-item>
-
+                <el-form-item label="借款目的">
+                    <el-input v-model="borrowDialog.sellName"></el-input>
+                </el-form-item>
                 <el-form-item label="还款方式">
-                    <el-select v-model="payBackForm.payBackOption">
+                    <el-select v-model="borrowDialog.repaymentType">
                         <el-option
                                 v-for="item in payBackOptions"
                                 :key="item.value"
@@ -224,14 +225,26 @@
         payBackForm: {
           payBackOption: ''
         },
-
         reason: '',
         rules: {
           type: [{required: true, message: 'type is required', trigger: 'change'}],
           timestamp: [{type: 'date', required: true, message: 'timestamp is required', trigger: 'change'}],
           title: [{required: true, message: 'title is required', trigger: 'blur'}]
         },
-        downloadLoading: false
+
+        authDialog: {
+          moneyNum: 0,
+          interest: 0,
+          period: 0,
+          repaymentType: ''
+        },
+        borrowDialog: {
+          moneyNum: 0,
+          interest: 0,
+          period: 0,
+          repaymentType: '',
+          sellName: ''
+        }
       };
     },
 
@@ -274,15 +287,11 @@
         this.dialogBorrowVisible = true;
       },
       handleConfirmAuth () {
-        this.$message({
-          message: 'todo'
-        });
+        this.$emit('auth', this.authDialog);
         this.dialogAuthVisible = false;
       },
       handleConfirmBorrow () {
-        this.$message({
-          message: 'todo'
-        });
+        this.$emit('Borrow', this.borrowDialog);
         this.dialogBorrowVisible = false;
       }
     }

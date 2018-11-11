@@ -12,6 +12,7 @@
                 @reset="handelRest"
                 @deal="handelBuy"
                 @filter="handelFilter"
+                @auth="handelAuth"
         ></basic-table>
     </div>
 </template>
@@ -28,7 +29,6 @@
         tableData: null,
         labels: {
           transactionId: '交易id',
-          buyName: '贷款目的',
           interest: '利率',
           moneyNum: '总额(元)',
           period: '周期（天）',
@@ -101,6 +101,9 @@
         console.log(filterStr);
         this.filterStr = filterStr;
         this.loadData();
+      },
+      handelAuth (dialog) {
+
       }
     }
   };
