@@ -82,7 +82,16 @@
 
                 </el-row>
             </el-form-item>
-
+            <el-form-item label="期望信用">
+                <el-select v-model="creditValues" placeholder="期望信用">
+                    <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
 
             <el-form-item>
                 <el-button type="success"
@@ -109,12 +118,24 @@
 
       return {
         userCreditInfo: {},
+        options: [{
+          value: 1,
+          label: 'A'
+        }, {
+          value: 2,
+          label: 'B'
+        }, {
+          value: 3,
+          label: 'C'
+        }],
+        creditValues:'',
         dialogVisibility: false,
         userId: 0
       };
     },
     methods: {
       applyCreditUpdate () {
+        api.expectedCredit({userId:this.userId,expectedCredit:this.creditValues})
         this.dialogVisibility = true;
       }
     },

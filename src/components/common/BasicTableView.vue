@@ -79,6 +79,7 @@
                 </el-table-column>
 
 
+
             </el-table>
         </div>
         <div class="u-pagination-block">
@@ -257,6 +258,10 @@
       makeReview (row, comment) {
         console.log(row, comment);
         this.$emit('checked', comment, row);
+      },
+      creditPass (row, comment) {
+        console.log(row, comment);
+        this.$emit('credictChecked', comment, row);
       },
       handleFilter () {
         this.$emit('filter', this.filterStr);
