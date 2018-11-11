@@ -87,7 +87,7 @@
         if (comment === 'pass') {
           data[''];
         }
-        data.status = comment;
+        data.buyStatus = 'Y';
         api.updateTransation(data).then(re => {
           console.log(re);
           if (re.data.code === 0) {

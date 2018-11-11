@@ -32,7 +32,9 @@
           interest: '利率',
           moneyNum: '总额(元)',
           period: '周期（天）',
-          repaymentType: '还款方式'
+          repaymentType: '还款方式',
+          sellStatus:'借款审核',
+          buyStatus:'贷款审核'
         },
         filterStr: undefined,
         pageNow: 1,

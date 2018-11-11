@@ -122,6 +122,7 @@
           data['role'] = 'user';
         }
         login(data).then((re) => {
+          console.log(re);
           if (re.data.code === 0) {
             console.log(re.data.data);
             this.$store.commit('login');

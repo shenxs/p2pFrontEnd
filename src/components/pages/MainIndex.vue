@@ -14,7 +14,7 @@
             </el-aside>
             <div class="g-main">
                 <div class="g-slogan">
-                    <marquee   amount=10 class="g-slogan-text">
+                    <marquee amount=10 class="g-slogan-text">
                         <ul>
                             <li>
                                 天弘聚利灵活配置混合(001647)，今日单位净值1.3722，近一周上涨29.37%
@@ -125,9 +125,7 @@
             moneyNum: '总额',
             interest: '利率',
             period: '周期'
-
           }
-
         },
         buyTable: {
           data: undefined,
@@ -271,7 +269,7 @@
                     z-index: 1;
                     height: 100%;
 
-                    background-color: rgba(224,224,224, 0.3);
+                    background-color: rgba(224, 224, 224, 0.3);
                     filter: alpha(opacity=60);
                     /*opacity: 0.6;*/
                     .notice {

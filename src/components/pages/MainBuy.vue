@@ -74,8 +74,9 @@
         console.log(row);
         let data = row;
         let user = JSON.parse(localStorage.getItem('user'));
-        data.sellName = reason;
+        data.buyName = reason;
         data.sellId = user.userId;
+        data.buyStaus='N';
         data.transactionTime = (new Date()).getTime();
         api.updateTransation(data).then(re => {
           // eslint-disable-next-line
