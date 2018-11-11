@@ -103,7 +103,7 @@
         this.loadData();
       },
       handelAuth (dialog) {
-
+        this.$alert(dialog);
       }
     }
   };
