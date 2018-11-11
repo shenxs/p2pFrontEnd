@@ -107,7 +107,8 @@
         let user = JSON.parse(localStorage.getItem('user'));
         api.addTransaction({
           sellId: user.userId,
-          ...dialog
+          ...dialog,
+          sellStatus:'N',
         }).then(re => {
           if (re.data.code === 0) {
             this.$message({

@@ -241,7 +241,7 @@
           interest: 0,
           period: 0,
           repaymentType: '',
-          buyName:''
+          buyName: ''
         },
         borrowDialog: {
           moneyNum: 0,
