@@ -275,7 +275,8 @@
         this.ruleForm.description = re.data.data.description;
         this.ruleForm.transationNum = re.data.data.transationNum;
         this.ruleForm.delayTransation = re.data.data.delayTransation;
-        this.ruleForm.credit = String.fromCharCode(re.data.data.credit+"A".charCodeAt());
+        this.ruleForm.credit = re.data.data.credit!=null ?
+          String.fromCharCode(re.data.data.credit+"A".charCodeAt()-1):"暂无"
       }).catch(e => {
         console.log(e);
       });
