@@ -79,6 +79,7 @@
                 </el-table-column>
 
 
+
                 <el-table-column
                         v-if="payBackBtn"
                         fixed="right"
@@ -271,6 +272,10 @@
       makeReview (row, comment) {
         console.log(row, comment);
         this.$emit('checked', comment, row);
+      },
+      creditPass (row, comment) {
+        console.log(row, comment);
+        this.$emit('credictChecked', comment, row);
       },
       handleFilter () {
         this.$emit('filter', this.filterStr);

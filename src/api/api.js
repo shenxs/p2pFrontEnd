@@ -59,7 +59,7 @@ const apiDes = [
     method: 'post',
     params: ['sellId']
   }, {
-    fun: 'getSellByUserId',
+    fun: 'getSellByuserInformation/getChangeCreditUserId',
     url: '/deSell/getByUserId',
     method: 'post',
     params: ['userId']
@@ -214,6 +214,28 @@ const apiDes = [
     url:'/transaction/insert.do',
     method:'post',
     params:['period','interest','repaymentType']
+  },{
+    fun:'expectedCredit',
+    url:'/userInformation/setExpectedCredit',
+    method:'post',
+    params:['userId','expectedCredit']
+  },{
+  fun:'getChangeCredit',
+  url:'/userInformation/getChangeCredit',
+  method:'post',
+  params:[]
+  },{
+
+    fun:'changeCreditYes',
+    url:'/userInformation/changeCreditYes',
+    method:'post',
+    params:['userId']
+  },{
+
+    fun:'changeCreditNo',
+    url:'/userInformation/changeCreditNo',
+    method:'post',
+    params:['userId']
   }
 ];
 

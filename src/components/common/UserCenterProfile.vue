@@ -254,6 +254,7 @@
     },
     beforeMount () {
       // `this` 指向 vm 实例
+
       let user = JSON.parse(localStorage.getItem('user'));
       // console.log(user);
       this.userId = user.userId;
@@ -274,7 +275,7 @@
         this.ruleForm.description = re.data.data.description;
         this.ruleForm.transationNum = re.data.data.transationNum;
         this.ruleForm.delayTransation = re.data.data.delayTransation;
-        this.ruleForm.credit = re.data.data.credit;
+        this.ruleForm.credit = String.fromCharCode(re.data.data.credit+"A".charCodeAt()-1);
       }).catch(e => {
         console.log(e);
       });
