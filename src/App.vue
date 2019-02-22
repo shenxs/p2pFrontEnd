@@ -1,72 +1,47 @@
 <template>
     <div id="app">
-
-        <el-container style="margin-bottom: 10px; border: 1px solid #eee">
-            <side></side>
-            <el-container>
-                <my-header></my-header>
-
-                <el-header style="height: 0%;"/>
-
-                <el-main>
-                    <router-view></router-view>
-                </el-main>
-
-            </el-container>
-        </el-container>
-
+        <global-header/>
+        <global-main/>
+        <global-footer/>
     </div>
-
 </template>
 
 <script>
+  import Header from './components/global/Header';
+  import Main from './components/global/Main';
+  import Footer from './components/global/Footer';
 
-    import myHeader from './components/myHeader'
-    import side from './components/side'
-    import myFooter from './components/myFooter'
-
-    export default {
-        name: 'app',
-        components: {myHeader, side, myFooter},
-
-        props: {
-            msg: 123
-        },
-        methods: {
-            changeRoute(path) {
-                this.$router.push(path);
-            }
-        },
-        data() {
-            return {
-                theMsg: "Hello"
-            }
-
-        }
+  export default {
+    name: 'App',
+    components: {
+      GlobalHeader: Header,
+      GlobalMain: Main,
+      GlobalFooter: Footer
+    },
+    props: {},
+    data () {
+      return {};
+    },
+    methods: {
+      changeRoute (path) {
+        this.$router.push(path);
+      }
     }
-
+  };
 
 </script>
 
 <style>
+    @import "./styles/base.scss";
+
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        font-family: '微软雅黑', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-align: center;
         color: #2c3e50;
         margin-bottom: auto;
+        background: #efefef;
+        min-height: 100vh;
+        padding: 60px 0 40px 0;
     }
-    .el-header {
-        background-color: #B3C0D1;
-        color: #333;
-        line-height: 60px;
-
-    }
-    .a{
-        text-decoration-line: none;
-    }
-
-
-
 </style>
