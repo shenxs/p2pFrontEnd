@@ -5,7 +5,6 @@
         <el-row>
             <transation-table class="tanstable" :table-name="'借款'" :table-data="tableData"></transation-table>
         </el-row>
-
         <el-row>
             <transation-table class="tanstable" :table-name="'贷款'" :table-data="tableData"></transation-table>
         </el-row>
